@@ -1,0 +1,111 @@
+---
+title: "Semi-structured Data"
+---
+
+When we talk about semi-structured data we usually refer to data that is not represented as a table, but as a hierarchical nested structure of key-value pairs. 
+We will see how to import two kinds of file:
+
+- JSON (JavaScript Object Notation);
+- XML (eXtensible Markup Language).
+
+:::{.panel-tabset}
+### R
+
+```{r}
+library(jsonlite)
+library(xml2)
+```
+
+### Python
+
+```{python}
+import pandas as pd
+```
+:::
+
+## JSON
+
+We will use the [Open Library](https://openlibrary.org/) RESTful API (see chapter XX to know more about APIs) in order to retrieve information about books written by one of my favorite authors, [Anna Maria Ortese](https://en.wikipedia.org/wiki/Anna_Maria_Ortese).
+
+:::{.panel-tabset}
+### R
+
+```{r}
+json_data <- read_json("http://openlibrary.org/search.json?author=anna+maria+ortese",
+                       simplifyVector = TRUE)
+```
+
+### Python
+
+```{python}
+json_data = pd.read_json("http://openlibrary.org/search.json?author=anna+maria+ortese")
+```
+:::
+
+By default, `jsonlite::read_json()` will not simplify the JSON structure, whereas `pd.read_json()` will try to convert the JSON file into a table.
+
+```{r}
+lapply(json_data, length) # in R
+```
+
+We are interested in retrieving information from four sub-fields coming from the `docs` field:
+
+:::{.panel-tabset}
+### R
+
+```{r}
+json_data$docs |> 
+    dplyr::select(author_name, title, publish_year, number_of_pages_median) |> 
+    head(5)
+```
+
+### Python
+
+```{python}
+(
+    pd.json_normalize(json_data["docs"])
+    .loc[:,["author_name", "title", "publish_year", "number_of_pages_median"]]
+    .head(5)
+)
+
+```
+:::
+
+Read more about how to subset data frames in [Chapter -@sec-subset]
+
+## XML
+
+:::{.panel-tabset}
+### R
+
+```{r}
+xml_data <- read_xml("https://www.w3schools.com/xml/simple.xml")
+```
+
+### Python
+
+```{python}
+xml_data = pd.read_xml("https://www.w3schools.com/xml/simple.xml")
+```
+:::
+
+
+:::{.panel-tabset}
+### R
+
+```{r}
+xml_data |> 
+    xml_children() |> 
+    as_list() |> 
+    dplyr::bind_rows() |> 
+    tidyr::unnest(cols = c(name, price, description, calories))
+```
+
+### Python
+
+```{python}
+xml_data
+```
+:::
+
+

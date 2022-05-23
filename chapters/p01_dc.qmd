@@ -1,0 +1,15 @@
+---
+title: "Data Collection"
+---
+
+Data collection is the most fundamental part of data science. Data can be imported into R and Python from many sources: csv, txt, pdf and even from html pages.
+
+The following chapters will show you how to import data into R and Python from several sources using different packages:
+
+- [`readr`](https://readr.tidyverse.org/) and [`Pandas`](https://pandas.pydata.org/) for the most common tabular data formats;
+- [`readxl`]() and [`openpyxl`]() for Excel files;
+- [`jsonlite`](https://CRAN.R-project.org/package=jsonlite) and [`json`](https://docs.python.org/3/library/json.html) for JSON files;
+- [`xml2`](https://xml2.r-lib.org/) and **???** for XML files;
+- [`DBI`]() and ??? for SQL databases;
+- [`rvest`](https://rvest.tidyverse.org/) and [`Beautiful Soup`](https://www.crummy.com/software/BeautifulSoup/bs4/doc/) for web scraping;
+- [`httr2`](https://httr2.r-lib.org/) and [`Requests`](https://docs.python-requests.org/en/master/) to interrogate APIs.

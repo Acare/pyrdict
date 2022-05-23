@@ -1,0 +1,332 @@
+# Subset Data {#sec-subset}
+
+By subsetting data, it is intended all those operations used to retrieve a specific part of a dataset. For example, we could be interested in getting the last three rows of a table or the columns whose name starts with a specific keyword.
+
+For this chapter, we will consider the [Personal key indicators of heart disease](https://www.kaggle.com/kamilpytlak/personal-key-indicators-of-heart-disease) Kaggle dataset.
+
+```{bash}
+#| eval: false
+
+kaggle datasets download kamilpytlak/personal-key-indicators-of-heart-disease ./data --unzip
+```
+
+After loading the necessary packages and importing the data, we make use of the `clean_names` function of the [`janitor`](https://CRAN.R-project.org/package=janitor) and [`pyjanitor`](https://pyjanitor-devs.github.io/pyjanitor/) packages. This function can be used to make lowercase and snake case the dataset column names.
+
+:::{.callout-tip}
+## The janitor package
+
+The `pyjanitor` module is a porting of the `janitor` R package. There are other useful functions in these packages!
+:::
+
+:::{.panel-tabset}
+### R
+
+```{r}
+#| message: false
+library(dplyr)
+library(readr)
+library(tidyr)
+
+df <- read_csv("data/heart_2020_cleaned.csv", show_col_types = FALSE) |> 
+    janitor::clean_names()
+```
+
+### Python
+
+```{python}
+import pandas as pd
+from janitor import clean_names
+
+df = pd.read_csv("data/heart_2020_cleaned.csv").clean_names(case_type='snake')
+```
+:::
+
+
+## Filter rows
+
+
+
+### Top
+
+Get the first three rows of a dataset:
+
+:::{.panel-tabset}
+#### R
+
+```{r}
+head(df, n = 3)
+```
+
+```{r}
+#| eval: false
+#| code-fold: true
+#| code-summary: "Synonyms"
+df |> slice_head(n = 3)
+```
+
+
+#### Python
+
+```{python}
+df.head(n=3)
+```
+:::
+
+### Bottom
+
+Get the last five rows of a dataset:
+
+:::{.panel-tabset}
+#### R
+
+```{r}
+tail(df, n = 5)
+```
+
+```{r}
+#| eval: false
+#| code-fold: true
+#| code-summary: "Synonyms"
+df |> slice_tail(n = 5)
+```
+
+
+#### Python
+
+```{python}
+df.tail(n=5)
+```
+:::
+
+### Slicing
+
+Get rows number seven to eleven:
+
+:::{.panel-tabset}
+#### R
+
+```{r}
+df[7:11, ]
+```
+
+```{r}
+#| eval: false
+#| code-fold: true
+#| code-summary: "Synonyms"
+df |> slice(7:11)
+```
+
+
+#### Python
+
+```{python}
+df.iloc[6:11,]
+```
+:::
+
+
+### By column values
+
+Filter rows by column values:
+
+:::{.panel-tabset}
+#### R
+
+```{r}
+df[(df$bmi < 20) & (df$smoking == "Yes"), ]
+```
+
+```{r}
+#| eval: false
+#| code-fold: true
+#| code-summary: "Synonyms"
+df |> filter(bmi < 20, smoking == "Yes")
+```
+
+#### Python
+
+```{python}
+df.loc[(df["bmi"] < 20) & (df["smoking"] == "Yes"),:]
+```
+
+```{python}
+#| eval: false
+#| code-fold: true
+#| code-summary: "Synonyms"
+df.query('bmi < 20 & smoking == "Yes"')
+```
+:::
+
+
+## Select two or more columns
+
+### By position
+
+Select three columns by their position:
+
+:::{.panel-tabset}
+#### R
+
+```{r}
+df[1:3]
+```
+
+```{r}
+#| eval: false
+#| code-fold: true
+#| code-summary: "Synonyms"
+df |> select(1:3)
+```
+
+#### Python
+
+```{python}
+df.iloc[:,0:3]
+```
+:::
+
+### By name
+
+Select three columns by their name:
+
+:::{.panel-tabset}
+#### R
+
+```{r}
+df[c("heart_disease", "bmi", "smoking")]
+```
+
+```{r}
+#| eval: false
+#| code-fold: true
+#| code-summary: "Synonyms"
+df |> select(heart_disease, bmi, smoking)
+df |> select(heart_disease:smoking)
+```
+
+#### Python
+
+```{python}
+df.loc[:, ["heart_disease", "bmi", "smoking"]]
+```
+
+```{python}
+#| eval: false
+#| code-fold: true
+#| code-summary: "Synonyms"
+df.loc[:, "heart_disease":"smoking"]
+```
+:::
+
+
+### By pattern
+
+Select columns by a regular expression or pattern in their name:
+
+:::{.panel-tabset}
+#### R
+
+```{r}
+df |> select(ends_with("health"))
+```
+
+#### Python
+
+```{python}
+df.filter(like="health", axis=1)
+```
+:::
+
+
+### By type
+
+Select columns based on their data type:
+
+:::{.panel-tabset}
+#### R
+
+```{r}
+df |> select(where(is.double))
+```
+
+#### Python
+
+```{python}
+df.select_dtypes(float)
+```
+:::
+
+
+## Remove columns
+
+Remove one column:
+
+:::{.panel-tabset}
+### R
+
+```{r}
+df |> select(-bmi)
+```
+
+### Python
+
+```{python}
+df.drop("bmi", axis=1)
+```
+:::
+
+Remove more than one column:
+
+:::{.panel-tabset}
+### R
+
+```{r}
+df |> select(-c(bmi, heart_disease))
+```
+
+### Python
+
+```{python}
+df.drop(["bmi", "heart_disease"], axis=1)
+```
+:::
+
+
+## Sorting
+
+### Ascending
+
+Sort a dataset by column values in ascending order:
+
+:::{.panel-tabset}
+#### R
+
+```{r}
+df |> arrange(sex)
+```
+
+#### Python
+
+```{python}
+df.sort_values("sex")
+```
+:::
+
+### Descending
+
+Sort a dataset by column values in descending order:
+
+:::{.panel-tabset}
+#### R
+
+```{r}
+df |> arrange(-bmi)
+```
+
+#### Python
+
+```{python}
+df.sort_values("bmi", ascending=False)
+```
+:::
+

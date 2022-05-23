@@ -1,0 +1,132 @@
+---
+title: "Modify, Group, Summarize"
+---
+
+
+```{r}
+#| echo: false
+#| message: false
+
+source("../scripts/prepare.R")
+```
+
+```{python}
+#| echo: false
+#| message: false
+
+exec(open("../scripts/prepare.py").read())
+```
+
+## Modify data
+
+::: {.panel-tabset}
+### R
+
+```{r}
+cols_to_mod <- c("smoking", "asthma", "skin_cancer")
+df |> mutate(across(all_of(cols_to_mod), stringr::str_to_lower))
+```
+
+```{r}
+df <- df |> mutate(bmi_class = case_when(
+    bmi < 18.5 ~ "underweight",
+    bmi >= 18.5 & bmi < 25 ~ "normal weight",
+    bmi >= 25 & bmi < 30 ~ "overweight",
+    bmi >= 30 ~ "obese",
+    TRUE ~ NA_character_
+))
+```
+
+### Python
+
+```{python}
+cols_to_mod = ["smoking", "asthma", "skin_cancer"]
+df.loc[:,cols_to_mod].applymap(str.lower)
+```
+
+```{python}
+df = df.assign(bmi_class=pd.cut(df["bmi"], 
+    bins=[0, 18.5, 25, 30, 1000], 
+    labels=["underweight", "normal weight", "overweight", "obese"],
+    ordered=True))
+
+# df["bmi_class"] = pd.cut(df["bmi"], 
+#     bins=[0, 18.5, 25, 30, 1000], 
+#     labels=["underweight", "normal weight", "overweight", "obese"],
+#     ordered=True)
+```
+:::
+
+
+## Count values
+
+::: {.panel-tabset}
+### R
+
+```{r}
+df |> count(smoking, asthma)
+```
+
+### Python
+
+```{python}
+df.value_counts(["smoking", "asthma"])
+```
+:::
+
+
+## Cross-tabulation
+
+::: {.panel-tabset}
+### R
+
+```{r}
+df |> select(smoking, asthma) |> table()
+```
+
+### Python
+
+```{python}
+pd.crosstab(df.smoking, df.asthma)
+```
+:::
+
+
+## Grouping
+
+::: {.panel-tabset}
+### R
+
+```{r}
+df |> group_by(heart_disease)
+```
+
+### Python
+
+```{python}
+df.groupby("heart_disease")
+```
+:::
+
+
+## Summarize data
+
+::: {.panel-tabset}
+### R
+
+```{r}
+df |> 
+    group_by(heart_disease) |> 
+    summarize(min = min(bmi), mean = mean(bmi), max = max(bmi))
+```
+
+### Python
+
+```{python}
+(
+    df
+    .groupby("heart_disease")
+    .agg({'bmi': ['min', 'mean', 'max']})
+)
+```
+:::

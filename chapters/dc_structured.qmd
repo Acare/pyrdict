@@ -1,0 +1,150 @@
+---
+title: "Structured Data"
+---
+
+The most common tabular (or structured) file formats one may encounter in a data science project are:
+
+- delimited files such as **CSV** (comma-separated values) and **TSV** (tab-separated values) files;
+- **Excel** files.
+
+We will consider the [Personal key indicators of heart disease](https://www.kaggle.com/kamilpytlak/personal-key-indicators-of-heart-disease) from Kaggle.
+
+```{bash}
+#| eval: false
+
+kaggle datasets download kamilpytlak/personal-key-indicators-of-heart-disease ./data --unzip
+```
+
+:::{.panel-tabset}
+### R
+
+```{r}
+library(readr)
+```
+
+### Python
+
+```{python}
+import pandas as pd
+```
+:::
+
+## Delimited files
+
+
+### TSV
+
+As an example, let's consider the [Animal Crossing](https://github.com/rfordatascience/tidytuesday/blob/master/data/2020/2020-05-05) dataset from week 19 of the 2020 TidyTuesday challenge.
+
+:::{.panel-tabset}
+#### R
+
+```{r}
+url <- "https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2020/2020-05-05/critic.tsv"
+
+df <- read_tsv(url, show_col_types = FALSE)
+df
+```
+
+#### Python
+
+```{python}
+url = "https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2020/2020-05-05/critic.tsv"
+
+df = pd.read_table(url)
+df
+```
+:::
+
+### CSV
+
+As an example, let's consider the [Indoor Pollution](https://github.com/rfordatascience/tidytuesday/blob/master/data/2022/2022-04-12) dataset from week 15 of the 2022 TidyTuesday challenge.
+
+:::{.panel-tabset}
+#### R
+
+```{r}
+url <- "https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2022/2022-04-12/indoor_pollution.csv"
+
+read_csv(url, show_col_types = FALSE)
+```
+
+#### Python
+
+```{python}
+url = "https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2022/2022-04-12/indoor_pollution.csv"
+
+pd.read_csv(url)
+```
+:::
+
+### General delimiter
+
+Again, we can consider the [Animal Crossing](https://github.com/rfordatascience/tidytuesday/blob/master/data/2020/2020-05-05) dataset from TidyTuesday and use the `read_table` function to import the data by specifying a separator/delimiter.
+
+:::{.panel-tabset}
+#### R
+
+```{r}
+url <- "https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2020/2020-05-05/critic.tsv"
+
+read_delim(url, delim ="\t", show_col_types = FALSE)
+```
+
+#### Python
+
+```{python}
+url = "https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2020/2020-05-05/critic.tsv"
+
+pd.read_table(url, sep="\t")
+```
+:::
+
+
+
+## Excel files
+
+At the moment, `readxl` does not support reading files from URLs. Hence, we will consider an example dataset which comes into the `readxl` package.
+
+:::{.panel-tabset}
+#### R
+
+```{r}
+library(readxl)
+
+path_to_ds <- readxl_example("clippy.xlsx")
+read_xlsx(path_to_ds)
+```
+
+#### Python
+
+```{python}
+pd.read_excel(r.path_to_ds)
+```
+:::
+
+
+
+## Summarize your data
+
+:::{.callout-tip}
+## The skimr package
+
+The [`skimr`](https://docs.ropensci.org/skimr/) package can be very useful to easily summarize your data!
+:::
+
+:::{.panel-tabset}
+### R
+
+```{r}
+skimr::skim(df)
+summary(df)
+```
+
+### Python
+
+```{python}
+df.info()
+df.describe()
+```
+:::

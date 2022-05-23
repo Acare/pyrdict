@@ -1,0 +1,14 @@
+---
+title: "Data Manipulation"
+---
+
+We will go through the main activities one have to face in order to overcome most common data cleaning/wrangling problems.
+
+R has an ecosystem of packages, the `tidyverse`, each specialized in a single task:
+
+- [`readr`](https://readr.tidyverse.org/) for importing data from various sources;
+- [`tidyr`](https://tidyr.tidyverse.org/) and [`dplyr`](https://dplyr.tidyverse.org/) for data wrangling;
+- [`ggplot2`](https://ggplot2.tidyverse.org/) for plotting;
+- and others.
+
+In Python, it is possible to accomplish almost every data manipulation task with the [`Pandas`](https://pandas.pydata.org/) package.

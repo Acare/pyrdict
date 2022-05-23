@@ -1,0 +1,64 @@
+project:
+  type: book
+  output-dir: docs
+  # pre-render:
+  #   - scripts/prepare.py
+  #   - scripts/prepare.R
+
+book:
+  title: "A Python-R Dictionary for Data Science"
+  author: "Andrea Carenzo"
+  date: "today"
+  search: true
+  sidebar:
+    style: docked
+    background: light
+  repo-url: https://github.com/Acare/pyrdict
+  code-overflow: "scroll"
+  page-navigation: true
+  chapters:
+    - index.qmd
+    - chapters/p00_intro.qmd
+    - part: chapters/p01_dc.qmd             # Data Collection
+      chapters:
+        - chapters/dc_structured.qmd
+        - chapters/dc_semi-structured.qmd
+        - chapters/dc_unstructured.qmd
+        # - chapters/dc_scraping.qmd
+    - part: chapters/p02_dm.qmd             # Data Manipulation
+      chapters:
+        - chapters/dm_subset.qmd
+        - chapters/dm_sum_mod.qmd
+        - chapters/dm_pivot_join.qmd
+        # - chapters/dm_dates.qmd
+        - chapters/dm_nlp.qmd
+    - part: chapters/p03_dv.qmd             # Data Visualization
+      chapters:
+        - chapters/dv_trends.qmd
+        - chapters/dv_distrib.qmd
+        # - chapters/dv_facets.qmd
+        # - chapters/dv_themes.qmd
+    - part: chapters/p04_ml.qmd             # Machine Learning
+      chapters:
+        - chapters/ml_split.qmd
+        - chapters/ml_prep.qmd
+        - chapters/ml_fit.qmd
+        # - chapters/ml_tune.qmd
+        # - chapters/ml_stack.qmd
+    # - part: chapters/p05_api.qmd # plumber vs flask/django
+    #   chapters:
+    #     - chapters/api_read.qmd
+    #     - chapters/api_build.qmd
+    - references.qmd
+
+number-depth: 3
+bibliography: references.bib
+cover-image: pyrdict_logo.svg
+
+format:
+  html:
+    theme: sandstone # cosmo, sandstone, simplex, united
+    highlight-style: atom-one # atom-one, ayu, breeze
+
+
+

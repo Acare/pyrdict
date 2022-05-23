@@ -1,0 +1,21 @@
+# Welcome {.unnumbered}
+
+I personally consider [R](https://www.r-project.org/) and [Python](https://www.python.org/) to be two very powerful programming languages (and ecosystems) to make *data science*. 
+Being mainly an R user for three years, I had to learn (**quickly**) Python and its modules for data science due to a change of career. Starting to learn a programming language from scratch and getting familiar with the APIs of lots of packages can be overwhelming. 
+Hence, I started looking for similarities across the R and Python ecosystems and I've decided to create this book as a personal reference to be able to switch from one language to another seamlessly.
+
+This book must not be intended as an in-depth guide into any of the concepts exposed. Instead, it should be considered as a **dictionary** aimed at translating many common data science problems from R to Python and viceversa.
+The current version of this dictionary covers the following macro-areas of data science:
+
+- Data Collection
+- Data Manipulation
+- Data Visualization
+- Machine Learning
+
+Obviously, data science is a broader topic and you can find links to external useful resources throughout the book. 
+I chose to translate the most common and useful commands with code snippets which needed to be both concise and as accurate as possible.
+
+This project was created with the language-agnostic publishing system [Quarto](https://quarto.org/), which can be considered as a younger (yet very ambitious) brother of [`rmarkdown`](https://rmarkdown.rstudio.com/).
+
+Hopefully, this resource may help someone else in their journey through data science with R and Python.
+Enjoy.

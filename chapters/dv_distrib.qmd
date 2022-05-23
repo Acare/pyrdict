@@ -1,0 +1,155 @@
+---
+title: "Distributions"
+---
+
+```{r}
+#| echo: false
+#| message: false
+
+source("../scripts/prepare.R")
+df <- df |> group_by(heart_disease) |> slice_head(n = 50)
+```
+
+```{python}
+#| echo: false
+#| message: false
+
+import matplotlib.pyplot as plt
+import seaborn as sns
+sns.set_theme()
+
+exec(open("../scripts/prepare.py").read())
+df = df.groupby("heart_disease").head(50)
+```
+
+
+## Bar Plots
+
+### A simple bar plot
+
+:::{.panel-tabset}
+#### R
+
+```{r}
+df |> 
+    ggplot(aes(gen_health)) +
+    geom_bar(color = "red")
+```
+
+#### Python
+
+```{python}
+sns.countplot(x="gen_health", color="grey", edgecolor="red", data=df)
+```
+:::
+
+### A stacked bar plot
+
+:::{.panel-tabset}
+#### R
+
+```{r}
+df |> 
+    ggplot(aes(gen_health, fill = heart_disease)) +
+    geom_bar()
+```
+
+#### Python
+
+```{python}
+sns.displot(x="gen_health", hue="heart_disease", multiple="stack", aspect=7/5, data=df);
+plt.show()
+```
+:::
+
+### A dodged bar plot
+
+:::{.panel-tabset}
+#### R
+
+```{r}
+df |> 
+    ggplot(aes(gen_health, fill = heart_disease)) +
+    geom_bar(position = "dodge")
+```
+
+#### Python
+
+```{python}
+sns.countplot(x="gen_health", hue="heart_disease", data=df)
+```
+:::
+
+
+## Histograms
+
+:::{.panel-tabset}
+#### R
+
+```{r}
+df |> 
+    ggplot(aes(bmi)) +
+    geom_histogram()
+```
+
+#### Python
+
+```{python}
+sns.histplot(x="bmi", data=df)
+```
+:::
+
+
+## Density Plots
+
+:::{.panel-tabset}
+#### R
+
+```{r}
+df |> 
+    ggplot(aes(bmi)) +
+    geom_density()
+```
+
+#### Python
+
+```{python}
+sns.kdeplot(x="bmi", data=df)
+```
+:::
+
+## Boxplots
+
+:::{.panel-tabset}
+#### R
+
+```{r}
+df |> 
+    ggplot(aes(smoking, bmi)) +
+    geom_boxplot()
+```
+
+#### Python
+
+```{python}
+sns.boxplot(x="smoking", y="bmi", data=df)
+```
+:::
+
+## Violin Plots
+
+:::{.panel-tabset}
+#### R
+
+```{r}
+df |> 
+    ggplot(aes(smoking, bmi)) +
+    geom_violin()
+```
+
+#### Python
+
+```{python}
+sns.violinplot(x="smoking", y="bmi", data=df)
+```
+:::

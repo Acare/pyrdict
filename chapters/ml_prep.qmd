@@ -1,0 +1,300 @@
+---
+title: "Preprocessing"
+execute: 
+  eval: false
+---
+
+<!-- magari mettere a inizio capitolo uno script con i risultati precedenti da usare nel successivo. Questo implica il dover fare o degli script "disgiunti" o "incrementali non disgiunti" -->
+
+```{r}
+#| echo: false
+#| message: false
+#| eval: true
+
+library(tidymodels)
+
+df <- readr::read_csv("data/heart_2020_cleaned.csv", show_col_types = FALSE) |> 
+    janitor::clean_names()
+
+set.seed(42)
+splits <- initial_split(df, prop = 0.8, strata = heart_disease)
+train_data <- training(splits)
+test_data <- testing(splits)
+```
+
+```{python}
+#| echo: false
+#| eval: true
+
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+from janitor import clean_names
+from sklearn.model_selection import train_test_split
+
+df = pd.read_csv("data/heart_2020_cleaned.csv").clean_names(case_type='snake')
+
+train_data, test_data, train_target, test_target = train_test_split(
+    df.drop(columns="heart_disease"), df["heart_disease"],
+    train_size=0.8,
+    random_state=42
+)
+```
+
+Pre-processing or feature engineering is a crucial step to take in every machine learning project. Some models require dummy variables instead of categorical ones, or normalized numerical variables, or also NA values to be imputed.
+
+In `tidymodels`, every data pre-processing operation can be specified trough a `step_` function of the `recipes` package. You start by defining a `recipe` object in which you specify the predictors and response variable as well as the data. Then, you add incrementally the `step_` functions, which transform accordingly your data.
+
+In `Scikit-Learn`, every pre-processor is a class object ...
+
+## Feature engineering
+
+::: panel-tabset
+### R
+
+```{r}
+#| eval: true
+
+preprocessor <- recipe(heart_disease ~ ., data = train_data) |> 
+    step_normalize(all_numeric_predictors()) |> 
+    step_dummy(all_nominal_predictors(), one_hot = FALSE)
+```
+
+```{r}
+#| eval: true
+
+preprocessor |> 
+    prep() |> 
+    bake(new_data = NULL) |> 
+    head()
+```
+
+### Python
+
+```{python}
+#| eval: true
+
+from sklearn.preprocessing import OneHotEncoder, StandardScaler
+from sklearn.compose import make_column_selector, ColumnTransformer
+
+select_cat_cols = make_column_selector(dtype_include=object)
+select_num_cols = make_column_selector(dtype_exclude=object)
+
+preprocessor = ColumnTransformer([
+    ('cat', OneHotEncoder(drop="first", sparse=False), select_cat_cols(train_data)),
+    ('num', StandardScaler(), select_num_cols(train_data))
+])
+```
+
+```{python}
+#| eval: true
+
+pd.DataFrame(
+    preprocessor.fit_transform(train_data),
+    columns=preprocessor.get_feature_names_out(preprocessor.feature_names_in_)
+).head()
+```
+:::
+
+## Preprocessors
+
+You can find all the available recipes [here](https://www.tidymodels.org/find/recipes/). For Scikit-Learn, you can see the official [API pages](https://scikit-learn.org/stable/modules/classes.html).
+
+### Normalization
+
+#### z-score
+
+::: panel-tabset
+##### R
+
+```{r}
+step_normalize()
+step_center()
+step_scale()
+```
+
+##### Python
+
+```{python}
+from sklearn.preprocessing import StandardScaler
+
+StandardScaler()
+StandardScaler(with_std=False)
+StandardScaler(with_mean=False)
+```
+:::
+
+#### min-max
+
+::: panel-tabset
+##### R
+
+```{r}
+step_range()
+step_range(min = -1, max = 1)
+```
+
+##### Python
+
+```{python}
+from sklearn.preprocessing import MinMaxScaler
+
+MinMaxScalerScaler()
+MinMaxScalerScaler(feature_range=(-1, 1))
+```
+:::
+
+#### Gaussian-like
+
+::: panel-tabset
+##### R
+
+```{r}
+step_YeoJohnson()
+step_BoxCox()
+```
+
+##### Python
+
+```{python}
+from sklearn.preprocessing import PowerTransformer
+
+PowerTransformer(method="yeo-johnson")
+PowerTransformer(method="box-cox")
+```
+:::
+
+### Binning
+
+::: panel-tabset
+#### R
+
+```{r}
+step_discretize(num_breaks = 4)
+```
+
+#### Python
+
+```{python}
+from sklearn.preprocessing import KBinsDiscretizer
+
+KBinsDiscretizer(n_bins=5, encode="ordinal")
+```
+:::
+
+### Dummy variables
+
+::: panel-tabset
+#### R
+
+```{r}
+step_dummy(one_hot = TRUE)
+step_dummy()
+```
+
+#### Python
+
+```{python}
+from sklearn.preprocessing import OneHotEncoder
+
+OneHotEncoder()
+OneHotEncoder(drop="first")
+```
+:::
+
+### Imputation
+
+::: panel-tabset
+#### R
+
+```{r}
+step_impute_mean()
+step_impute_median()
+step_impute_mode()
+
+step_impute_knn(neighbors = 5)
+```
+
+#### Python
+
+```{python}
+from sklearn.impute import SimpleImputer, KNNImputer
+
+SimpleImputer(strategy="mean")
+SimpleImputer(strategy="median")
+SimpleImputer(strategy="most_frequent")
+
+KNNImputer(n_neighbors=5)
+```
+:::
+
+### Augmentation
+
+::: panel-tabset
+#### R
+
+```{r}
+step_poly(degree=2)
+step_bs(deg_free = 8, degree = 3)
+```
+
+#### Python
+
+```{python}
+from sklearn.preprocessing import PolynomialFeatures, SplineTransformer
+
+PolynomialFeatures(degree=2)
+SplineTransformer(n_knots=5, degree=3, knots="quantile")
+```
+:::
+
+### Apply functions
+
+::: panel-tabset
+#### R
+
+```{r}
+step_log()
+step_log(base = 10)
+
+step_hyperbolic(func = "sin")
+step_hyperbolic(func = "cos")
+step_hyperbolic(func = "tan")
+
+step_sqrt()
+```
+
+#### Python
+
+```{python}
+import numpy as np
+from sklearn.preprocessing import FunctionTransformer
+
+FunctionTransformer(func=np.log)
+FunctionTransformer(func=np.log10)
+
+FunctionTransformer(func=np.sin)
+FunctionTransformer(func=np.cos)
+FunctionTransformer(func=np.tan)
+
+FunctionTransformer(func=np.sqrt)
+```
+:::
+
+### Zero-variance
+
+::: panel-tabset
+#### R
+
+```{r}
+step_zv()
+```
+
+#### Python
+
+```{python}
+from sklearn.feature_selection import VarianceThreshold
+
+VarianceThreshold(threshold=0)
+```
+:::

@@ -1,0 +1,22 @@
+---
+title: "Data Visualization"
+---
+
+We will use the [`ggplot2`](https://ggplot2.tidyverse.org/) and [`Seaborn`](https://seaborn.pydata.org/) packages for plotting in R and Python respectively. Actually, `ggplot2` is more mature than `Seaborn` which nonetheless allows to create several plots commonly used in data science.
+The low-level [`Matplotlib`](https://matplotlib.org/) module will be used for low-level manipulation and further customization of plots in Python.
+
+:::{.callout-warning}
+## The Seaborn "nextgen" API
+
+I decided to use the nextgen API of Seaborn because it has a lot of potential. Nonetheless, caution must be taken because it is in alpha release yet and everything can change.
+See [here](https://seaborn.pydata.org/nextgen).
+
+If you are comfortable with a ggplot2 syntax and grammar, then you can take a look at the [plotnine](https://plotnine.readthedocs.io/en/stable/) Python package.
+:::
+
+The data visualization part will cover the following topics:
+
+- look for **trends** in your data with scatter plots and line plots;
+- visualize **distributions** through bar plots, histograms, density plots, boxplots and violin plots;
+- augment the information displayed in your plots with **faceting**;
+- customize the **theme** of your plots.

@@ -1,0 +1,4234 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+\PassOptionsToPackage{dvipsnames,svgnames,x11names}{xcolor}
+%
+\documentclass[
+  letterpaper,
+  DIV=11,
+  numbers=noendperiod]{scrreprt}
+\usepackage{amsmath,amssymb}
+\usepackage{lmodern}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math}
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{241,243,245}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{#1}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.40,0.46,0.14}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
+\newcommand{\BuiltInTok}[1]{\textcolor[rgb]{0.00,0.46,0.62}{#1}}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.13,0.47,0.30}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{#1}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{\textit{#1}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.46,0.62}{#1}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{\textit{#1}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
+\newcommand{\ExtensionTok}[1]{\textcolor[rgb]{0.00,0.46,0.62}{#1}}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.28,0.35,0.67}{#1}}
+\newcommand{\ImportTok}[1]{\textcolor[rgb]{0.00,0.46,0.62}{#1}}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{#1}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.46,0.62}{#1}}
+\newcommand{\NormalTok}[1]{\textcolor[rgb]{0.00,0.46,0.62}{#1}}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{#1}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.46,0.62}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
+\newcommand{\RegionMarkerTok}[1]{\textcolor[rgb]{0.00,0.46,0.62}{#1}}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{#1}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.13,0.47,0.30}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.13,0.47,0.30}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.07,0.07,0.07}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.13,0.47,0.30}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{\textit{#1}}}
+\usepackage{longtable,booktabs,array}
+\usepackage{calc} % for calculating minipage widths
+% Correct order of tables after \paragraph or \subparagraph
+\usepackage{etoolbox}
+\makeatletter
+\patchcmd\longtable{\par}{\if@noskipsec\mbox{}\fi\par}{}{}
+\makeatother
+% Allow footnotes in longtable head/foot
+\IfFileExists{footnotehyper.sty}{\usepackage{footnotehyper}}{\usepackage{footnote}}
+\makesavenoteenv{longtable}
+\usepackage{graphicx}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+% Set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{3}
+% Make \paragraph and \subparagraph free-standing
+\ifx\paragraph\undefined\else
+  \let\oldparagraph\paragraph
+  \renewcommand{\paragraph}[1]{\oldparagraph{#1}\mbox{}}
+\fi
+\ifx\subparagraph\undefined\else
+  \let\oldsubparagraph\subparagraph
+  \renewcommand{\subparagraph}[1]{\oldsubparagraph{#1}\mbox{}}
+\fi
+\newlength{\cslhangindent}
+\setlength{\cslhangindent}{1.5em}
+\newlength{\csllabelwidth}
+\setlength{\csllabelwidth}{3em}
+\newlength{\cslentryspacingunit} % times entry-spacing
+\setlength{\cslentryspacingunit}{\parskip}
+\newenvironment{CSLReferences}[2] % #1 hanging-ident, #2 entry spacing
+ {% don't indent paragraphs
+  \setlength{\parindent}{0pt}
+  % turn on hanging indent if param 1 is 1
+  \ifodd #1
+  \let\oldpar\par
+  \def\par{\hangindent=\cslhangindent\oldpar}
+  \fi
+  % set entry spacing
+  \setlength{\parskip}{#2\cslentryspacingunit}
+ }%
+ {}
+\usepackage{calc}
+\newcommand{\CSLBlock}[1]{#1\hfill\break}
+\newcommand{\CSLLeftMargin}[1]{\parbox[t]{\csllabelwidth}{#1}}
+\newcommand{\CSLRightInline}[1]{\parbox[t]{\linewidth - \csllabelwidth}{#1}\break}
+\newcommand{\CSLIndent}[1]{\hspace{\cslhangindent}#1}
+\KOMAoption{captions}{tableheading}
+\makeatletter
+\@ifpackageloaded{tcolorbox}{}{\usepackage[many]{tcolorbox}}
+\@ifpackageloaded{fontawesome5}{}{\usepackage{fontawesome5}}
+\definecolor{quarto-callout-color}{HTML}{909090}
+\definecolor{quarto-callout-note-color}{HTML}{0758E5}
+\definecolor{quarto-callout-important-color}{HTML}{CC1914}
+\definecolor{quarto-callout-warning-color}{HTML}{EB9113}
+\definecolor{quarto-callout-tip-color}{HTML}{00A047}
+\definecolor{quarto-callout-caution-color}{HTML}{FC5300}
+\definecolor{quarto-callout-color-frame}{HTML}{acacac}
+\definecolor{quarto-callout-note-color-frame}{HTML}{4582ec}
+\definecolor{quarto-callout-important-color-frame}{HTML}{d9534f}
+\definecolor{quarto-callout-warning-color-frame}{HTML}{f0ad4e}
+\definecolor{quarto-callout-tip-color-frame}{HTML}{02b875}
+\definecolor{quarto-callout-caution-color-frame}{HTML}{fd7e14}
+\makeatother
+\makeatletter
+\makeatother
+\makeatletter
+\@ifpackageloaded{caption}{}{\usepackage{caption}}
+\AtBeginDocument{%
+\renewcommand*\contentsname{Table of contents}
+\renewcommand*\listfigurename{List of Figures}
+\renewcommand*\listtablename{List of Tables}
+\renewcommand*\figurename{Figure}
+\renewcommand*\tablename{Table}
+}
+\@ifpackageloaded{float}{}{\usepackage{float}}
+\floatstyle{ruled}
+\@ifundefined{c@chapter}{\newfloat{codelisting}{h}{lop}}{\newfloat{codelisting}{h}{lop}[chapter]}
+\floatname{codelisting}{Listing}
+\newcommand*\listoflistings{\listof{codelisting}{List of Listings}}
+\makeatother
+\makeatletter
+\@ifpackageloaded{caption}{}{\usepackage{caption}}
+\@ifpackageloaded{subcaption}{}{\usepackage{subcaption}}
+\makeatother
+\makeatletter
+\@ifpackageloaded{tcolorbox}{}{\usepackage[many]{tcolorbox}}
+\makeatother
+\makeatletter
+\@ifundefined{shadecolor}{\definecolor{shadecolor}{rgb}{.97, .97, .97}}
+\makeatother
+\makeatletter
+\makeatother
+\ifLuaTeX
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same} % disable monospaced font for URLs
+\hypersetup{
+  pdftitle={Fitting a Model},
+  pdfauthor={Andrea Carenzo},
+  colorlinks=true,
+  linkcolor={blue},
+  filecolor={Maroon},
+  citecolor={Blue},
+  urlcolor={Blue},
+  pdfcreator={LaTeX via pandoc}}
+
+\title{Fitting a Model}
+\author{Andrea Carenzo}
+\date{2022-05-23T00:00:00+02:00}
+
+\begin{document}
+\maketitle
+
+\ifdefined\Shaded\renewenvironment{Shaded}{\begin{tcolorbox}[boxrule=0pt, interior hidden, borderline west={3pt}{0pt}{shadecolor}, enhanced, sharp corners, frame hidden]}{\end{tcolorbox}}\fi
+
+\renewcommand*\contentsname{Table of contents}
+{
+\hypersetup{linkcolor=}
+\setcounter{tocdepth}{2}
+\tableofcontents
+}
+\hypertarget{welcome}{%
+\chapter*{Welcome}\label{welcome}}
+\addcontentsline{toc}{chapter}{Welcome}
+
+I personally consider \href{https://www.r-project.org/}{R} and
+\href{https://www.python.org/}{Python} to be two very powerful
+programming languages (and ecosystems) to make \emph{data science}.
+Being mainly an R user for three years, I had to learn
+(\textbf{quickly}) Python and its modules for data science due to a
+change of career. Starting to learn a programming language from scratch
+and getting familiar with the APIs of lots of packages can be
+overwhelming. Hence, I started looking for similarities across the R and
+Python ecosystems and I've decided to create this book as a personal
+reference to be able to switch from one language to another seamlessly.
+
+This book must not be intended as an in-depth guide into any of the
+concepts exposed. Instead, it should be considered as a
+\textbf{dictionary} aimed at translating many common data science
+problems from R to Python and viceversa. The current version of this
+dictionary covers the following macro-areas of data science:
+
+\begin{itemize}
+\tightlist
+\item
+  Data Collection
+\item
+  Data Manipulation
+\item
+  Data Visualization
+\item
+  Machine Learning
+\end{itemize}
+
+Obviously, data science is a broader topic and you can find links to
+external useful resources throughout the book. I chose to translate the
+most common and useful commands with code snippets which needed to be
+both concise and as accurate as possible.
+
+This project was created with the language-agnostic publishing system
+\href{https://quarto.org/}{Quarto}, which can be considered as a younger
+(yet very ambitious) brother of
+\href{https://rmarkdown.rstudio.com/}{\texttt{rmarkdown}}.
+
+Hopefully, this resource may help someone else in their journey through
+data science with R and Python. Enjoy.
+
+\hypertarget{introduction}{%
+\chapter{Introduction}\label{introduction}}
+
+Before taking your bilingual journey through data science, I want to
+highlight some useful resources which can improve your overall learning
+experience.
+
+\hypertarget{choose-an-ide}{%
+\section{Choose an IDE}\label{choose-an-ide}}
+
+Making data science in the command line is ok, but you can save time and
+improve a lot your workflow by using an integrated development
+environment (IDE). You will have the ability to create scripts, running
+code interactively, making plots, debugging code and more within a
+single application.
+
+In my opinion, the
+\href{https://www.rstudio.com/products/rstudio/}{RStudio IDE} is the
+best solution out there for R at present.
+
+For Python, good choices are \href{https://www.spyder-ide.org/}{Spyder},
+\href{https://www.jetbrains.com/pycharm/}{PyCharm} and
+\href{https://jupyter.org/}{Jupyter}.
+
+\hypertarget{learn-by-others-and-improve-yourself}{%
+\section{Learn by others and improve
+yourself}\label{learn-by-others-and-improve-yourself}}
+
+\hypertarget{kaggle}{%
+\subsection{Kaggle}\label{kaggle}}
+
+\href{https://www.kaggle.com/}{Kaggle} is an online platform hosting
+datasets and competitions aimed at solving real-life problems. This is
+one of the best places to getting your hands dirty in data science!
+
+Throughout the book, we will use many (?) Kaggle datasets. You can
+install the CLI of \href{https://www.kaggle.com/docs/api}{Kaggle API}
+and run the following command on bash to download a dataset:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ExtensionTok{kaggle}\NormalTok{ datasets download kamilpytlak/personal{-}key{-}indicators{-}of{-}heart{-}disease ./data }\AttributeTok{{-}{-}unzip}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{tidytuesday}{%
+\subsection{TidyTuesday}\label{tidytuesday}}
+
+As described in the main page,
+\href{https://github.com/rfordatascience/tidytuesday}{TidyTuesday} is a
+weekly social data project aimed at applying your R skills, getting
+feedback, exploring other's work and connecting with the greater R
+community. Every week (yes, on Tuesday), a new dataset is posted on the
+GitHub page and people are encouraged to produce useful insights from it
+(usually) through figures. Once you're done with your visualization, you
+can post it on Twitter by using the hashtags \textbf{\#TidyTuesday} and
+\textbf{\#RStats}. It is also recommended to share your code and adding
+alt text to your visualizations.
+
+\hypertarget{big-books}{%
+\subsection{Big Books}\label{big-books}}
+
+There will be lots of links to external resources throughout the book.
+Anyway, I suggest you to take a look at these two meta-books which can
+help you to point to the right direction in your learning path:
+
+\begin{itemize}
+\tightlist
+\item
+  \href{https://www.bigbookofr.com/}{the Big Book of R};
+\item
+  \href{https://www.bigbookofpython.com/}{the Big Book of Python}.
+\end{itemize}
+
+\hypertarget{integrate-r-and-python}{%
+\section{Integrate R and Python}\label{integrate-r-and-python}}
+
+If you want to integrate Python code in your R projects, I suggest you
+to take a look at the R package
+\href{https://rstudio.github.io/reticulate/}{\texttt{reticulate}}.
+
+For example, it is possible to import Python libraries and use their
+functions to create R objects. In the following code chunk, you can see
+how we import Numpy and Pandas (using R syntax), create two Numpy arrays
+(R vectors) and use them to make a Pandas DataFrame (R data.frame):
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(reticulate)}
+
+\NormalTok{np }\OtherTok{\textless{}{-}} \FunctionTok{import}\NormalTok{(}\StringTok{"numpy"}\NormalTok{)}
+\NormalTok{pd }\OtherTok{\textless{}{-}} \FunctionTok{import}\NormalTok{(}\StringTok{"pandas"}\NormalTok{)}
+
+\NormalTok{a1 }\OtherTok{\textless{}{-}}\NormalTok{ np}\SpecialCharTok{$}\FunctionTok{array}\NormalTok{(}\FunctionTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{3}\NormalTok{, }\DecValTok{4}\NormalTok{))}
+\NormalTok{a2 }\OtherTok{\textless{}{-}}\NormalTok{ np}\SpecialCharTok{$}\FunctionTok{array}\NormalTok{(}\DecValTok{5}\SpecialCharTok{:}\DecValTok{8}\NormalTok{)}
+\NormalTok{pd}\SpecialCharTok{$}\FunctionTok{DataFrame}\NormalTok{(}\FunctionTok{list}\NormalTok{(}\AttributeTok{a1 =}\NormalTok{ a1, }\AttributeTok{a2 =}\NormalTok{ a2), }\AttributeTok{index =}\NormalTok{ letters[}\DecValTok{1}\SpecialCharTok{:}\DecValTok{4}\NormalTok{])}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+  a1 a2
+a  1  5
+b  2  6
+c  3  7
+d  4  8
+\end{verbatim}
+
+You can also use Python interactively through the R console
+(\texttt{reticulate::repl\_python()} function) or sourcing Python
+scripts (\texttt{reticulate::source\_python()}) and more.
+
+\part{Data Collection}
+
+Data collection is the most fundamental part of data science. Data can
+be imported into R and Python from many sources: csv, txt, pdf and even
+from html pages.
+
+The following chapters will show you how to import data into R and
+Python from several sources using different packages:
+
+\begin{itemize}
+\tightlist
+\item
+  \href{https://readr.tidyverse.org/}{\texttt{readr}} and
+  \href{https://pandas.pydata.org/}{\texttt{Pandas}} for the most common
+  tabular data formats;
+\item
+  \href{}{\texttt{readxl}} and \href{}{\texttt{openpyxl}} for Excel
+  files;
+\item
+  \href{https://CRAN.R-project.org/package=jsonlite}{\texttt{jsonlite}}
+  and \href{https://docs.python.org/3/library/json.html}{\texttt{json}}
+  for JSON files;
+\item
+  \href{https://xml2.r-lib.org/}{\texttt{xml2}} and \textbf{???} for XML
+  files;
+\item
+  \href{}{\texttt{DBI}} and ??? for SQL databases;
+\item
+  \href{https://rvest.tidyverse.org/}{\texttt{rvest}} and
+  \href{https://www.crummy.com/software/BeautifulSoup/bs4/doc/}{\texttt{Beautiful\ Soup}}
+  for web scraping;
+\item
+  \href{https://httr2.r-lib.org/}{\texttt{httr2}} and
+  \href{https://docs.python-requests.org/en/master/}{\texttt{Requests}}
+  to interrogate APIs.
+\end{itemize}
+
+\hypertarget{structured-data}{%
+\chapter{Structured Data}\label{structured-data}}
+
+The most common tabular (or structured) file formats one may encounter
+in a data science project are:
+
+\begin{itemize}
+\tightlist
+\item
+  delimited files such as \textbf{CSV} (comma-separated values) and
+  \textbf{TSV} (tab-separated values) files;
+\item
+  \textbf{Excel} files.
+\end{itemize}
+
+We will consider the
+\href{https://www.kaggle.com/kamilpytlak/personal-key-indicators-of-heart-disease}{Personal
+key indicators of heart disease} from Kaggle.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ExtensionTok{kaggle}\NormalTok{ datasets download kamilpytlak/personal{-}key{-}indicators{-}of{-}heart{-}disease ./data }\AttributeTok{{-}{-}unzip}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{r}{%
+\subsubsection{R}\label{r}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(readr)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{python}{%
+\subsubsection{Python}\label{python}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{import}\NormalTok{ pandas }\ImportTok{as}\NormalTok{ pd}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{delimited-files}{%
+\section{Delimited files}\label{delimited-files}}
+
+\hypertarget{tsv}{%
+\subsection{TSV}\label{tsv}}
+
+As an example, let's consider the
+\href{https://github.com/rfordatascience/tidytuesday/blob/master/data/2020/2020-05-05}{Animal
+Crossing} dataset from week 19 of the 2020 TidyTuesday challenge.
+
+\hypertarget{r-1}{%
+\subsubsection{R}\label{r-1}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{url }\OtherTok{\textless{}{-}} \StringTok{"https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2020/2020{-}05{-}05/critic.tsv"}
+
+\NormalTok{df }\OtherTok{\textless{}{-}} \FunctionTok{read\_tsv}\NormalTok{(url, }\AttributeTok{show\_col\_types =} \ConstantTok{FALSE}\NormalTok{)}
+\NormalTok{df}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+# A tibble: 107 x 4
+   grade publication      text                                        date      
+   <dbl> <chr>            <chr>                                       <date>    
+ 1   100 Pocket Gamer UK  Animal Crossing; New Horizons, much like i~ 2020-03-16
+ 2   100 Forbes           Know that if you’re overwhelmed with the w~ 2020-03-16
+ 3   100 Telegraph        With a game this broad and lengthy, there’~ 2020-03-16
+ 4   100 VG247            Animal Crossing: New Horizons is everythin~ 2020-03-16
+ 5   100 Nintendo Insider Above all else, Animal Crossing: New Horiz~ 2020-03-16
+ 6   100 Trusted Reviews  Animal Crossing: New Horizons is the best ~ 2020-03-16
+ 7   100 VGC              Nintendo's comforting life sim is a tranqu~ 2020-03-16
+ 8   100 God is a Geek    A beautiful, welcoming game that is everyt~ 2020-03-16
+ 9   100 Nintendo Life    Animal Crossing: New Horizons takes Animal~ 2020-03-16
+10   100 Daily Star       Similar to how Breath of the Wild and Odys~ 2020-03-16
+# ... with 97 more rows
+\end{verbatim}
+
+\hypertarget{python-1}{%
+\subsubsection{Python}\label{python-1}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{url }\OperatorTok{=} \StringTok{"https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2020/2020{-}05{-}05/critic.tsv"}
+
+\NormalTok{df }\OperatorTok{=}\NormalTok{ pd.read\_table(url)}
+\NormalTok{df}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+     grade  ...        date
+0      100  ...  2020-03-16
+1      100  ...  2020-03-16
+2      100  ...  2020-03-16
+3      100  ...  2020-03-16
+4      100  ...  2020-03-16
+..     ...  ...         ...
+102     90  ...  2020-04-16
+103     90  ...  2020-04-17
+104     95  ...  2020-04-22
+105     90  ...  2020-05-01
+106     80  ...  2020-05-01
+
+[107 rows x 4 columns]
+\end{verbatim}
+
+\hypertarget{csv}{%
+\subsection{CSV}\label{csv}}
+
+As an example, let's consider the
+\href{https://github.com/rfordatascience/tidytuesday/blob/master/data/2022/2022-04-12}{Indoor
+Pollution} dataset from week 15 of the 2022 TidyTuesday challenge.
+
+\hypertarget{r-2}{%
+\subsubsection{R}\label{r-2}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{url }\OtherTok{\textless{}{-}} \StringTok{"https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2022/2022{-}04{-}12/indoor\_pollution.csv"}
+
+\FunctionTok{read\_csv}\NormalTok{(url, }\AttributeTok{show\_col\_types =} \ConstantTok{FALSE}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+# A tibble: 8,010 x 4
+   Entity      Code   Year `Deaths - Cause: All causes - Risk: Household air p~`
+   <chr>       <chr> <dbl>                                                 <dbl>
+ 1 Afghanistan AFG    1990                                                  19.6
+ 2 Afghanistan AFG    1991                                                  19.3
+ 3 Afghanistan AFG    1992                                                  19.5
+ 4 Afghanistan AFG    1993                                                  19.7
+ 5 Afghanistan AFG    1994                                                  19.4
+ 6 Afghanistan AFG    1995                                                  19.6
+ 7 Afghanistan AFG    1996                                                  19.8
+ 8 Afghanistan AFG    1997                                                  19.7
+ 9 Afghanistan AFG    1998                                                  19.0
+10 Afghanistan AFG    1999                                                  19.9
+# ... with 8,000 more rows
+\end{verbatim}
+
+\hypertarget{python-2}{%
+\subsubsection{Python}\label{python-2}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{url }\OperatorTok{=} \StringTok{"https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2022/2022{-}04{-}12/indoor\_pollution.csv"}
+
+\NormalTok{pd.read\_csv(url)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+           Entity  ... Deaths - Cause: All causes - Risk: Household air pollution from solid fuels - Sex: Both - Age: Age-standardized (Percent)
+0     Afghanistan  ...                                          19.623001                                                                       
+1     Afghanistan  ...                                          19.335193                                                                       
+2     Afghanistan  ...                                          19.508785                                                                       
+3     Afghanistan  ...                                          19.677607                                                                       
+4     Afghanistan  ...                                          19.432528                                                                       
+...           ...  ...                                                ...                                                                       
+8005     Zimbabwe  ...                                           8.603630                                                                       
+8006     Zimbabwe  ...                                           8.656817                                                                       
+8007     Zimbabwe  ...                                           8.690100                                                                       
+8008     Zimbabwe  ...                                           8.736245                                                                       
+8009     Zimbabwe  ...                                           8.658818                                                                       
+
+[8010 rows x 4 columns]
+\end{verbatim}
+
+\hypertarget{general-delimiter}{%
+\subsection{General delimiter}\label{general-delimiter}}
+
+Again, we can consider the
+\href{https://github.com/rfordatascience/tidytuesday/blob/master/data/2020/2020-05-05}{Animal
+Crossing} dataset from TidyTuesday and use the \texttt{read\_table}
+function to import the data by specifying a separator/delimiter.
+
+\hypertarget{r-3}{%
+\subsubsection{R}\label{r-3}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{url }\OtherTok{\textless{}{-}} \StringTok{"https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2020/2020{-}05{-}05/critic.tsv"}
+
+\FunctionTok{read\_delim}\NormalTok{(url, }\AttributeTok{delim =}\StringTok{"}\SpecialCharTok{\textbackslash{}t}\StringTok{"}\NormalTok{, }\AttributeTok{show\_col\_types =} \ConstantTok{FALSE}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+# A tibble: 107 x 4
+   grade publication      text                                        date      
+   <dbl> <chr>            <chr>                                       <date>    
+ 1   100 Pocket Gamer UK  Animal Crossing; New Horizons, much like i~ 2020-03-16
+ 2   100 Forbes           Know that if you’re overwhelmed with the w~ 2020-03-16
+ 3   100 Telegraph        With a game this broad and lengthy, there’~ 2020-03-16
+ 4   100 VG247            Animal Crossing: New Horizons is everythin~ 2020-03-16
+ 5   100 Nintendo Insider Above all else, Animal Crossing: New Horiz~ 2020-03-16
+ 6   100 Trusted Reviews  Animal Crossing: New Horizons is the best ~ 2020-03-16
+ 7   100 VGC              Nintendo's comforting life sim is a tranqu~ 2020-03-16
+ 8   100 God is a Geek    A beautiful, welcoming game that is everyt~ 2020-03-16
+ 9   100 Nintendo Life    Animal Crossing: New Horizons takes Animal~ 2020-03-16
+10   100 Daily Star       Similar to how Breath of the Wild and Odys~ 2020-03-16
+# ... with 97 more rows
+\end{verbatim}
+
+\hypertarget{python-3}{%
+\subsubsection{Python}\label{python-3}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{url }\OperatorTok{=} \StringTok{"https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2020/2020{-}05{-}05/critic.tsv"}
+
+\NormalTok{pd.read\_table(url, sep}\OperatorTok{=}\StringTok{"}\CharTok{\textbackslash{}t}\StringTok{"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+     grade  ...        date
+0      100  ...  2020-03-16
+1      100  ...  2020-03-16
+2      100  ...  2020-03-16
+3      100  ...  2020-03-16
+4      100  ...  2020-03-16
+..     ...  ...         ...
+102     90  ...  2020-04-16
+103     90  ...  2020-04-17
+104     95  ...  2020-04-22
+105     90  ...  2020-05-01
+106     80  ...  2020-05-01
+
+[107 rows x 4 columns]
+\end{verbatim}
+
+\hypertarget{excel-files}{%
+\section{Excel files}\label{excel-files}}
+
+At the moment, \texttt{readxl} does not support reading files from URLs.
+Hence, we will consider an example dataset which comes into the
+\texttt{readxl} package.
+
+\hypertarget{r-4}{%
+\subsubsection{R}\label{r-4}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(readxl)}
+
+\NormalTok{path\_to\_ds }\OtherTok{\textless{}{-}} \FunctionTok{readxl\_example}\NormalTok{(}\StringTok{"clippy.xlsx"}\NormalTok{)}
+\FunctionTok{read\_xlsx}\NormalTok{(path\_to\_ds)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+# A tibble: 4 x 2
+  name                 value    
+  <chr>                <chr>    
+1 Name                 Clippy   
+2 Species              paperclip
+3 Approx date of death 39083    
+4 Weight in grams      0.9      
+\end{verbatim}
+
+\hypertarget{python-4}{%
+\subsubsection{Python}\label{python-4}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{pd.read\_excel(r.path\_to\_ds)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+                   name                value
+0                  Name               Clippy
+1               Species            paperclip
+2  Approx date of death  2007-01-01 00:00:00
+3       Weight in grams                  0.9
+\end{verbatim}
+
+\hypertarget{summarize-your-data}{%
+\section{Summarize your data}\label{summarize-your-data}}
+
+\begin{tcolorbox}[standard jigsaw,bottomtitle=1mm, opacitybacktitle=0.6, coltitle=black, colback=white, arc=.35mm, leftrule=.75mm, titlerule=0mm, rightrule=.15mm, opacityback=0, colframe=quarto-callout-tip-color-frame, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{The skimr package}, toprule=.15mm, colbacktitle=quarto-callout-tip-color!10!white, bottomrule=.15mm, toptitle=1mm, left=2mm]
+The \href{https://docs.ropensci.org/skimr/}{\texttt{skimr}} package can
+be very useful to easily summarize your data!
+\end{tcolorbox}
+
+\hypertarget{r-5}{%
+\subsubsection{R}\label{r-5}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{skimr}\SpecialCharTok{::}\FunctionTok{skim}\NormalTok{(df)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{longtable}[]{@{}ll@{}}
+\caption{Data summary}\tabularnewline
+\toprule()
+\endhead
+Name & df \\
+Number of rows & 107 \\
+Number of columns & 4 \\
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_ & \\
+Column type frequency: & \\
+character & 2 \\
+Date & 1 \\
+numeric & 1 \\
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_ & \\
+Group variables & None \\
+\bottomrule()
+\end{longtable}
+
+\textbf{Variable type: character}
+
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 14\tabcolsep) * \real{0.1944}}
+  >{\raggedleft\arraybackslash}p{(\columnwidth - 14\tabcolsep) * \real{0.1389}}
+  >{\raggedleft\arraybackslash}p{(\columnwidth - 14\tabcolsep) * \real{0.1944}}
+  >{\raggedleft\arraybackslash}p{(\columnwidth - 14\tabcolsep) * \real{0.0556}}
+  >{\raggedleft\arraybackslash}p{(\columnwidth - 14\tabcolsep) * \real{0.0556}}
+  >{\raggedleft\arraybackslash}p{(\columnwidth - 14\tabcolsep) * \real{0.0833}}
+  >{\raggedleft\arraybackslash}p{(\columnwidth - 14\tabcolsep) * \real{0.1250}}
+  >{\raggedleft\arraybackslash}p{(\columnwidth - 14\tabcolsep) * \real{0.1528}}@{}}
+\toprule()
+\begin{minipage}[b]{\linewidth}\raggedright
+skim\_variable
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+n\_missing
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+complete\_rate
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+min
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+max
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+empty
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+n\_unique
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+whitespace
+\end{minipage} \\
+\midrule()
+\endhead
+publication & 0 & 1 & 2 & 29 & 0 & 107 & 0 \\
+text & 0 & 1 & 22 & 833 & 0 & 107 & 0 \\
+\bottomrule()
+\end{longtable}
+
+\textbf{Variable type: Date}
+
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 12\tabcolsep) * \real{0.1750}}
+  >{\raggedleft\arraybackslash}p{(\columnwidth - 12\tabcolsep) * \real{0.1250}}
+  >{\raggedleft\arraybackslash}p{(\columnwidth - 12\tabcolsep) * \real{0.1750}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 12\tabcolsep) * \real{0.1375}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 12\tabcolsep) * \real{0.1375}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 12\tabcolsep) * \real{0.1375}}
+  >{\raggedleft\arraybackslash}p{(\columnwidth - 12\tabcolsep) * \real{0.1125}}@{}}
+\toprule()
+\begin{minipage}[b]{\linewidth}\raggedright
+skim\_variable
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+n\_missing
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+complete\_rate
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+min
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+max
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+median
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+n\_unique
+\end{minipage} \\
+\midrule()
+\endhead
+date & 0 & 1 & 2020-03-16 & 2020-05-01 & 2020-03-23 & 28 \\
+\bottomrule()
+\end{longtable}
+
+\textbf{Variable type: numeric}
+
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 20\tabcolsep) * \real{0.1867}}
+  >{\raggedleft\arraybackslash}p{(\columnwidth - 20\tabcolsep) * \real{0.1333}}
+  >{\raggedleft\arraybackslash}p{(\columnwidth - 20\tabcolsep) * \real{0.1867}}
+  >{\raggedleft\arraybackslash}p{(\columnwidth - 20\tabcolsep) * \real{0.0800}}
+  >{\raggedleft\arraybackslash}p{(\columnwidth - 20\tabcolsep) * \real{0.0667}}
+  >{\raggedleft\arraybackslash}p{(\columnwidth - 20\tabcolsep) * \real{0.0400}}
+  >{\raggedleft\arraybackslash}p{(\columnwidth - 20\tabcolsep) * \real{0.0533}}
+  >{\raggedleft\arraybackslash}p{(\columnwidth - 20\tabcolsep) * \real{0.0533}}
+  >{\raggedleft\arraybackslash}p{(\columnwidth - 20\tabcolsep) * \real{0.0533}}
+  >{\raggedleft\arraybackslash}p{(\columnwidth - 20\tabcolsep) * \real{0.0667}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 20\tabcolsep) * \real{0.0800}}@{}}
+\toprule()
+\begin{minipage}[b]{\linewidth}\raggedright
+skim\_variable
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+n\_missing
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+complete\_rate
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+mean
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+sd
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+p0
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+p25
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+p50
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+p75
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+p100
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+hist
+\end{minipage} \\
+\midrule()
+\endhead
+grade & 0 & 1 & 90.64 & 6.11 & 70 & 90 & 90 & 94 & 100 & ▁▂▁▇▃ \\
+\bottomrule()
+\end{longtable}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{summary}\NormalTok{(df)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+     grade        publication            text                date           
+ Min.   : 70.00   Length:107         Length:107         Min.   :2020-03-16  
+ 1st Qu.: 90.00   Class :character   Class :character   1st Qu.:2020-03-16  
+ Median : 90.00   Mode  :character   Mode  :character   Median :2020-03-23  
+ Mean   : 90.64                                         Mean   :2020-03-25  
+ 3rd Qu.: 94.00                                         3rd Qu.:2020-04-02  
+ Max.   :100.00                                         Max.   :2020-05-01  
+\end{verbatim}
+
+\hypertarget{python-5}{%
+\subsubsection{Python}\label{python-5}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{df.info()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+<class 'pandas.core.frame.DataFrame'>
+RangeIndex: 107 entries, 0 to 106
+Data columns (total 4 columns):
+ #   Column       Non-Null Count  Dtype 
+---  ------       --------------  ----- 
+ 0   grade        107 non-null    int64 
+ 1   publication  107 non-null    object
+ 2   text         107 non-null    object
+ 3   date         107 non-null    object
+dtypes: int64(1), object(3)
+memory usage: 3.5+ KB
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{df.describe()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+            grade
+count  107.000000
+mean    90.635514
+std      6.114308
+min     70.000000
+25%     90.000000
+50%     90.000000
+75%     94.000000
+max    100.000000
+\end{verbatim}
+
+\hypertarget{semi-structured-data}{%
+\chapter{Semi-structured Data}\label{semi-structured-data}}
+
+When we talk about semi-structured data we usually refer to data that is
+not represented as a table, but as a hierarchical nested structure of
+key-value pairs. We will see how to import two kinds of file:
+
+\begin{itemize}
+\tightlist
+\item
+  JSON (JavaScript Object Notation);
+\item
+  XML (eXtensible Markup Language).
+\end{itemize}
+
+\hypertarget{r-6}{%
+\subsubsection{R}\label{r-6}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(jsonlite)}
+\FunctionTok{library}\NormalTok{(xml2)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{python-6}{%
+\subsubsection{Python}\label{python-6}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{import}\NormalTok{ pandas }\ImportTok{as}\NormalTok{ pd}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{json}{%
+\section{JSON}\label{json}}
+
+We will use the \href{https://openlibrary.org/}{Open Library} RESTful
+API (see chapter XX to know more about APIs) in order to retrieve
+information about books written by one of my favorite authors,
+\href{https://en.wikipedia.org/wiki/Anna_Maria_Ortese}{Anna Maria
+Ortese}.
+
+\hypertarget{r-7}{%
+\subsubsection{R}\label{r-7}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{json\_data }\OtherTok{\textless{}{-}} \FunctionTok{read\_json}\NormalTok{(}\StringTok{"http://openlibrary.org/search.json?author=anna+maria+ortese"}\NormalTok{,}
+                       \AttributeTok{simplifyVector =} \ConstantTok{TRUE}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{python-7}{%
+\subsubsection{Python}\label{python-7}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{json\_data }\OperatorTok{=}\NormalTok{ pd.read\_json(}\StringTok{"http://openlibrary.org/search.json?author=anna+maria+ortese"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+By default, \texttt{jsonlite::read\_json()} will not simplify the JSON
+structure, whereas \texttt{pd.read\_json()} will try to convert the JSON
+file into a table.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{lapply}\NormalTok{(json\_data, length) }\CommentTok{\# in R}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+$numFound
+[1] 1
+
+$start
+[1] 1
+
+$numFoundExact
+[1] 1
+
+$docs
+[1] 56
+
+$num_found
+[1] 1
+
+$q
+[1] 1
+
+$offset
+[1] 0
+\end{verbatim}
+
+We are interested in retrieving information from four sub-fields coming
+from the \texttt{docs} field:
+
+\hypertarget{r-8}{%
+\subsubsection{R}\label{r-8}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{json\_data}\SpecialCharTok{$}\NormalTok{docs }\SpecialCharTok{|\textgreater{}} 
+\NormalTok{    dplyr}\SpecialCharTok{::}\FunctionTok{select}\NormalTok{(author\_name, title, publish\_year, number\_of\_pages\_median) }\SpecialCharTok{|\textgreater{}} 
+    \FunctionTok{head}\NormalTok{(}\DecValTok{5}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+        author_name                    title                       publish_year
+1 Anna Maria Ortese Il mare non bagna Napoli 1955, 1979, 1953, 1994, 1975, 1967
+2 Anna Maria Ortese                L' iguana                         1978, 1965
+3 Anna Maria Ortese                  Romanzi                               2002
+4 Anna Maria Ortese        Poveri e semplici                         1974, 1967
+5 Anna Maria Ortese            Short Stories                               1994
+  number_of_pages_median
+1                    160
+2                    204
+3                     NA
+4                    163
+5                    191
+\end{verbatim}
+
+\hypertarget{python-8}{%
+\subsubsection{Python}\label{python-8}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{(}
+\NormalTok{    pd.json\_normalize(json\_data[}\StringTok{"docs"}\NormalTok{])}
+\NormalTok{    .loc[:,[}\StringTok{"author\_name"}\NormalTok{, }\StringTok{"title"}\NormalTok{, }\StringTok{"publish\_year"}\NormalTok{, }\StringTok{"number\_of\_pages\_median"}\NormalTok{]]}
+\NormalTok{    .head(}\DecValTok{5}\NormalTok{)}
+\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+           author_name  ... number_of_pages_median
+0  [Anna Maria Ortese]  ...                  160.0
+1  [Anna Maria Ortese]  ...                  204.0
+2  [Anna Maria Ortese]  ...                    NaN
+3  [Anna Maria Ortese]  ...                  163.0
+4  [Anna Maria Ortese]  ...                  191.0
+
+[5 rows x 4 columns]
+\end{verbatim}
+
+Read more about how to subset data frames in Chapter~\ref{sec-subset}
+
+\hypertarget{xml}{%
+\section{XML}\label{xml}}
+
+\hypertarget{r-9}{%
+\subsubsection{R}\label{r-9}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{xml\_data }\OtherTok{\textless{}{-}} \FunctionTok{read\_xml}\NormalTok{(}\StringTok{"https://www.w3schools.com/xml/simple.xml"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{python-9}{%
+\subsubsection{Python}\label{python-9}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{xml\_data }\OperatorTok{=}\NormalTok{ pd.read\_xml(}\StringTok{"https://www.w3schools.com/xml/simple.xml"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{r-10}{%
+\subsubsection{R}\label{r-10}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{xml\_data }\SpecialCharTok{|\textgreater{}} 
+    \FunctionTok{xml\_children}\NormalTok{() }\SpecialCharTok{|\textgreater{}} 
+    \FunctionTok{as\_list}\NormalTok{() }\SpecialCharTok{|\textgreater{}} 
+\NormalTok{    dplyr}\SpecialCharTok{::}\FunctionTok{bind\_rows}\NormalTok{() }\SpecialCharTok{|\textgreater{}} 
+\NormalTok{    tidyr}\SpecialCharTok{::}\FunctionTok{unnest}\NormalTok{(}\AttributeTok{cols =} \FunctionTok{c}\NormalTok{(name, price, description, calories))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+# A tibble: 5 x 4
+  name                        price description                         calories
+  <chr>                       <chr> <chr>                               <chr>   
+1 Belgian Waffles             $5.95 Two of our famous Belgian Waffles ~ 650     
+2 Strawberry Belgian Waffles  $7.95 Light Belgian waffles covered with~ 900     
+3 Berry-Berry Belgian Waffles $8.95 Light Belgian waffles covered with~ 900     
+4 French Toast                $4.50 Thick slices made from our homemad~ 600     
+5 Homestyle Breakfast         $6.95 Two eggs, bacon or sausage, toast,~ 950     
+\end{verbatim}
+
+\hypertarget{python-10}{%
+\subsubsection{Python}\label{python-10}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{xml\_data}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+                          name  ... calories
+0              Belgian Waffles  ...      650
+1   Strawberry Belgian Waffles  ...      900
+2  Berry-Berry Belgian Waffles  ...      900
+3                 French Toast  ...      600
+4          Homestyle Breakfast  ...      950
+
+[5 rows x 4 columns]
+\end{verbatim}
+
+\hypertarget{unstructured-data}{%
+\chapter{Unstructured Data}\label{unstructured-data}}
+
+\hypertarget{r-11}{%
+\subsubsection{R}\label{r-11}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(jsonlite)}
+\FunctionTok{library}\NormalTok{(xml2)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{python-11}{%
+\subsubsection{Python}\label{python-11}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{import}\NormalTok{ pandas }\ImportTok{as}\NormalTok{ pd}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{html-pages}{%
+\section{HTML pages}\label{html-pages}}
+
+\hypertarget{pdfs}{%
+\section{PDFs}\label{pdfs}}
+
+\part{Data Manipulation}
+
+We will go through the main activities one have to face in order to
+overcome most common data cleaning/wrangling problems.
+
+R has an ecosystem of packages, the \texttt{tidyverse}, each specialized
+in a single task:
+
+\begin{itemize}
+\tightlist
+\item
+  \href{https://readr.tidyverse.org/}{\texttt{readr}} for importing data
+  from various sources;
+\item
+  \href{https://tidyr.tidyverse.org/}{\texttt{tidyr}} and
+  \href{https://dplyr.tidyverse.org/}{\texttt{dplyr}} for data
+  wrangling;
+\item
+  \href{https://ggplot2.tidyverse.org/}{\texttt{ggplot2}} for plotting;
+\item
+  and others.
+\end{itemize}
+
+In Python, it is possible to accomplish almost every data manipulation
+task with the \href{https://pandas.pydata.org/}{\texttt{Pandas}}
+package.
+
+\hypertarget{sec-subset}{%
+\chapter{Subset Data}\label{sec-subset}}
+
+By subsetting data, it is intended all those operations used to retrieve
+a specific part of a dataset. For example, we could be interested in
+getting the last three rows of a table or the columns whose name starts
+with a specific keyword.
+
+For this chapter, we will consider the
+\href{https://www.kaggle.com/kamilpytlak/personal-key-indicators-of-heart-disease}{Personal
+key indicators of heart disease} Kaggle dataset.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ExtensionTok{kaggle}\NormalTok{ datasets download kamilpytlak/personal{-}key{-}indicators{-}of{-}heart{-}disease ./data }\AttributeTok{{-}{-}unzip}
+\end{Highlighting}
+\end{Shaded}
+
+After loading the necessary packages and importing the data, we make use
+of the \texttt{clean\_names} function of the
+\href{https://CRAN.R-project.org/package=janitor}{\texttt{janitor}} and
+\href{https://pyjanitor-devs.github.io/pyjanitor/}{\texttt{pyjanitor}}
+packages. This function can be used to make lowercase and snake case the
+dataset column names.
+
+\begin{tcolorbox}[standard jigsaw,bottomtitle=1mm, opacitybacktitle=0.6, coltitle=black, colback=white, arc=.35mm, leftrule=.75mm, titlerule=0mm, rightrule=.15mm, opacityback=0, colframe=quarto-callout-tip-color-frame, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{The janitor package}, toprule=.15mm, colbacktitle=quarto-callout-tip-color!10!white, bottomrule=.15mm, toptitle=1mm, left=2mm]
+The \texttt{pyjanitor} module is a porting of the \texttt{janitor} R
+package. There are other useful functions in these packages!
+\end{tcolorbox}
+
+\hypertarget{r-12}{%
+\subsubsection{R}\label{r-12}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(dplyr)}
+\FunctionTok{library}\NormalTok{(readr)}
+\FunctionTok{library}\NormalTok{(tidyr)}
+
+\NormalTok{df }\OtherTok{\textless{}{-}} \FunctionTok{read\_csv}\NormalTok{(}\StringTok{"data/heart\_2020\_cleaned.csv"}\NormalTok{, }\AttributeTok{show\_col\_types =} \ConstantTok{FALSE}\NormalTok{) }\SpecialCharTok{|\textgreater{}} 
+\NormalTok{    janitor}\SpecialCharTok{::}\FunctionTok{clean\_names}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{python-12}{%
+\subsubsection{Python}\label{python-12}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{import}\NormalTok{ pandas }\ImportTok{as}\NormalTok{ pd}
+\ImportTok{from}\NormalTok{ janitor }\ImportTok{import}\NormalTok{ clean\_names}
+
+\NormalTok{df }\OperatorTok{=}\NormalTok{ pd.read\_csv(}\StringTok{"data/heart\_2020\_cleaned.csv"}\NormalTok{).clean\_names(case\_type}\OperatorTok{=}\StringTok{\textquotesingle{}snake\textquotesingle{}}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{filter-rows}{%
+\section{Filter rows}\label{filter-rows}}
+
+\hypertarget{top}{%
+\subsection{Top}\label{top}}
+
+Get the first three rows of a dataset:
+
+\hypertarget{r-13}{%
+\subsubsection{R}\label{r-13}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{head}\NormalTok{(df, }\AttributeTok{n =} \DecValTok{3}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+# A tibble: 3 x 18
+  heart_disease   bmi smoking alcohol_drinking stroke physical_health
+  <chr>         <dbl> <chr>   <chr>            <chr>            <dbl>
+1 No             16.6 Yes     No               No                   3
+2 No             20.3 No      No               Yes                  0
+3 No             26.6 Yes     No               No                  20
+# ... with 12 more variables: mental_health <dbl>, diff_walking <chr>,
+#   sex <chr>, age_category <chr>, race <chr>, diabetic <chr>,
+#   physical_activity <chr>, gen_health <chr>, sleep_time <dbl>, asthma <chr>,
+#   kidney_disease <chr>, skin_cancer <chr>
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{df }\SpecialCharTok{|\textgreater{}} \FunctionTok{slice\_head}\NormalTok{(}\AttributeTok{n =} \DecValTok{3}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{python-13}{%
+\subsubsection{Python}\label{python-13}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{df.head(n}\OperatorTok{=}\DecValTok{3}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+  heart_disease    bmi smoking  ... asthma kidney_disease  skin_cancer
+0            No  16.60     Yes  ...    Yes             No          Yes
+1            No  20.34      No  ...     No             No           No
+2            No  26.58     Yes  ...    Yes             No           No
+
+[3 rows x 18 columns]
+\end{verbatim}
+
+\hypertarget{bottom}{%
+\subsection{Bottom}\label{bottom}}
+
+Get the last five rows of a dataset:
+
+\hypertarget{r-14}{%
+\subsubsection{R}\label{r-14}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{tail}\NormalTok{(df, }\AttributeTok{n =} \DecValTok{5}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+# A tibble: 5 x 18
+  heart_disease   bmi smoking alcohol_drinking stroke physical_health
+  <chr>         <dbl> <chr>   <chr>            <chr>            <dbl>
+1 Yes            27.4 Yes     No               No                   7
+2 No             29.8 Yes     No               No                   0
+3 No             24.2 No      No               No                   0
+4 No             32.8 No      No               No                   0
+5 No             46.6 No      No               No                   0
+# ... with 12 more variables: mental_health <dbl>, diff_walking <chr>,
+#   sex <chr>, age_category <chr>, race <chr>, diabetic <chr>,
+#   physical_activity <chr>, gen_health <chr>, sleep_time <dbl>, asthma <chr>,
+#   kidney_disease <chr>, skin_cancer <chr>
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{df }\SpecialCharTok{|\textgreater{}} \FunctionTok{slice\_tail}\NormalTok{(}\AttributeTok{n =} \DecValTok{5}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{python-14}{%
+\subsubsection{Python}\label{python-14}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{df.tail(n}\OperatorTok{=}\DecValTok{5}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+       heart_disease    bmi smoking  ... asthma kidney_disease  skin_cancer
+319790           Yes  27.41     Yes  ...    Yes             No           No
+319791            No  29.84     Yes  ...    Yes             No           No
+319792            No  24.24      No  ...     No             No           No
+319793            No  32.81      No  ...     No             No           No
+319794            No  46.56      No  ...     No             No           No
+
+[5 rows x 18 columns]
+\end{verbatim}
+
+\hypertarget{slicing}{%
+\subsection{Slicing}\label{slicing}}
+
+Get rows number seven to eleven:
+
+\hypertarget{r-15}{%
+\subsubsection{R}\label{r-15}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{df[}\DecValTok{7}\SpecialCharTok{:}\DecValTok{11}\NormalTok{, ]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+# A tibble: 5 x 18
+  heart_disease   bmi smoking alcohol_drinking stroke physical_health
+  <chr>         <dbl> <chr>   <chr>            <chr>            <dbl>
+1 No             21.6 No      No               No                  15
+2 No             31.6 Yes     No               No                   5
+3 No             26.4 No      No               No                   0
+4 No             40.7 No      No               No                   0
+5 Yes            34.3 Yes     No               No                  30
+# ... with 12 more variables: mental_health <dbl>, diff_walking <chr>,
+#   sex <chr>, age_category <chr>, race <chr>, diabetic <chr>,
+#   physical_activity <chr>, gen_health <chr>, sleep_time <dbl>, asthma <chr>,
+#   kidney_disease <chr>, skin_cancer <chr>
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{df }\SpecialCharTok{|\textgreater{}} \FunctionTok{slice}\NormalTok{(}\DecValTok{7}\SpecialCharTok{:}\DecValTok{11}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{python-15}{%
+\subsubsection{Python}\label{python-15}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{df.iloc[}\DecValTok{6}\NormalTok{:}\DecValTok{11}\NormalTok{,]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+   heart_disease    bmi smoking  ... asthma kidney_disease  skin_cancer
+6             No  21.63      No  ...    Yes             No          Yes
+7             No  31.64     Yes  ...    Yes             No           No
+8             No  26.45      No  ...     No            Yes           No
+9             No  40.69      No  ...     No             No           No
+10           Yes  34.30     Yes  ...    Yes             No           No
+
+[5 rows x 18 columns]
+\end{verbatim}
+
+\hypertarget{by-column-values}{%
+\subsection{By column values}\label{by-column-values}}
+
+Filter rows by column values:
+
+\hypertarget{r-16}{%
+\subsubsection{R}\label{r-16}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{df[(df}\SpecialCharTok{$}\NormalTok{bmi }\SpecialCharTok{\textless{}} \DecValTok{20}\NormalTok{) }\SpecialCharTok{\&}\NormalTok{ (df}\SpecialCharTok{$}\NormalTok{smoking }\SpecialCharTok{==} \StringTok{"Yes"}\NormalTok{), ]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+# A tibble: 6,061 x 18
+   heart_disease   bmi smoking alcohol_drinking stroke physical_health
+   <chr>         <dbl> <chr>   <chr>            <chr>            <dbl>
+ 1 No             16.6 Yes     No               No                   3
+ 2 No             19.0 Yes     No               No                   0
+ 3 No             19.5 Yes     No               No                   0
+ 4 No             19.3 Yes     No               No                   0
+ 5 No             18.8 Yes     No               Yes                  0
+ 6 No             18.8 Yes     Yes              Yes                 30
+ 7 No             17.6 Yes     No               No                   2
+ 8 No             19.1 Yes     No               No                   0
+ 9 No             14.7 Yes     No               No                   0
+10 No             19.0 Yes     No               No                  10
+# ... with 6,051 more rows, and 12 more variables: mental_health <dbl>,
+#   diff_walking <chr>, sex <chr>, age_category <chr>, race <chr>,
+#   diabetic <chr>, physical_activity <chr>, gen_health <chr>,
+#   sleep_time <dbl>, asthma <chr>, kidney_disease <chr>, skin_cancer <chr>
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{df }\SpecialCharTok{|\textgreater{}} \FunctionTok{filter}\NormalTok{(bmi }\SpecialCharTok{\textless{}} \DecValTok{20}\NormalTok{, smoking }\SpecialCharTok{==} \StringTok{"Yes"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{python-16}{%
+\subsubsection{Python}\label{python-16}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{df.loc[(df[}\StringTok{"bmi"}\NormalTok{] }\OperatorTok{\textless{}} \DecValTok{20}\NormalTok{) }\OperatorTok{\&}\NormalTok{ (df[}\StringTok{"smoking"}\NormalTok{] }\OperatorTok{==} \StringTok{"Yes"}\NormalTok{),:]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+       heart_disease    bmi smoking  ... asthma kidney_disease  skin_cancer
+0                 No  16.60     Yes  ...    Yes             No          Yes
+33                No  19.02     Yes  ...     No             No           No
+99                No  19.47     Yes  ...     No             No           No
+189               No  19.31     Yes  ...     No             No           No
+250               No  18.84     Yes  ...     No             No           No
+...              ...    ...     ...  ...    ...            ...          ...
+318688            No  19.20     Yes  ...     No             No           No
+319455            No  19.77     Yes  ...     No             No           No
+319602            No  17.94     Yes  ...     No             No           No
+319678            No  18.42     Yes  ...    Yes             No           No
+319712            No  17.38     Yes  ...     No             No           No
+
+[6061 rows x 18 columns]
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{df.query(}\StringTok{\textquotesingle{}bmi \textless{} 20 \& smoking == "Yes"\textquotesingle{}}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{select-two-or-more-columns}{%
+\section{Select two or more columns}\label{select-two-or-more-columns}}
+
+\hypertarget{by-position}{%
+\subsection{By position}\label{by-position}}
+
+Select three columns by their position:
+
+\hypertarget{r-17}{%
+\subsubsection{R}\label{r-17}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{df[}\DecValTok{1}\SpecialCharTok{:}\DecValTok{3}\NormalTok{]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+# A tibble: 319,795 x 3
+   heart_disease   bmi smoking
+   <chr>         <dbl> <chr>  
+ 1 No             16.6 Yes    
+ 2 No             20.3 No     
+ 3 No             26.6 Yes    
+ 4 No             24.2 No     
+ 5 No             23.7 No     
+ 6 Yes            28.9 Yes    
+ 7 No             21.6 No     
+ 8 No             31.6 Yes    
+ 9 No             26.4 No     
+10 No             40.7 No     
+# ... with 319,785 more rows
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{df }\SpecialCharTok{|\textgreater{}} \FunctionTok{select}\NormalTok{(}\DecValTok{1}\SpecialCharTok{:}\DecValTok{3}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{python-17}{%
+\subsubsection{Python}\label{python-17}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{df.iloc[:,}\DecValTok{0}\NormalTok{:}\DecValTok{3}\NormalTok{]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+       heart_disease    bmi smoking
+0                 No  16.60     Yes
+1                 No  20.34      No
+2                 No  26.58     Yes
+3                 No  24.21      No
+4                 No  23.71      No
+...              ...    ...     ...
+319790           Yes  27.41     Yes
+319791            No  29.84     Yes
+319792            No  24.24      No
+319793            No  32.81      No
+319794            No  46.56      No
+
+[319795 rows x 3 columns]
+\end{verbatim}
+
+\hypertarget{by-name}{%
+\subsection{By name}\label{by-name}}
+
+Select three columns by their name:
+
+\hypertarget{r-18}{%
+\subsubsection{R}\label{r-18}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{df[}\FunctionTok{c}\NormalTok{(}\StringTok{"heart\_disease"}\NormalTok{, }\StringTok{"bmi"}\NormalTok{, }\StringTok{"smoking"}\NormalTok{)]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+# A tibble: 319,795 x 3
+   heart_disease   bmi smoking
+   <chr>         <dbl> <chr>  
+ 1 No             16.6 Yes    
+ 2 No             20.3 No     
+ 3 No             26.6 Yes    
+ 4 No             24.2 No     
+ 5 No             23.7 No     
+ 6 Yes            28.9 Yes    
+ 7 No             21.6 No     
+ 8 No             31.6 Yes    
+ 9 No             26.4 No     
+10 No             40.7 No     
+# ... with 319,785 more rows
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{df }\SpecialCharTok{|\textgreater{}} \FunctionTok{select}\NormalTok{(heart\_disease, bmi, smoking)}
+\NormalTok{df }\SpecialCharTok{|\textgreater{}} \FunctionTok{select}\NormalTok{(heart\_disease}\SpecialCharTok{:}\NormalTok{smoking)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{python-18}{%
+\subsubsection{Python}\label{python-18}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{df.loc[:, [}\StringTok{"heart\_disease"}\NormalTok{, }\StringTok{"bmi"}\NormalTok{, }\StringTok{"smoking"}\NormalTok{]]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+       heart_disease    bmi smoking
+0                 No  16.60     Yes
+1                 No  20.34      No
+2                 No  26.58     Yes
+3                 No  24.21      No
+4                 No  23.71      No
+...              ...    ...     ...
+319790           Yes  27.41     Yes
+319791            No  29.84     Yes
+319792            No  24.24      No
+319793            No  32.81      No
+319794            No  46.56      No
+
+[319795 rows x 3 columns]
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{df.loc[:, }\StringTok{"heart\_disease"}\NormalTok{:}\StringTok{"smoking"}\NormalTok{]}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{by-pattern}{%
+\subsection{By pattern}\label{by-pattern}}
+
+Select columns by a regular expression or pattern in their name:
+
+\hypertarget{r-19}{%
+\subsubsection{R}\label{r-19}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{df }\SpecialCharTok{|\textgreater{}} \FunctionTok{select}\NormalTok{(}\FunctionTok{ends\_with}\NormalTok{(}\StringTok{"health"}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+# A tibble: 319,795 x 3
+   physical_health mental_health gen_health
+             <dbl>         <dbl> <chr>     
+ 1               3            30 Very good 
+ 2               0             0 Very good 
+ 3              20            30 Fair      
+ 4               0             0 Good      
+ 5              28             0 Very good 
+ 6               6             0 Fair      
+ 7              15             0 Fair      
+ 8               5             0 Good      
+ 9               0             0 Fair      
+10               0             0 Good      
+# ... with 319,785 more rows
+\end{verbatim}
+
+\hypertarget{python-19}{%
+\subsubsection{Python}\label{python-19}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{df.}\BuiltInTok{filter}\NormalTok{(like}\OperatorTok{=}\StringTok{"health"}\NormalTok{, axis}\OperatorTok{=}\DecValTok{1}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+        physical_health  mental_health gen_health
+0                   3.0           30.0  Very good
+1                   0.0            0.0  Very good
+2                  20.0           30.0       Fair
+3                   0.0            0.0       Good
+4                  28.0            0.0  Very good
+...                 ...            ...        ...
+319790              7.0            0.0       Fair
+319791              0.0            0.0  Very good
+319792              0.0            0.0       Good
+319793              0.0            0.0       Good
+319794              0.0            0.0       Good
+
+[319795 rows x 3 columns]
+\end{verbatim}
+
+\hypertarget{by-type}{%
+\subsection{By type}\label{by-type}}
+
+Select columns based on their data type:
+
+\hypertarget{r-20}{%
+\subsubsection{R}\label{r-20}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{df }\SpecialCharTok{|\textgreater{}} \FunctionTok{select}\NormalTok{(}\FunctionTok{where}\NormalTok{(is.double))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+# A tibble: 319,795 x 4
+     bmi physical_health mental_health sleep_time
+   <dbl>           <dbl>         <dbl>      <dbl>
+ 1  16.6               3            30          5
+ 2  20.3               0             0          7
+ 3  26.6              20            30          8
+ 4  24.2               0             0          6
+ 5  23.7              28             0          8
+ 6  28.9               6             0         12
+ 7  21.6              15             0          4
+ 8  31.6               5             0          9
+ 9  26.4               0             0          5
+10  40.7               0             0         10
+# ... with 319,785 more rows
+\end{verbatim}
+
+\hypertarget{python-20}{%
+\subsubsection{Python}\label{python-20}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{df.select\_dtypes(}\BuiltInTok{float}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+          bmi  physical_health  mental_health  sleep_time
+0       16.60              3.0           30.0         5.0
+1       20.34              0.0            0.0         7.0
+2       26.58             20.0           30.0         8.0
+3       24.21              0.0            0.0         6.0
+4       23.71             28.0            0.0         8.0
+...       ...              ...            ...         ...
+319790  27.41              7.0            0.0         6.0
+319791  29.84              0.0            0.0         5.0
+319792  24.24              0.0            0.0         6.0
+319793  32.81              0.0            0.0        12.0
+319794  46.56              0.0            0.0         8.0
+
+[319795 rows x 4 columns]
+\end{verbatim}
+
+\hypertarget{remove-columns}{%
+\section{Remove columns}\label{remove-columns}}
+
+Remove one column:
+
+\hypertarget{r-21}{%
+\subsubsection{R}\label{r-21}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{df }\SpecialCharTok{|\textgreater{}} \FunctionTok{select}\NormalTok{(}\SpecialCharTok{{-}}\NormalTok{bmi)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+# A tibble: 319,795 x 17
+   heart_disease smoking alcohol_drinking stroke physical_health mental_health
+   <chr>         <chr>   <chr>            <chr>            <dbl>         <dbl>
+ 1 No            Yes     No               No                   3            30
+ 2 No            No      No               Yes                  0             0
+ 3 No            Yes     No               No                  20            30
+ 4 No            No      No               No                   0             0
+ 5 No            No      No               No                  28             0
+ 6 Yes           Yes     No               No                   6             0
+ 7 No            No      No               No                  15             0
+ 8 No            Yes     No               No                   5             0
+ 9 No            No      No               No                   0             0
+10 No            No      No               No                   0             0
+# ... with 319,785 more rows, and 11 more variables: diff_walking <chr>,
+#   sex <chr>, age_category <chr>, race <chr>, diabetic <chr>,
+#   physical_activity <chr>, gen_health <chr>, sleep_time <dbl>, asthma <chr>,
+#   kidney_disease <chr>, skin_cancer <chr>
+\end{verbatim}
+
+\hypertarget{python-21}{%
+\subsubsection{Python}\label{python-21}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{df.drop(}\StringTok{"bmi"}\NormalTok{, axis}\OperatorTok{=}\DecValTok{1}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+       heart_disease smoking alcohol_drinking  ... asthma  kidney_disease  skin_cancer
+0                 No     Yes               No  ...    Yes              No          Yes
+1                 No      No               No  ...     No              No           No
+2                 No     Yes               No  ...    Yes              No           No
+3                 No      No               No  ...     No              No          Yes
+4                 No      No               No  ...     No              No           No
+...              ...     ...              ...  ...    ...             ...          ...
+319790           Yes     Yes               No  ...    Yes              No           No
+319791            No     Yes               No  ...    Yes              No           No
+319792            No      No               No  ...     No              No           No
+319793            No      No               No  ...     No              No           No
+319794            No      No               No  ...     No              No           No
+
+[319795 rows x 17 columns]
+\end{verbatim}
+
+Remove more than one column:
+
+\hypertarget{r-22}{%
+\subsubsection{R}\label{r-22}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{df }\SpecialCharTok{|\textgreater{}} \FunctionTok{select}\NormalTok{(}\SpecialCharTok{{-}}\FunctionTok{c}\NormalTok{(bmi, heart\_disease))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+# A tibble: 319,795 x 16
+   smoking alcohol_drinking stroke physical_health mental_health diff_walking
+   <chr>   <chr>            <chr>            <dbl>         <dbl> <chr>       
+ 1 Yes     No               No                   3            30 No          
+ 2 No      No               Yes                  0             0 No          
+ 3 Yes     No               No                  20            30 No          
+ 4 No      No               No                   0             0 No          
+ 5 No      No               No                  28             0 Yes         
+ 6 Yes     No               No                   6             0 Yes         
+ 7 No      No               No                  15             0 No          
+ 8 Yes     No               No                   5             0 Yes         
+ 9 No      No               No                   0             0 No          
+10 No      No               No                   0             0 Yes         
+# ... with 319,785 more rows, and 10 more variables: sex <chr>,
+#   age_category <chr>, race <chr>, diabetic <chr>, physical_activity <chr>,
+#   gen_health <chr>, sleep_time <dbl>, asthma <chr>, kidney_disease <chr>,
+#   skin_cancer <chr>
+\end{verbatim}
+
+\hypertarget{python-22}{%
+\subsubsection{Python}\label{python-22}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{df.drop([}\StringTok{"bmi"}\NormalTok{, }\StringTok{"heart\_disease"}\NormalTok{], axis}\OperatorTok{=}\DecValTok{1}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+       smoking alcohol_drinking stroke  ...  asthma  kidney_disease skin_cancer
+0          Yes               No     No  ...     Yes              No         Yes
+1           No               No    Yes  ...      No              No          No
+2          Yes               No     No  ...     Yes              No          No
+3           No               No     No  ...      No              No         Yes
+4           No               No     No  ...      No              No          No
+...        ...              ...    ...  ...     ...             ...         ...
+319790     Yes               No     No  ...     Yes              No          No
+319791     Yes               No     No  ...     Yes              No          No
+319792      No               No     No  ...      No              No          No
+319793      No               No     No  ...      No              No          No
+319794      No               No     No  ...      No              No          No
+
+[319795 rows x 16 columns]
+\end{verbatim}
+
+\hypertarget{sorting}{%
+\section{Sorting}\label{sorting}}
+
+\hypertarget{ascending}{%
+\subsection{Ascending}\label{ascending}}
+
+Sort a dataset by column values in ascending order:
+
+\hypertarget{r-23}{%
+\subsubsection{R}\label{r-23}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{df }\SpecialCharTok{|\textgreater{}} \FunctionTok{arrange}\NormalTok{(sex)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+# A tibble: 319,795 x 18
+   heart_disease   bmi smoking alcohol_drinking stroke physical_health
+   <chr>         <dbl> <chr>   <chr>            <chr>            <dbl>
+ 1 No             16.6 Yes     No               No                   3
+ 2 No             20.3 No      No               Yes                  0
+ 3 No             24.2 No      No               No                   0
+ 4 No             23.7 No      No               No                  28
+ 5 Yes            28.9 Yes     No               No                   6
+ 6 No             21.6 No      No               No                  15
+ 7 No             31.6 Yes     No               No                   5
+ 8 No             26.4 No      No               No                   0
+ 9 No             28.7 Yes     No               No                   0
+10 No             28.2 No      No               No                   7
+# ... with 319,785 more rows, and 12 more variables: mental_health <dbl>,
+#   diff_walking <chr>, sex <chr>, age_category <chr>, race <chr>,
+#   diabetic <chr>, physical_activity <chr>, gen_health <chr>,
+#   sleep_time <dbl>, asthma <chr>, kidney_disease <chr>, skin_cancer <chr>
+\end{verbatim}
+
+\hypertarget{python-23}{%
+\subsubsection{Python}\label{python-23}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{df.sort\_values(}\StringTok{"sex"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+       heart_disease    bmi smoking  ... asthma kidney_disease  skin_cancer
+0                 No  16.60     Yes  ...    Yes             No          Yes
+179722            No  29.29      No  ...    Yes             No           No
+179725           Yes  36.58     Yes  ...     No             No          Yes
+179728            No  24.96      No  ...     No             No           No
+179730            No  25.06     Yes  ...     No             No           No
+...              ...    ...     ...  ...    ...            ...          ...
+139706            No  42.91     Yes  ...     No             No           No
+94088            Yes  38.39     Yes  ...     No             No           No
+212147            No  37.59      No  ...     No             No           No
+56348             No  32.89     Yes  ...    Yes             No          Yes
+109843            No  37.03     Yes  ...     No             No           No
+
+[319795 rows x 18 columns]
+\end{verbatim}
+
+\hypertarget{descending}{%
+\subsection{Descending}\label{descending}}
+
+Sort a dataset by column values in descending order:
+
+\hypertarget{r-24}{%
+\subsubsection{R}\label{r-24}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{df }\SpecialCharTok{|\textgreater{}} \FunctionTok{arrange}\NormalTok{(}\SpecialCharTok{{-}}\NormalTok{bmi)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+# A tibble: 319,795 x 18
+   heart_disease   bmi smoking alcohol_drinking stroke physical_health
+   <chr>         <dbl> <chr>   <chr>            <chr>            <dbl>
+ 1 No             94.8 No      No               No                   0
+ 2 No             94.7 No      No               No                   4
+ 3 No             94.0 Yes     No               No                  20
+ 4 No             93.9 Yes     Yes              No                  30
+ 5 No             92.5 Yes     No               No                   7
+ 6 No             91.8 No      No               No                   0
+ 7 No             91.6 Yes     No               No                   0
+ 8 No             91.6 No      No               No                   0
+ 9 No             88.6 No      No               No                  30
+10 No             88.2 No      No               No                   0
+# ... with 319,785 more rows, and 12 more variables: mental_health <dbl>,
+#   diff_walking <chr>, sex <chr>, age_category <chr>, race <chr>,
+#   diabetic <chr>, physical_activity <chr>, gen_health <chr>,
+#   sleep_time <dbl>, asthma <chr>, kidney_disease <chr>, skin_cancer <chr>
+\end{verbatim}
+
+\hypertarget{python-24}{%
+\subsubsection{Python}\label{python-24}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{df.sort\_values(}\StringTok{"bmi"}\NormalTok{, ascending}\OperatorTok{=}\VariableTok{False}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+       heart_disease    bmi smoking  ... asthma kidney_disease  skin_cancer
+126896            No  94.85      No  ...     No             No           No
+242834            No  94.66      No  ...     No             No           No
+104267            No  93.97     Yes  ...     No             No           No
+249715            No  93.86     Yes  ...    Yes            Yes           No
+156093            No  92.53     Yes  ...    Yes             No           No
+...              ...    ...     ...  ...    ...            ...          ...
+81754             No  12.16      No  ...     No             No           No
+51637             No  12.13      No  ...     No             No           No
+113373            No  12.08     Yes  ...     No             No           No
+69662             No  12.02     Yes  ...     No             No           No
+205511            No  12.02      No  ...     No             No           No
+
+[319795 rows x 18 columns]
+\end{verbatim}
+
+\hypertarget{modify-group-summarize}{%
+\chapter{Modify, Group, Summarize}\label{modify-group-summarize}}
+
+\hypertarget{modify-data}{%
+\section{Modify data}\label{modify-data}}
+
+\hypertarget{r-25}{%
+\subsubsection{R}\label{r-25}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{cols\_to\_mod }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\StringTok{"smoking"}\NormalTok{, }\StringTok{"asthma"}\NormalTok{, }\StringTok{"skin\_cancer"}\NormalTok{)}
+\NormalTok{df }\SpecialCharTok{|\textgreater{}} \FunctionTok{mutate}\NormalTok{(}\FunctionTok{across}\NormalTok{(}\FunctionTok{all\_of}\NormalTok{(cols\_to\_mod), stringr}\SpecialCharTok{::}\NormalTok{str\_to\_lower))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+# A tibble: 319,795 x 18
+   heart_disease   bmi smoking alcohol_drinking stroke physical_health
+   <chr>         <dbl> <chr>   <chr>            <chr>            <dbl>
+ 1 No             16.6 yes     No               No                   3
+ 2 No             20.3 no      No               Yes                  0
+ 3 No             26.6 yes     No               No                  20
+ 4 No             24.2 no      No               No                   0
+ 5 No             23.7 no      No               No                  28
+ 6 Yes            28.9 yes     No               No                   6
+ 7 No             21.6 no      No               No                  15
+ 8 No             31.6 yes     No               No                   5
+ 9 No             26.4 no      No               No                   0
+10 No             40.7 no      No               No                   0
+# ... with 319,785 more rows, and 12 more variables: mental_health <dbl>,
+#   diff_walking <chr>, sex <chr>, age_category <chr>, race <chr>,
+#   diabetic <chr>, physical_activity <chr>, gen_health <chr>,
+#   sleep_time <dbl>, asthma <chr>, kidney_disease <chr>, skin_cancer <chr>
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{df }\OtherTok{\textless{}{-}}\NormalTok{ df }\SpecialCharTok{|\textgreater{}} \FunctionTok{mutate}\NormalTok{(}\AttributeTok{bmi\_class =} \FunctionTok{case\_when}\NormalTok{(}
+\NormalTok{    bmi }\SpecialCharTok{\textless{}} \FloatTok{18.5} \SpecialCharTok{\textasciitilde{}} \StringTok{"underweight"}\NormalTok{,}
+\NormalTok{    bmi }\SpecialCharTok{\textgreater{}=} \FloatTok{18.5} \SpecialCharTok{\&}\NormalTok{ bmi }\SpecialCharTok{\textless{}} \DecValTok{25} \SpecialCharTok{\textasciitilde{}} \StringTok{"normal weight"}\NormalTok{,}
+\NormalTok{    bmi }\SpecialCharTok{\textgreater{}=} \DecValTok{25} \SpecialCharTok{\&}\NormalTok{ bmi }\SpecialCharTok{\textless{}} \DecValTok{30} \SpecialCharTok{\textasciitilde{}} \StringTok{"overweight"}\NormalTok{,}
+\NormalTok{    bmi }\SpecialCharTok{\textgreater{}=} \DecValTok{30} \SpecialCharTok{\textasciitilde{}} \StringTok{"obese"}\NormalTok{,}
+    \ConstantTok{TRUE} \SpecialCharTok{\textasciitilde{}} \ConstantTok{NA\_character\_}
+\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{python-25}{%
+\subsubsection{Python}\label{python-25}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{cols\_to\_mod }\OperatorTok{=}\NormalTok{ [}\StringTok{"smoking"}\NormalTok{, }\StringTok{"asthma"}\NormalTok{, }\StringTok{"skin\_cancer"}\NormalTok{]}
+\NormalTok{df.loc[:,cols\_to\_mod].applymap(}\BuiltInTok{str}\NormalTok{.lower)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+       smoking asthma skin_cancer
+0          yes    yes         yes
+1           no     no          no
+2          yes    yes          no
+3           no     no         yes
+4           no     no          no
+...        ...    ...         ...
+319790     yes    yes          no
+319791     yes    yes          no
+319792      no     no          no
+319793      no     no          no
+319794      no     no          no
+
+[319795 rows x 3 columns]
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{df }\OperatorTok{=}\NormalTok{ df.assign(bmi\_class}\OperatorTok{=}\NormalTok{pd.cut(df[}\StringTok{"bmi"}\NormalTok{], }
+\NormalTok{    bins}\OperatorTok{=}\NormalTok{[}\DecValTok{0}\NormalTok{, }\FloatTok{18.5}\NormalTok{, }\DecValTok{25}\NormalTok{, }\DecValTok{30}\NormalTok{, }\DecValTok{1000}\NormalTok{], }
+\NormalTok{    labels}\OperatorTok{=}\NormalTok{[}\StringTok{"underweight"}\NormalTok{, }\StringTok{"normal weight"}\NormalTok{, }\StringTok{"overweight"}\NormalTok{, }\StringTok{"obese"}\NormalTok{],}
+\NormalTok{    ordered}\OperatorTok{=}\VariableTok{True}\NormalTok{))}
+
+\CommentTok{\# df["bmi\_class"] = pd.cut(df["bmi"], }
+\CommentTok{\#     bins=[0, 18.5, 25, 30, 1000], }
+\CommentTok{\#     labels=["underweight", "normal weight", "overweight", "obese"],}
+\CommentTok{\#     ordered=True)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{count-values}{%
+\section{Count values}\label{count-values}}
+
+\hypertarget{r-26}{%
+\subsubsection{R}\label{r-26}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{df }\SpecialCharTok{|\textgreater{}} \FunctionTok{count}\NormalTok{(smoking, asthma)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+# A tibble: 4 x 3
+  smoking asthma      n
+  <chr>   <chr>   <int>
+1 No      No     163994
+2 No      Yes     23893
+3 Yes     No     112929
+4 Yes     Yes     18979
+\end{verbatim}
+
+\hypertarget{python-26}{%
+\subsubsection{Python}\label{python-26}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{df.value\_counts([}\StringTok{"smoking"}\NormalTok{, }\StringTok{"asthma"}\NormalTok{])}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+smoking  asthma
+No       No        163994
+Yes      No        112929
+No       Yes        23893
+Yes      Yes        18979
+dtype: int64
+\end{verbatim}
+
+\hypertarget{cross-tabulation}{%
+\section{Cross-tabulation}\label{cross-tabulation}}
+
+\hypertarget{r-27}{%
+\subsubsection{R}\label{r-27}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{df }\SpecialCharTok{|\textgreater{}} \FunctionTok{select}\NormalTok{(smoking, asthma) }\SpecialCharTok{|\textgreater{}} \FunctionTok{table}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+       asthma
+smoking     No    Yes
+    No  163994  23893
+    Yes 112929  18979
+\end{verbatim}
+
+\hypertarget{python-27}{%
+\subsubsection{Python}\label{python-27}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{pd.crosstab(df.smoking, df.asthma)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+asthma       No    Yes
+smoking               
+No       163994  23893
+Yes      112929  18979
+\end{verbatim}
+
+\hypertarget{grouping}{%
+\section{Grouping}\label{grouping}}
+
+\hypertarget{r-28}{%
+\subsubsection{R}\label{r-28}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{df }\SpecialCharTok{|\textgreater{}} \FunctionTok{group\_by}\NormalTok{(heart\_disease)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+# A tibble: 319,795 x 19
+# Groups:   heart_disease [2]
+   heart_disease   bmi smoking alcohol_drinking stroke physical_health
+   <chr>         <dbl> <chr>   <chr>            <chr>            <dbl>
+ 1 No             16.6 Yes     No               No                   3
+ 2 No             20.3 No      No               Yes                  0
+ 3 No             26.6 Yes     No               No                  20
+ 4 No             24.2 No      No               No                   0
+ 5 No             23.7 No      No               No                  28
+ 6 Yes            28.9 Yes     No               No                   6
+ 7 No             21.6 No      No               No                  15
+ 8 No             31.6 Yes     No               No                   5
+ 9 No             26.4 No      No               No                   0
+10 No             40.7 No      No               No                   0
+# ... with 319,785 more rows, and 13 more variables: mental_health <dbl>,
+#   diff_walking <chr>, sex <chr>, age_category <chr>, race <chr>,
+#   diabetic <chr>, physical_activity <chr>, gen_health <chr>,
+#   sleep_time <dbl>, asthma <chr>, kidney_disease <chr>, skin_cancer <chr>,
+#   bmi_class <chr>
+\end{verbatim}
+
+\hypertarget{python-28}{%
+\subsubsection{Python}\label{python-28}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{df.groupby(}\StringTok{"heart\_disease"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+<pandas.core.groupby.generic.DataFrameGroupBy object at 0x7fbd01183fd0>
+\end{verbatim}
+
+\hypertarget{summarize-data}{%
+\section{Summarize data}\label{summarize-data}}
+
+\hypertarget{r-29}{%
+\subsubsection{R}\label{r-29}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{df }\SpecialCharTok{|\textgreater{}} 
+    \FunctionTok{group\_by}\NormalTok{(heart\_disease) }\SpecialCharTok{|\textgreater{}} 
+    \FunctionTok{summarize}\NormalTok{(}\AttributeTok{min =} \FunctionTok{min}\NormalTok{(bmi), }\AttributeTok{mean =} \FunctionTok{mean}\NormalTok{(bmi), }\AttributeTok{max =} \FunctionTok{max}\NormalTok{(bmi))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+# A tibble: 2 x 4
+  heart_disease   min  mean   max
+  <chr>         <dbl> <dbl> <dbl>
+1 No             12.0  28.2  94.8
+2 Yes            12.2  29.4  83.3
+\end{verbatim}
+
+\hypertarget{python-29}{%
+\subsubsection{Python}\label{python-29}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{(}
+\NormalTok{    df}
+\NormalTok{    .groupby(}\StringTok{"heart\_disease"}\NormalTok{)}
+\NormalTok{    .agg(\{}\StringTok{\textquotesingle{}bmi\textquotesingle{}}\NormalTok{: [}\StringTok{\textquotesingle{}min\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}mean\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}max\textquotesingle{}}\NormalTok{]\})}
+\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+                 bmi                  
+                 min       mean    max
+heart_disease                         
+No             12.02  28.224658  94.85
+Yes            12.21  29.401592  83.33
+\end{verbatim}
+
+\hypertarget{pivoting-and-joining}{%
+\chapter{Pivoting and Joining}\label{pivoting-and-joining}}
+
+After importing the data as in \textbf{?@sec-import\_local}, we must
+load the necessary packages:
+
+\hypertarget{pivot}{%
+\section{Pivot}\label{pivot}}
+
+First, we select the first ten rows of our dataframe and the columns
+\texttt{heart\_disease}, \texttt{stroke}, \texttt{smoking} and
+\texttt{bmi}.
+
+\hypertarget{r-30}{%
+\subsubsection{R}\label{r-30}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{df3 }\OtherTok{\textless{}{-}}\NormalTok{ df[}\DecValTok{1}\SpecialCharTok{:}\DecValTok{10}\NormalTok{, ] }\SpecialCharTok{|\textgreater{}} 
+    \FunctionTok{select}\NormalTok{(heart\_disease, stroke, smoking, bmi) }\SpecialCharTok{|\textgreater{}} 
+    \FunctionTok{mutate}\NormalTok{(}\AttributeTok{patient\_id =}\NormalTok{ stringr}\SpecialCharTok{::}\FunctionTok{str\_c}\NormalTok{(}\StringTok{"P"}\NormalTok{, }\DecValTok{1}\SpecialCharTok{:}\DecValTok{10}\NormalTok{), }\AttributeTok{.before =} \DecValTok{1}\NormalTok{)}
+\NormalTok{df3}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+# A tibble: 10 x 5
+   patient_id heart_disease stroke smoking   bmi
+   <chr>      <chr>         <chr>  <chr>   <dbl>
+ 1 P1         No            No     Yes      16.6
+ 2 P2         No            Yes    No       20.3
+ 3 P3         No            No     Yes      26.6
+ 4 P4         No            No     No       24.2
+ 5 P5         No            No     No       23.7
+ 6 P6         Yes           No     Yes      28.9
+ 7 P7         No            No     No       21.6
+ 8 P8         No            No     Yes      31.6
+ 9 P9         No            No     No       26.4
+10 P10        No            No     No       40.7
+\end{verbatim}
+
+\hypertarget{python-30}{%
+\subsubsection{Python}\label{python-30}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{df3 }\OperatorTok{=}\NormalTok{ df.loc[}\DecValTok{0}\NormalTok{:}\DecValTok{9}\NormalTok{, [}\StringTok{"heart\_disease"}\NormalTok{, }\StringTok{"stroke"}\NormalTok{, }\StringTok{"smoking"}\NormalTok{, }\StringTok{"bmi"}\NormalTok{]]}
+\NormalTok{df3.insert(}\DecValTok{0}\NormalTok{, }\StringTok{"patient\_id"}\NormalTok{, [}\StringTok{"P"} \OperatorTok{+} \BuiltInTok{str}\NormalTok{(i) }\ControlFlowTok{for}\NormalTok{ i }\KeywordTok{in} \BuiltInTok{range}\NormalTok{(}\DecValTok{1}\NormalTok{, }\DecValTok{11}\NormalTok{)])}
+\NormalTok{df3}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+  patient_id heart_disease stroke smoking    bmi
+0         P1            No     No     Yes  16.60
+1         P2            No    Yes      No  20.34
+2         P3            No     No     Yes  26.58
+3         P4            No     No      No  24.21
+4         P5            No     No      No  23.71
+5         P6           Yes     No     Yes  28.87
+6         P7            No     No      No  21.63
+7         P8            No     No     Yes  31.64
+8         P9            No     No      No  26.45
+9        P10            No     No      No  40.69
+\end{verbatim}
+
+\hypertarget{long-format}{%
+\subsection{Long format}\label{long-format}}
+
+\hypertarget{r-31}{%
+\subsubsection{R}\label{r-31}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{df4 }\OtherTok{\textless{}{-}}\NormalTok{ df3 }\SpecialCharTok{|\textgreater{}} 
+    \FunctionTok{pivot\_longer}\NormalTok{(}\SpecialCharTok{{-}}\NormalTok{patient\_id, }\AttributeTok{names\_to =} \StringTok{"variable"}\NormalTok{, }\AttributeTok{values\_to =} \StringTok{"value"}\NormalTok{,}
+                 \AttributeTok{values\_transform =}\NormalTok{ as.character)}
+\NormalTok{df4}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+# A tibble: 40 x 3
+   patient_id variable      value
+   <chr>      <chr>         <chr>
+ 1 P1         heart_disease No   
+ 2 P1         stroke        No   
+ 3 P1         smoking       Yes  
+ 4 P1         bmi           16.6 
+ 5 P2         heart_disease No   
+ 6 P2         stroke        Yes  
+ 7 P2         smoking       No   
+ 8 P2         bmi           20.34
+ 9 P3         heart_disease No   
+10 P3         stroke        No   
+# ... with 30 more rows
+\end{verbatim}
+
+\hypertarget{python-31}{%
+\subsubsection{Python}\label{python-31}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{df4 }\OperatorTok{=}\NormalTok{ df3.melt(id\_vars}\OperatorTok{=}\StringTok{"patient\_id"}\NormalTok{, var\_name}\OperatorTok{=}\StringTok{"variable"}\NormalTok{, value\_name}\OperatorTok{=}\StringTok{"value"}\NormalTok{)}
+\NormalTok{df4}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+   patient_id       variable  value
+0          P1  heart_disease     No
+1          P2  heart_disease     No
+2          P3  heart_disease     No
+3          P4  heart_disease     No
+4          P5  heart_disease     No
+5          P6  heart_disease    Yes
+6          P7  heart_disease     No
+7          P8  heart_disease     No
+8          P9  heart_disease     No
+9         P10  heart_disease     No
+10         P1         stroke     No
+11         P2         stroke    Yes
+12         P3         stroke     No
+13         P4         stroke     No
+14         P5         stroke     No
+15         P6         stroke     No
+16         P7         stroke     No
+17         P8         stroke     No
+18         P9         stroke     No
+19        P10         stroke     No
+20         P1        smoking    Yes
+21         P2        smoking     No
+22         P3        smoking    Yes
+23         P4        smoking     No
+24         P5        smoking     No
+25         P6        smoking    Yes
+26         P7        smoking     No
+27         P8        smoking    Yes
+28         P9        smoking     No
+29        P10        smoking     No
+30         P1            bmi   16.6
+31         P2            bmi  20.34
+32         P3            bmi  26.58
+33         P4            bmi  24.21
+34         P5            bmi  23.71
+35         P6            bmi  28.87
+36         P7            bmi  21.63
+37         P8            bmi  31.64
+38         P9            bmi  26.45
+39        P10            bmi  40.69
+\end{verbatim}
+
+\hypertarget{wide-format}{%
+\subsection{Wide format}\label{wide-format}}
+
+\hypertarget{r-32}{%
+\subsubsection{R}\label{r-32}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{df4 }\SpecialCharTok{|\textgreater{}} \FunctionTok{pivot\_wider}\NormalTok{(patient\_id, }\AttributeTok{names\_from =}\NormalTok{ variable, }\AttributeTok{values\_from =}\NormalTok{ value)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+# A tibble: 10 x 5
+   patient_id heart_disease stroke smoking bmi  
+   <chr>      <chr>         <chr>  <chr>   <chr>
+ 1 P1         No            No     Yes     16.6 
+ 2 P2         No            Yes    No      20.34
+ 3 P3         No            No     Yes     26.58
+ 4 P4         No            No     No      24.21
+ 5 P5         No            No     No      23.71
+ 6 P6         Yes           No     Yes     28.87
+ 7 P7         No            No     No      21.63
+ 8 P8         No            No     Yes     31.64
+ 9 P9         No            No     No      26.45
+10 P10        No            No     No      40.69
+\end{verbatim}
+
+\hypertarget{python-32}{%
+\subsubsection{Python}\label{python-32}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{df4.pivot(index}\OperatorTok{=}\StringTok{"patient\_id"}\NormalTok{, columns}\OperatorTok{=}\StringTok{"variable"}\NormalTok{, values}\OperatorTok{=}\StringTok{"value"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+variable      bmi heart_disease smoking stroke
+patient_id                                    
+P1           16.6            No     Yes     No
+P10         40.69            No      No     No
+P2          20.34            No      No    Yes
+P3          26.58            No     Yes     No
+P4          24.21            No      No     No
+P5          23.71            No      No     No
+P6          28.87           Yes     Yes     No
+P7          21.63            No      No     No
+P8          31.64            No     Yes     No
+P9          26.45            No      No     No
+\end{verbatim}
+
+\hypertarget{merge}{%
+\section{Merge}\label{merge}}
+
+\hypertarget{r-33}{%
+\subsubsection{R}\label{r-33}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{set.seed}\NormalTok{(}\DecValTok{123}\NormalTok{)}
+\NormalTok{df2 }\OtherTok{\textless{}{-}} \FunctionTok{tibble}\NormalTok{(}
+    \AttributeTok{gen\_health =} \FunctionTok{c}\NormalTok{(}\StringTok{"Poor"}\NormalTok{, }\StringTok{"Fair"}\NormalTok{, }\StringTok{"Good"}\NormalTok{, }\StringTok{"Very good"}\NormalTok{, }\StringTok{"Excellent"}\NormalTok{),}
+    \AttributeTok{random\_biomarker =} \FunctionTok{rnorm}\NormalTok{(}\DecValTok{5}\NormalTok{)}
+\NormalTok{)}
+\NormalTok{df2}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+# A tibble: 5 x 2
+  gen_health random_biomarker
+  <chr>                 <dbl>
+1 Poor                -0.560 
+2 Fair                -0.230 
+3 Good                 1.56  
+4 Very good            0.0705
+5 Excellent            0.129 
+\end{verbatim}
+
+\hypertarget{python-33}{%
+\subsubsection{Python}\label{python-33}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{import}\NormalTok{ numpy }\ImportTok{as}\NormalTok{ np}
+
+\NormalTok{rng }\OperatorTok{=}\NormalTok{ np.random.RandomState(}\DecValTok{123}\NormalTok{)}
+\NormalTok{df2 }\OperatorTok{=}\NormalTok{ pd.DataFrame(\{}
+    \StringTok{"gen\_health"}\NormalTok{: [}\StringTok{"Poor"}\NormalTok{, }\StringTok{"Fair"}\NormalTok{, }\StringTok{"Good"}\NormalTok{, }\StringTok{"Very good"}\NormalTok{, }\StringTok{"Excellent"}\NormalTok{],}
+    \StringTok{"random\_biomarker"}\NormalTok{: rng.randn(}\DecValTok{5}\NormalTok{)}
+\NormalTok{\})}
+\NormalTok{df2}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+  gen_health  random_biomarker
+0       Poor         -1.085631
+1       Fair          0.997345
+2       Good          0.282978
+3  Very good         -1.506295
+4  Excellent         -0.578600
+\end{verbatim}
+
+\hypertarget{left-join}{%
+\subsection{Left-join}\label{left-join}}
+
+\hypertarget{r-34}{%
+\subsubsection{R}\label{r-34}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{df }\SpecialCharTok{|\textgreater{}} \FunctionTok{left\_join}\NormalTok{(df2, }\AttributeTok{by =} \StringTok{"gen\_health"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+# A tibble: 319,795 x 19
+   heart_disease   bmi smoking alcohol_drinking stroke physical_health
+   <chr>         <dbl> <chr>   <chr>            <chr>            <dbl>
+ 1 No             16.6 Yes     No               No                   3
+ 2 No             20.3 No      No               Yes                  0
+ 3 No             26.6 Yes     No               No                  20
+ 4 No             24.2 No      No               No                   0
+ 5 No             23.7 No      No               No                  28
+ 6 Yes            28.9 Yes     No               No                   6
+ 7 No             21.6 No      No               No                  15
+ 8 No             31.6 Yes     No               No                   5
+ 9 No             26.4 No      No               No                   0
+10 No             40.7 No      No               No                   0
+# ... with 319,785 more rows, and 13 more variables: mental_health <dbl>,
+#   diff_walking <chr>, sex <chr>, age_category <chr>, race <chr>,
+#   diabetic <chr>, physical_activity <chr>, gen_health <chr>,
+#   sleep_time <dbl>, asthma <chr>, kidney_disease <chr>, skin_cancer <chr>,
+#   random_biomarker <dbl>
+\end{verbatim}
+
+\hypertarget{python-34}{%
+\subsubsection{Python}\label{python-34}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{df.join(df2.set\_index(}\StringTok{"gen\_health"}\NormalTok{), on}\OperatorTok{=}\StringTok{\textquotesingle{}gen\_health\textquotesingle{}}\NormalTok{, how}\OperatorTok{=}\StringTok{"left"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+       heart_disease    bmi  ... skin_cancer random_biomarker
+0                 No  16.60  ...         Yes        -1.506295
+1                 No  20.34  ...          No        -1.506295
+2                 No  26.58  ...          No         0.997345
+3                 No  24.21  ...         Yes         0.282978
+4                 No  23.71  ...          No        -1.506295
+...              ...    ...  ...         ...              ...
+319790           Yes  27.41  ...          No         0.997345
+319791            No  29.84  ...          No        -1.506295
+319792            No  24.24  ...          No         0.282978
+319793            No  32.81  ...          No         0.282978
+319794            No  46.56  ...          No         0.282978
+
+[319795 rows x 19 columns]
+\end{verbatim}
+
+\hypertarget{right-join}{%
+\subsection{Right-join}\label{right-join}}
+
+\hypertarget{r-35}{%
+\subsubsection{R}\label{r-35}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{df }\SpecialCharTok{|\textgreater{}} \FunctionTok{right\_join}\NormalTok{(df2, }\AttributeTok{by =} \StringTok{"gen\_health"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+# A tibble: 319,795 x 19
+   heart_disease   bmi smoking alcohol_drinking stroke physical_health
+   <chr>         <dbl> <chr>   <chr>            <chr>            <dbl>
+ 1 No             16.6 Yes     No               No                   3
+ 2 No             20.3 No      No               Yes                  0
+ 3 No             26.6 Yes     No               No                  20
+ 4 No             24.2 No      No               No                   0
+ 5 No             23.7 No      No               No                  28
+ 6 Yes            28.9 Yes     No               No                   6
+ 7 No             21.6 No      No               No                  15
+ 8 No             31.6 Yes     No               No                   5
+ 9 No             26.4 No      No               No                   0
+10 No             40.7 No      No               No                   0
+# ... with 319,785 more rows, and 13 more variables: mental_health <dbl>,
+#   diff_walking <chr>, sex <chr>, age_category <chr>, race <chr>,
+#   diabetic <chr>, physical_activity <chr>, gen_health <chr>,
+#   sleep_time <dbl>, asthma <chr>, kidney_disease <chr>, skin_cancer <chr>,
+#   random_biomarker <dbl>
+\end{verbatim}
+
+\hypertarget{python-35}{%
+\subsubsection{Python}\label{python-35}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{df.join(df2.set\_index(}\StringTok{"gen\_health"}\NormalTok{), on}\OperatorTok{=}\StringTok{\textquotesingle{}gen\_health\textquotesingle{}}\NormalTok{, how}\OperatorTok{=}\StringTok{"right"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+       heart_disease    bmi  ... skin_cancer random_biomarker
+10               Yes  34.30  ...          No        -1.085631
+25                No  29.18  ...          No        -1.085631
+35               Yes  32.98  ...         Yes        -1.085631
+45               Yes  20.37  ...          No        -1.085631
+49                No  27.46  ...          No        -1.085631
+...              ...    ...  ...         ...              ...
+319751            No  34.96  ...          No        -0.578600
+319772            No  30.90  ...          No        -0.578600
+319783            No  33.28  ...          No        -0.578600
+319788            No  23.38  ...          No        -0.578600
+319789            No  22.22  ...          No        -0.578600
+
+[319795 rows x 19 columns]
+\end{verbatim}
+
+\hypertarget{natural-language-processing}{%
+\chapter{Natural Language
+Processing}\label{natural-language-processing}}
+
+\hypertarget{r-36}{%
+\subsubsection{R}\label{r-36}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# library(dplyr)}
+\FunctionTok{library}\NormalTok{(readr)}
+\CommentTok{\# library(tidyr)}
+\FunctionTok{library}\NormalTok{(tidytext)}
+
+\NormalTok{rotam }\OtherTok{\textless{}{-}} \FunctionTok{read\_lines}\NormalTok{(}\StringTok{"https://www.gutenberg.org/cache/epub/151/pg151.txt"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{python-36}{%
+\subsubsection{Python}\label{python-36}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{import}\NormalTok{ pandas }\ImportTok{as}\NormalTok{ pd}
+\ImportTok{import}\NormalTok{ nltk}
+\ImportTok{from}\NormalTok{ urllib }\ImportTok{import}\NormalTok{ request}
+
+\NormalTok{url\_rotam }\OperatorTok{=}\NormalTok{ request.urlopen(}\StringTok{"https://www.gutenberg.org/cache/epub/151/pg151.txt"}\NormalTok{)}
+\NormalTok{rotam }\OperatorTok{=}\NormalTok{ url\_rotam.read().decode(}\StringTok{"utf8"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{unnest-tokens}{%
+\section{Unnest tokens}\label{unnest-tokens}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{rotam\_df }\OtherTok{\textless{}{-}}\NormalTok{ tibble}\SpecialCharTok{::}\FunctionTok{tibble}\NormalTok{(rotam) }\SpecialCharTok{|\textgreater{}} 
+    \FunctionTok{mutate}\NormalTok{(}\AttributeTok{flag\_start =} \FunctionTok{cumsum}\NormalTok{(}\FunctionTok{str\_detect}\NormalTok{(rotam, }\StringTok{"START"}\NormalTok{)),}
+           \AttributeTok{flag\_end =} \FunctionTok{cumsum}\NormalTok{(}\FunctionTok{str\_detect}\NormalTok{(rotam, }\StringTok{"End"}\NormalTok{)),}
+           \AttributeTok{chapter =} \FunctionTok{cumsum}\NormalTok{(}\FunctionTok{str\_detect}\NormalTok{(rotam, }\StringTok{"PART THE"}\NormalTok{))) }\SpecialCharTok{|\textgreater{}} 
+    \FunctionTok{filter}\NormalTok{(flag\_start }\SpecialCharTok{==} \DecValTok{1}\NormalTok{, flag\_end }\SpecialCharTok{==} \DecValTok{0}\NormalTok{, chapter }\SpecialCharTok{\textgreater{}=} \DecValTok{1}\NormalTok{) }\SpecialCharTok{|\textgreater{}} 
+    \FunctionTok{mutate}\NormalTok{(}
+        \AttributeTok{stanza =} \FunctionTok{cumsum}\NormalTok{(rotam }\SpecialCharTok{==} \StringTok{""} \SpecialCharTok{\&}\NormalTok{ (}\FunctionTok{lead}\NormalTok{(rotam) }\SpecialCharTok{!=} \StringTok{""} \SpecialCharTok{|} \SpecialCharTok{!}\FunctionTok{str\_detect}\NormalTok{(rotam, }\StringTok{"PART THE"}\NormalTok{)))}
+\NormalTok{    ) }\SpecialCharTok{|\textgreater{}} 
+    \FunctionTok{filter}\NormalTok{(}\SpecialCharTok{!}\FunctionTok{str\_detect}\NormalTok{(rotam, }\StringTok{"PART THE"}\NormalTok{), rotam }\SpecialCharTok{!=} \StringTok{""}\NormalTok{) }\SpecialCharTok{|\textgreater{}} 
+    \FunctionTok{select}\NormalTok{(}\SpecialCharTok{{-}}\FunctionTok{starts\_with}\NormalTok{(}\StringTok{"flag"}\NormalTok{)) }\SpecialCharTok{|\textgreater{}} 
+    \FunctionTok{mutate}\NormalTok{(}\AttributeTok{verse =} \FunctionTok{row\_number}\NormalTok{(), }\AttributeTok{rotam =} \FunctionTok{str\_squish}\NormalTok{(rotam) }\SpecialCharTok{|\textgreater{}} \FunctionTok{str\_trim}\NormalTok{())}
+
+\NormalTok{rotam\_words }\OtherTok{\textless{}{-}}\NormalTok{ rotam\_df }\SpecialCharTok{|\textgreater{}} \FunctionTok{unnest\_tokens}\NormalTok{(word, rotam)}
+
+\NormalTok{rotam\_words }\SpecialCharTok{|\textgreater{}} 
+    \FunctionTok{anti\_join}\NormalTok{(stop\_words, }\AttributeTok{by =} \StringTok{"word"}\NormalTok{) }\SpecialCharTok{|\textgreater{}} 
+    \FunctionTok{count}\NormalTok{(word, chapter, }\AttributeTok{sort =} \ConstantTok{TRUE}\NormalTok{) }\SpecialCharTok{|\textgreater{}} 
+    \CommentTok{\# left\_join(rotam\_words[c("chapter", "word")], by = "word") |\textgreater{} }
+    \CommentTok{\# distinct() |\textgreater{} }
+    \FunctionTok{inner\_join}\NormalTok{(}\FunctionTok{get\_sentiments}\NormalTok{(}\StringTok{"bing"}\NormalTok{), }\AttributeTok{by =} \StringTok{"word"}\NormalTok{) }\SpecialCharTok{|\textgreater{}} 
+    \FunctionTok{mutate}\NormalTok{(}\AttributeTok{n =} \FunctionTok{ifelse}\NormalTok{(sentiment }\SpecialCharTok{==} \StringTok{"negative"}\NormalTok{, }\SpecialCharTok{{-}}\NormalTok{n, n)) }\SpecialCharTok{|\textgreater{}} 
+    \FunctionTok{group\_by}\NormalTok{(chapter) }\SpecialCharTok{|\textgreater{}} 
+    \FunctionTok{slice\_head}\NormalTok{(}\AttributeTok{n =} \DecValTok{10}\NormalTok{) }\SpecialCharTok{|\textgreater{}} 
+    \FunctionTok{ungroup}\NormalTok{() }\SpecialCharTok{|\textgreater{}} 
+    \FunctionTok{ggplot}\NormalTok{(}\FunctionTok{aes}\NormalTok{(n, }\FunctionTok{reorder}\NormalTok{(word, n), }\AttributeTok{fill =}\NormalTok{ sentiment)) }\SpecialCharTok{+}
+    \FunctionTok{geom\_col}\NormalTok{() }\SpecialCharTok{+}
+    \FunctionTok{geom\_text}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{label =}\NormalTok{ word), }\AttributeTok{position =} \FunctionTok{position\_stack}\NormalTok{(}\AttributeTok{vjust =} \FloatTok{0.5}\NormalTok{), }
+              \AttributeTok{color =} \StringTok{"grey"}\NormalTok{, }\AttributeTok{size =} \DecValTok{2}\NormalTok{) }\SpecialCharTok{+}
+    \FunctionTok{facet\_grid}\NormalTok{(}\AttributeTok{rows =} \FunctionTok{vars}\NormalTok{(chapter), }\AttributeTok{scales =} \StringTok{"free\_y"}\NormalTok{) }\SpecialCharTok{+}
+    \FunctionTok{scale\_fill\_viridis\_d}\NormalTok{() }\SpecialCharTok{+}
+    \FunctionTok{scale\_x\_continuous}\NormalTok{(}\AttributeTok{breaks =} \FunctionTok{seq}\NormalTok{(}\AttributeTok{from =} \SpecialCharTok{{-}}\DecValTok{10}\NormalTok{, }\AttributeTok{to =} \DecValTok{10}\NormalTok{, }\AttributeTok{by =} \DecValTok{1}\NormalTok{), }
+                       \AttributeTok{labels =}\NormalTok{ rlang}\SpecialCharTok{::}\FunctionTok{as\_function}\NormalTok{(}\SpecialCharTok{\textasciitilde{}} \FunctionTok{abs}\NormalTok{(.x))) }\SpecialCharTok{+}
+    \FunctionTok{theme\_bw}\NormalTok{() }\SpecialCharTok{+}
+    \FunctionTok{labs}\NormalTok{(}\AttributeTok{x =} \StringTok{"\# of words"}\NormalTok{, }\AttributeTok{y =} \ConstantTok{NULL}\NormalTok{) }\SpecialCharTok{+}
+    \FunctionTok{theme}\NormalTok{(}\AttributeTok{panel.grid.major.y =} \FunctionTok{element\_blank}\NormalTok{(),}
+          \AttributeTok{axis.text.y =} \FunctionTok{element\_blank}\NormalTok{(), }\AttributeTok{axis.ticks.y =} \FunctionTok{element\_blank}\NormalTok{())}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{r-37}{%
+\subsubsection{R}\label{r-37}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{tibble}\SpecialCharTok{::}\FunctionTok{tibble}\NormalTok{(rotam) }\SpecialCharTok{|\textgreater{}} 
+\NormalTok{    dplyr}\SpecialCharTok{::}\FunctionTok{filter}\NormalTok{() }\SpecialCharTok{|\textgreater{}} 
+    \FunctionTok{unnest\_tokens}\NormalTok{(word, rotam)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{python-37}{%
+\subsubsection{Python}\label{python-37}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# nltk.download("punkt")}
+\NormalTok{rotam\_words }\OperatorTok{=}\NormalTok{ nltk.word\_tokenize(rotam)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{tf-idf}{%
+\section{Tf-idf}\label{tf-idf}}
+
+\hypertarget{document-term-matrix}{%
+\section{Document-term matrix}\label{document-term-matrix}}
+
+\part{Data Visualization}
+
+We will use the \href{https://ggplot2.tidyverse.org/}{\texttt{ggplot2}}
+and \href{https://seaborn.pydata.org/}{\texttt{Seaborn}} packages for
+plotting in R and Python respectively. Actually, \texttt{ggplot2} is
+more mature than \texttt{Seaborn} which nonetheless allows to create
+several plots commonly used in data science. The low-level
+\href{https://matplotlib.org/}{\texttt{Matplotlib}} module will be used
+for low-level manipulation and further customization of plots in Python.
+
+\begin{tcolorbox}[standard jigsaw,bottomtitle=1mm, opacitybacktitle=0.6, coltitle=black, colback=white, arc=.35mm, leftrule=.75mm, titlerule=0mm, rightrule=.15mm, opacityback=0, colframe=quarto-callout-warning-color-frame, title=\textcolor{quarto-callout-warning-color}{\faExclamationTriangle}\hspace{0.5em}{The Seaborn ``nextgen'' API}, toprule=.15mm, colbacktitle=quarto-callout-warning-color!10!white, bottomrule=.15mm, toptitle=1mm, left=2mm]
+I decided to use the nextgen API of Seaborn because it has a lot of
+potential. Nonetheless, caution must be taken because it is in alpha
+release yet and everything can change. See
+\href{https://seaborn.pydata.org/nextgen}{here}.
+
+If you are comfortable with a ggplot2 syntax and grammar, then you can
+take a look at the
+\href{https://plotnine.readthedocs.io/en/stable/}{plotnine} Python
+package.
+\end{tcolorbox}
+
+The data visualization part will cover the following topics:
+
+\begin{itemize}
+\tightlist
+\item
+  look for \textbf{trends} in your data with scatter plots and line
+  plots;
+\item
+  visualize \textbf{distributions} through bar plots, histograms,
+  density plots, boxplots and violin plots;
+\item
+  augment the information displayed in your plots with
+  \textbf{faceting};
+\item
+  customize the \textbf{theme} of your plots.
+\end{itemize}
+
+\hypertarget{trends}{%
+\chapter{Trends}\label{trends}}
+
+We will keep using the heart disease dataset (see
+\textbf{?@sec-import\_local}). However, we will consider a small subset
+of these data in order to lower computing resources.
+
+\hypertarget{r-38}{%
+\subsubsection{R}\label{r-38}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{df }\OtherTok{\textless{}{-}}\NormalTok{ df }\SpecialCharTok{|\textgreater{}} \FunctionTok{group\_by}\NormalTok{(heart\_disease) }\SpecialCharTok{|\textgreater{}} \FunctionTok{slice\_head}\NormalTok{(}\AttributeTok{n =} \DecValTok{50}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{python-38}{%
+\subsubsection{Python}\label{python-38}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{df }\OperatorTok{=}\NormalTok{ df.groupby(}\StringTok{"heart\_disease"}\NormalTok{).head(}\DecValTok{50}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{scatter-plots}{%
+\section{Scatter Plots}\label{scatter-plots}}
+
+\hypertarget{a-simple-scatter-plot}{%
+\subsection{A simple scatter plot}\label{a-simple-scatter-plot}}
+
+\hypertarget{r-39}{%
+\subsubsection{R}\label{r-39}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(ggplot2)}
+
+\NormalTok{df }\SpecialCharTok{|\textgreater{}} 
+    \FunctionTok{ggplot}\NormalTok{(}\FunctionTok{aes}\NormalTok{(bmi, sleep\_time)) }\SpecialCharTok{+}
+    \FunctionTok{geom\_point}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}[H]
+
+{\centering \includegraphics{chapters/dv_trends_files/figure-pdf/unnamed-chunk-5-1.pdf}
+
+}
+
+\end{figure}
+
+\hypertarget{python-39}{%
+\subsubsection{Python}\label{python-39}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{import}\NormalTok{ matplotlib.pyplot }\ImportTok{as}\NormalTok{ plt}
+\ImportTok{import}\NormalTok{ seaborn }\ImportTok{as}\NormalTok{ sns}
+\ImportTok{import}\NormalTok{ seaborn.objects }\ImportTok{as}\NormalTok{ so}
+
+\NormalTok{sns.set\_theme()}
+
+\NormalTok{(}
+\NormalTok{    so.Plot(df, }\StringTok{"bmi"}\NormalTok{, }\StringTok{"sleep\_time"}\NormalTok{)}
+\NormalTok{    .add(so.Scatter())}
+\NormalTok{    .show()}
+\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}[H]
+
+{\centering \includegraphics{chapters/dv_trends_files/figure-pdf/unnamed-chunk-6-1.pdf}
+
+}
+
+\end{figure}
+
+\hypertarget{color-by-variable}{%
+\subsection{Color by variable}\label{color-by-variable}}
+
+\hypertarget{r-40}{%
+\subsubsection{R}\label{r-40}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{df }\SpecialCharTok{|\textgreater{}} 
+    \FunctionTok{ggplot}\NormalTok{(}\FunctionTok{aes}\NormalTok{(bmi, sleep\_time, }\AttributeTok{color =}\NormalTok{ heart\_disease)) }\SpecialCharTok{+}
+    \FunctionTok{geom\_point}\NormalTok{(}\AttributeTok{alpha =} \FloatTok{0.6}\NormalTok{) }\SpecialCharTok{+}
+    \FunctionTok{scale\_color\_brewer}\NormalTok{(}\AttributeTok{palette =} \StringTok{"Set1"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}[H]
+
+{\centering \includegraphics{chapters/dv_trends_files/figure-pdf/unnamed-chunk-7-3.pdf}
+
+}
+
+\end{figure}
+
+\hypertarget{python-40}{%
+\subsubsection{Python}\label{python-40}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{(}
+\NormalTok{    so.Plot(df, }\StringTok{"bmi"}\NormalTok{, }\StringTok{"sleep\_time"}\NormalTok{, color}\OperatorTok{=}\StringTok{"heart\_disease"}\NormalTok{)}
+\NormalTok{    .add(so.Scatter(alpha}\OperatorTok{=}\FloatTok{0.6}\NormalTok{))}
+\NormalTok{    .scale(color}\OperatorTok{=}\StringTok{"Set1"}\NormalTok{)}
+\NormalTok{    .show()}
+\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}[H]
+
+{\centering \includegraphics{chapters/dv_trends_files/figure-pdf/unnamed-chunk-8-1.pdf}
+
+}
+
+\end{figure}
+
+or also:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{sns.relplot(}
+\NormalTok{    x}\OperatorTok{=}\StringTok{"bmi"}\NormalTok{, y}\OperatorTok{=}\StringTok{"sleep\_time"}\NormalTok{, hue}\OperatorTok{=}\StringTok{"heart\_disease"}\NormalTok{,}
+\NormalTok{    alpha}\OperatorTok{=}\FloatTok{0.6}\NormalTok{,}
+\NormalTok{    palette}\OperatorTok{=}\StringTok{"Set1"}\NormalTok{,}
+\NormalTok{    data}\OperatorTok{=}\NormalTok{df}
+\NormalTok{)}\OperatorTok{;}
+\NormalTok{plt.show()}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{line-plots}{%
+\section{Line Plots}\label{line-plots}}
+
+\hypertarget{r-41}{%
+\subsubsection{R}\label{r-41}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{df }\SpecialCharTok{|\textgreater{}} 
+    \FunctionTok{ggplot}\NormalTok{(}\FunctionTok{aes}\NormalTok{(bmi, sleep\_time, }\AttributeTok{color =}\NormalTok{ heart\_disease, }\AttributeTok{linetype =}\NormalTok{ smoking)) }\SpecialCharTok{+}
+    \FunctionTok{geom\_line}\NormalTok{(}\AttributeTok{alpha =} \FloatTok{0.6}\NormalTok{) }\SpecialCharTok{+}
+    \FunctionTok{scale\_color\_viridis\_d}\NormalTok{(}\AttributeTok{option =} \StringTok{"plasma"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}[H]
+
+{\centering \includegraphics{chapters/dv_trends_files/figure-pdf/unnamed-chunk-10-3.pdf}
+
+}
+
+\end{figure}
+
+\hypertarget{python-41}{%
+\subsubsection{Python}\label{python-41}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{sns.lineplot(}
+\NormalTok{    x}\OperatorTok{=}\StringTok{"bmi"}\NormalTok{, y}\OperatorTok{=}\StringTok{"sleep\_time"}\NormalTok{, hue}\OperatorTok{=}\StringTok{"heart\_disease"}\NormalTok{, style}\OperatorTok{=}\StringTok{"smoking"}\NormalTok{,}
+\NormalTok{    alpha}\OperatorTok{=}\FloatTok{0.6}\NormalTok{, }
+\NormalTok{    palette}\OperatorTok{=}\StringTok{"plasma"}\NormalTok{,}
+\NormalTok{    data}\OperatorTok{=}\NormalTok{df}
+\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}[H]
+
+{\centering \includegraphics{chapters/dv_trends_files/figure-pdf/unnamed-chunk-11-1.pdf}
+
+}
+
+\end{figure}
+
+\hypertarget{combine-different-layers}{%
+\section{Combine different layers}\label{combine-different-layers}}
+
+\hypertarget{r-42}{%
+\subsubsection{R}\label{r-42}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{df }\SpecialCharTok{|\textgreater{}} 
+    \FunctionTok{ggplot}\NormalTok{(}\FunctionTok{aes}\NormalTok{(bmi, sleep\_time, }\AttributeTok{color =}\NormalTok{ heart\_disease)) }\SpecialCharTok{+}
+    \FunctionTok{geom\_line}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{linetype =}\NormalTok{ smoking), }\AttributeTok{alpha =} \FloatTok{0.6}\NormalTok{) }\SpecialCharTok{+}
+    \FunctionTok{geom\_point}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{shape =}\NormalTok{ smoking), }\AttributeTok{alpha =} \FloatTok{0.6}\NormalTok{) }\SpecialCharTok{+}
+    \FunctionTok{scale\_color\_viridis\_d}\NormalTok{(}\AttributeTok{option =} \StringTok{"plasma"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}[H]
+
+{\centering \includegraphics{chapters/dv_trends_files/figure-pdf/unnamed-chunk-12-3.pdf}
+
+}
+
+\end{figure}
+
+\hypertarget{python-42}{%
+\subsubsection{Python}\label{python-42}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{sns.relplot(}
+\NormalTok{    x}\OperatorTok{=}\StringTok{"bmi"}\NormalTok{, y}\OperatorTok{=}\StringTok{"sleep\_time"}\NormalTok{, hue}\OperatorTok{=}\StringTok{"heart\_disease"}\NormalTok{, style}\OperatorTok{=}\StringTok{"smoking"}\NormalTok{,}
+\NormalTok{    kind}\OperatorTok{=}\StringTok{"line"}\NormalTok{, markers}\OperatorTok{=}\VariableTok{True}\NormalTok{, alpha}\OperatorTok{=}\FloatTok{0.6}\NormalTok{, }
+\NormalTok{    palette}\OperatorTok{=}\StringTok{"plasma"}\NormalTok{,}
+\NormalTok{    data}\OperatorTok{=}\NormalTok{df}
+\NormalTok{)}\OperatorTok{;}
+\NormalTok{plt.show()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}[H]
+
+{\centering \includegraphics{chapters/dv_trends_files/figure-pdf/unnamed-chunk-13-1.pdf}
+
+}
+
+\end{figure}
+
+\hypertarget{distributions}{%
+\chapter{Distributions}\label{distributions}}
+
+\hypertarget{bar-plots}{%
+\section{Bar Plots}\label{bar-plots}}
+
+\hypertarget{a-simple-bar-plot}{%
+\subsection{A simple bar plot}\label{a-simple-bar-plot}}
+
+\hypertarget{r-43}{%
+\subsubsection{R}\label{r-43}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{df }\SpecialCharTok{|\textgreater{}} 
+    \FunctionTok{ggplot}\NormalTok{(}\FunctionTok{aes}\NormalTok{(gen\_health)) }\SpecialCharTok{+}
+    \FunctionTok{geom\_bar}\NormalTok{(}\AttributeTok{color =} \StringTok{"red"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}[H]
+
+{\centering \includegraphics{chapters/dv_distrib_files/figure-pdf/unnamed-chunk-3-1.pdf}
+
+}
+
+\end{figure}
+
+\hypertarget{python-43}{%
+\subsubsection{Python}\label{python-43}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{sns.countplot(x}\OperatorTok{=}\StringTok{"gen\_health"}\NormalTok{, color}\OperatorTok{=}\StringTok{"grey"}\NormalTok{, edgecolor}\OperatorTok{=}\StringTok{"red"}\NormalTok{, data}\OperatorTok{=}\NormalTok{df)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}[H]
+
+{\centering \includegraphics{chapters/dv_distrib_files/figure-pdf/unnamed-chunk-4-1.pdf}
+
+}
+
+\end{figure}
+
+\hypertarget{a-stacked-bar-plot}{%
+\subsection{A stacked bar plot}\label{a-stacked-bar-plot}}
+
+\hypertarget{r-44}{%
+\subsubsection{R}\label{r-44}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{df }\SpecialCharTok{|\textgreater{}} 
+    \FunctionTok{ggplot}\NormalTok{(}\FunctionTok{aes}\NormalTok{(gen\_health, }\AttributeTok{fill =}\NormalTok{ heart\_disease)) }\SpecialCharTok{+}
+    \FunctionTok{geom\_bar}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}[H]
+
+{\centering \includegraphics{chapters/dv_distrib_files/figure-pdf/unnamed-chunk-5-3.pdf}
+
+}
+
+\end{figure}
+
+\hypertarget{python-44}{%
+\subsubsection{Python}\label{python-44}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{sns.displot(x}\OperatorTok{=}\StringTok{"gen\_health"}\NormalTok{, hue}\OperatorTok{=}\StringTok{"heart\_disease"}\NormalTok{, multiple}\OperatorTok{=}\StringTok{"stack"}\NormalTok{, aspect}\OperatorTok{=}\DecValTok{7}\OperatorTok{/}\DecValTok{5}\NormalTok{, data}\OperatorTok{=}\NormalTok{df)}\OperatorTok{;}
+\NormalTok{plt.show()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}[H]
+
+{\centering \includegraphics{chapters/dv_distrib_files/figure-pdf/unnamed-chunk-6-1.pdf}
+
+}
+
+\end{figure}
+
+\hypertarget{a-dodged-bar-plot}{%
+\subsection{A dodged bar plot}\label{a-dodged-bar-plot}}
+
+\hypertarget{r-45}{%
+\subsubsection{R}\label{r-45}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{df }\SpecialCharTok{|\textgreater{}} 
+    \FunctionTok{ggplot}\NormalTok{(}\FunctionTok{aes}\NormalTok{(gen\_health, }\AttributeTok{fill =}\NormalTok{ heart\_disease)) }\SpecialCharTok{+}
+    \FunctionTok{geom\_bar}\NormalTok{(}\AttributeTok{position =} \StringTok{"dodge"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}[H]
+
+{\centering \includegraphics{chapters/dv_distrib_files/figure-pdf/unnamed-chunk-7-3.pdf}
+
+}
+
+\end{figure}
+
+\hypertarget{python-45}{%
+\subsubsection{Python}\label{python-45}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{sns.countplot(x}\OperatorTok{=}\StringTok{"gen\_health"}\NormalTok{, hue}\OperatorTok{=}\StringTok{"heart\_disease"}\NormalTok{, data}\OperatorTok{=}\NormalTok{df)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}[H]
+
+{\centering \includegraphics{chapters/dv_distrib_files/figure-pdf/unnamed-chunk-8-1.pdf}
+
+}
+
+\end{figure}
+
+\hypertarget{histograms}{%
+\section{Histograms}\label{histograms}}
+
+\hypertarget{r-46}{%
+\subsubsection{R}\label{r-46}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{df }\SpecialCharTok{|\textgreater{}} 
+    \FunctionTok{ggplot}\NormalTok{(}\FunctionTok{aes}\NormalTok{(bmi)) }\SpecialCharTok{+}
+    \FunctionTok{geom\_histogram}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+`stat_bin()` using `bins = 30`. Pick better value with `binwidth`.
+\end{verbatim}
+
+\begin{figure}[H]
+
+{\centering \includegraphics{chapters/dv_distrib_files/figure-pdf/unnamed-chunk-9-3.pdf}
+
+}
+
+\end{figure}
+
+\hypertarget{python-46}{%
+\subsubsection{Python}\label{python-46}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{sns.histplot(x}\OperatorTok{=}\StringTok{"bmi"}\NormalTok{, data}\OperatorTok{=}\NormalTok{df)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}[H]
+
+{\centering \includegraphics{chapters/dv_distrib_files/figure-pdf/unnamed-chunk-10-1.pdf}
+
+}
+
+\end{figure}
+
+\hypertarget{density-plots}{%
+\section{Density Plots}\label{density-plots}}
+
+\hypertarget{r-47}{%
+\subsubsection{R}\label{r-47}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{df }\SpecialCharTok{|\textgreater{}} 
+    \FunctionTok{ggplot}\NormalTok{(}\FunctionTok{aes}\NormalTok{(bmi)) }\SpecialCharTok{+}
+    \FunctionTok{geom\_density}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}[H]
+
+{\centering \includegraphics{chapters/dv_distrib_files/figure-pdf/unnamed-chunk-11-3.pdf}
+
+}
+
+\end{figure}
+
+\hypertarget{python-47}{%
+\subsubsection{Python}\label{python-47}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{sns.kdeplot(x}\OperatorTok{=}\StringTok{"bmi"}\NormalTok{, data}\OperatorTok{=}\NormalTok{df)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}[H]
+
+{\centering \includegraphics{chapters/dv_distrib_files/figure-pdf/unnamed-chunk-12-1.pdf}
+
+}
+
+\end{figure}
+
+\hypertarget{boxplots}{%
+\section{Boxplots}\label{boxplots}}
+
+\hypertarget{r-48}{%
+\subsubsection{R}\label{r-48}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{df }\SpecialCharTok{|\textgreater{}} 
+    \FunctionTok{ggplot}\NormalTok{(}\FunctionTok{aes}\NormalTok{(smoking, bmi)) }\SpecialCharTok{+}
+    \FunctionTok{geom\_boxplot}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}[H]
+
+{\centering \includegraphics{chapters/dv_distrib_files/figure-pdf/unnamed-chunk-13-3.pdf}
+
+}
+
+\end{figure}
+
+\hypertarget{python-48}{%
+\subsubsection{Python}\label{python-48}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{sns.boxplot(x}\OperatorTok{=}\StringTok{"smoking"}\NormalTok{, y}\OperatorTok{=}\StringTok{"bmi"}\NormalTok{, data}\OperatorTok{=}\NormalTok{df)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}[H]
+
+{\centering \includegraphics{chapters/dv_distrib_files/figure-pdf/unnamed-chunk-14-1.pdf}
+
+}
+
+\end{figure}
+
+\hypertarget{violin-plots}{%
+\section{Violin Plots}\label{violin-plots}}
+
+\hypertarget{r-49}{%
+\subsubsection{R}\label{r-49}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{df }\SpecialCharTok{|\textgreater{}} 
+    \FunctionTok{ggplot}\NormalTok{(}\FunctionTok{aes}\NormalTok{(smoking, bmi)) }\SpecialCharTok{+}
+    \FunctionTok{geom\_violin}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}[H]
+
+{\centering \includegraphics{chapters/dv_distrib_files/figure-pdf/unnamed-chunk-15-3.pdf}
+
+}
+
+\end{figure}
+
+\hypertarget{python-49}{%
+\subsubsection{Python}\label{python-49}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{sns.violinplot(x}\OperatorTok{=}\StringTok{"smoking"}\NormalTok{, y}\OperatorTok{=}\StringTok{"bmi"}\NormalTok{, data}\OperatorTok{=}\NormalTok{df)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}[H]
+
+{\centering \includegraphics{chapters/dv_distrib_files/figure-pdf/unnamed-chunk-16-1.pdf}
+
+}
+
+\end{figure}
+
+\part{Machine Learning}
+
+The following chapters will translate two machine learning frameworks:
+\href{https://scikit-learn.org/stable/}{Scikit-Learn} for Python and
+\href{https://www.tidymodels.org/}{tidymodels} for R.
+
+\hypertarget{r-50}{%
+\subsubsection*{R}\label{r-50}}
+\addcontentsline{toc}{subsubsection}{R}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(tidymodels)}
+
+\NormalTok{df }\OtherTok{\textless{}{-}}\NormalTok{ readr}\SpecialCharTok{::}\FunctionTok{read\_csv}\NormalTok{(}\StringTok{"heart\_2020\_cleaned.csv"}\NormalTok{, }\AttributeTok{show\_col\_types =} \ConstantTok{FALSE}\NormalTok{) }\SpecialCharTok{|\textgreater{}} 
+\NormalTok{    janitor}\SpecialCharTok{::}\FunctionTok{clean\_names}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{python-50}{%
+\subsubsection*{Python}\label{python-50}}
+\addcontentsline{toc}{subsubsection}{Python}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{import}\NormalTok{ numpy }\ImportTok{as}\NormalTok{ np}
+\ImportTok{import}\NormalTok{ pandas }\ImportTok{as}\NormalTok{ pd}
+\ImportTok{import}\NormalTok{ matplotlib.pyplot }\ImportTok{as}\NormalTok{ plt}
+\ImportTok{from}\NormalTok{ janitor }\ImportTok{import}\NormalTok{ clean\_names}
+
+\NormalTok{df }\OperatorTok{=}\NormalTok{ pd.read\_csv(}\StringTok{"heart\_2020\_cleaned.csv"}\NormalTok{).clean\_names(case\_type}\OperatorTok{=}\StringTok{\textquotesingle{}snake\textquotesingle{}}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{splitting-data}{%
+\chapter{Splitting Data}\label{splitting-data}}
+
+\hypertarget{r-51}{%
+\subsubsection{R}\label{r-51}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(tidymodels)}
+
+\NormalTok{df }\OtherTok{\textless{}{-}}\NormalTok{ readr}\SpecialCharTok{::}\FunctionTok{read\_csv}\NormalTok{(}\StringTok{"data/heart\_2020\_cleaned.csv"}\NormalTok{, }\AttributeTok{show\_col\_types =} \ConstantTok{FALSE}\NormalTok{) }\SpecialCharTok{|\textgreater{}} 
+\NormalTok{    janitor}\SpecialCharTok{::}\FunctionTok{clean\_names}\NormalTok{()}
+\NormalTok{df }\OtherTok{\textless{}{-}}\NormalTok{ df[}\DecValTok{1}\SpecialCharTok{:}\DecValTok{1000}\NormalTok{, ]}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{python-51}{%
+\subsubsection{Python}\label{python-51}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{import}\NormalTok{ numpy }\ImportTok{as}\NormalTok{ np}
+\ImportTok{import}\NormalTok{ pandas }\ImportTok{as}\NormalTok{ pd}
+\ImportTok{import}\NormalTok{ matplotlib.pyplot }\ImportTok{as}\NormalTok{ plt}
+\ImportTok{from}\NormalTok{ janitor }\ImportTok{import}\NormalTok{ clean\_names}
+
+\NormalTok{df }\OperatorTok{=}\NormalTok{ pd.read\_csv(}\StringTok{"data/heart\_2020\_cleaned.csv"}\NormalTok{).clean\_names(case\_type}\OperatorTok{=}\StringTok{\textquotesingle{}snake\textquotesingle{}}\NormalTok{)}
+\NormalTok{df }\OperatorTok{=}\NormalTok{ df.iloc[}\DecValTok{0}\NormalTok{:}\DecValTok{1000}\NormalTok{,]}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{train-test-split}{%
+\section{Train-test split}\label{train-test-split}}
+
+To prevent data leakage, one always have to \textbf{train} their
+model(s) (i.e.~fit coefficients, find structure and association) on the
+training set and \textbf{test} it on the testing set (i.e.~evaluate
+performance on never-seen data, generalization). Hence, the first step
+in the data modeling process is to split your data into two separate
+sets.
+
+\hypertarget{r-52}{%
+\subsubsection{R}\label{r-52}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{set.seed}\NormalTok{(}\DecValTok{42}\NormalTok{)}
+\NormalTok{splits }\OtherTok{\textless{}{-}} \FunctionTok{initial\_split}\NormalTok{(df, }\AttributeTok{prop =} \FloatTok{0.8}\NormalTok{, }\AttributeTok{strata =}\NormalTok{ heart\_disease)}
+\NormalTok{train\_data }\OtherTok{\textless{}{-}} \FunctionTok{training}\NormalTok{(splits)}
+\NormalTok{test\_data }\OtherTok{\textless{}{-}} \FunctionTok{testing}\NormalTok{(splits)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{python-52}{%
+\subsubsection{Python}\label{python-52}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{from}\NormalTok{ sklearn.model\_selection }\ImportTok{import}\NormalTok{ train\_test\_split}
+
+\NormalTok{train\_data, test\_data, train\_target, test\_target }\OperatorTok{=}\NormalTok{ train\_test\_split(}
+\NormalTok{    df.drop(columns}\OperatorTok{=}\StringTok{"heart\_disease"}\NormalTok{), df[}\StringTok{"heart\_disease"}\NormalTok{],}
+\NormalTok{    train\_size}\OperatorTok{=}\FloatTok{0.8}\NormalTok{,}
+\NormalTok{    random\_state}\OperatorTok{=}\DecValTok{42}
+\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{tcolorbox}[standard jigsaw,bottomtitle=1mm, opacitybacktitle=0.6, coltitle=black, colback=white, arc=.35mm, leftrule=.75mm, titlerule=0mm, rightrule=.15mm, opacityback=0, colframe=quarto-callout-warning-color-frame, title=\textcolor{quarto-callout-warning-color}{\faExclamationTriangle}\hspace{0.5em}{Pseudo-random number generators}, toprule=.15mm, colbacktitle=quarto-callout-warning-color!10!white, bottomrule=.15mm, toptitle=1mm, left=2mm]
+Probability is concerned with studying uncertainty, randomness.
+Computers are not able to give you random answers, but they can simulate
+randomness with (pseudo) \textbf{random number generators}. In the
+following chapters, we will set the seeds of random number generators in
+order to reproduce the results (although some machine learning
+procedures involve randomness, you will be able to obtain the same
+results printed on this book).
+
+We will use the same number
+(\href{https://en.wikipedia.org/wiki/The_Hitchhiker\%27s_Guide_to_the_Galaxy\#42,_or_The_Answer_to_the_Ultimate_Question_of_Life,_The_Universe,_and_Everything}{42,
+or The Answer to the Ultimate Question of Life, The Universe, and
+Everything}) both in R and Python scripts, but remember that this choice
+does not lead to the same random process (even if the generation process
+is the same).
+\end{tcolorbox}
+
+\hypertarget{cross-validation}{%
+\section{Cross-validation}\label{cross-validation}}
+
+\hypertarget{k-fold}{%
+\subsection{K-fold}\label{k-fold}}
+
+\hypertarget{r-53}{%
+\subsubsection{R}\label{r-53}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{set.seed}\NormalTok{(}\DecValTok{42}\NormalTok{)}
+\NormalTok{cv }\OtherTok{\textless{}{-}} \FunctionTok{vfold\_cv}\NormalTok{(train\_data, }\AttributeTok{v =} \DecValTok{10}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{python-53}{%
+\subsubsection{Python}\label{python-53}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{from}\NormalTok{ sklearn.model\_selection }\ImportTok{import}\NormalTok{ KFold}
+
+\NormalTok{cv }\OperatorTok{=}\NormalTok{ KFold(n\_splits}\OperatorTok{=}\DecValTok{10}\NormalTok{, shuffle}\OperatorTok{=}\VariableTok{True}\NormalTok{, random\_state}\OperatorTok{=}\DecValTok{42}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{stratified-k-fold}{%
+\subsubsection{Stratified K-fold}\label{stratified-k-fold}}
+
+\hypertarget{r-54}{%
+\subsubsection{R}\label{r-54}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{set.seed}\NormalTok{(}\DecValTok{42}\NormalTok{)}
+\NormalTok{cv }\OtherTok{\textless{}{-}} \FunctionTok{vfold\_cv}\NormalTok{(train\_data, }\AttributeTok{v =} \DecValTok{10}\NormalTok{, }\AttributeTok{strata =}\NormalTok{ heart\_disease)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{python-54}{%
+\subsubsection{Python}\label{python-54}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{from}\NormalTok{ sklearn.model\_selection }\ImportTok{import}\NormalTok{ StratifiedKFold}
+
+\NormalTok{cv }\OperatorTok{=}\NormalTok{ StratifiedKFold(n\_splits}\OperatorTok{=}\DecValTok{10}\NormalTok{, shuffle}\OperatorTok{=}\VariableTok{True}\NormalTok{, random\_state}\OperatorTok{=}\DecValTok{42}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{repeated-stratified-k-fold}{%
+\subsubsection{Repeated Stratified
+K-fold}\label{repeated-stratified-k-fold}}
+
+\hypertarget{r-55}{%
+\subsubsection{R}\label{r-55}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{set.seed}\NormalTok{(}\DecValTok{42}\NormalTok{)}
+\NormalTok{cv }\OtherTok{\textless{}{-}} \FunctionTok{vfold\_cv}\NormalTok{(train\_data, }\AttributeTok{v =} \DecValTok{10}\NormalTok{, }\AttributeTok{strata =}\NormalTok{ heart\_disease, }\AttributeTok{repeats =} \DecValTok{10}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{python-55}{%
+\subsubsection{Python}\label{python-55}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{from}\NormalTok{ sklearn.model\_selection }\ImportTok{import}\NormalTok{ RepeatedStratifiedKFold}
+
+\NormalTok{cv }\OperatorTok{=}\NormalTok{ RepeatedStratifiedKFold(n\_splits}\OperatorTok{=}\DecValTok{10}\NormalTok{, n\_repeats}\OperatorTok{=}\DecValTok{10}\NormalTok{, random\_state}\OperatorTok{=}\DecValTok{42}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{grouped-k-fold}{%
+\subsubsection{Grouped K-fold}\label{grouped-k-fold}}
+
+\hypertarget{r-56}{%
+\subsubsection{R}\label{r-56}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{cv }\OtherTok{\textless{}{-}} \FunctionTok{group\_vfold\_cv}\NormalTok{(train\_data, }\AttributeTok{group =}\NormalTok{ , }\AttributeTok{v =} \DecValTok{10}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{python-56}{%
+\subsubsection{Python}\label{python-56}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{from}\NormalTok{ sklearn.model\_selection }\ImportTok{import}\NormalTok{ GroupKFold}
+
+\NormalTok{cv }\OperatorTok{=}\NormalTok{ GroupKFold(n\_splits}\OperatorTok{=}\DecValTok{10}\NormalTok{)}
+\CommentTok{\# group is specified later}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{leave-one-out}{%
+\subsection{Leave-one-out}\label{leave-one-out}}
+
+\hypertarget{r-57}{%
+\subsubsection{R}\label{r-57}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{cv }\OtherTok{\textless{}{-}} \FunctionTok{loo\_cv}\NormalTok{(train\_data)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{python-57}{%
+\subsubsection{Python}\label{python-57}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{from}\NormalTok{ sklearn.model\_selection }\ImportTok{import}\NormalTok{ LeaveOneOut}
+
+\NormalTok{cv }\OperatorTok{=}\NormalTok{ LeaveOneOut()}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{monte-carlo}{%
+\subsection{Monte Carlo}\label{monte-carlo}}
+
+\hypertarget{r-58}{%
+\subsubsection{R}\label{r-58}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{set.seed}\NormalTok{(}\DecValTok{42}\NormalTok{)}
+\NormalTok{cv }\OtherTok{\textless{}{-}} \FunctionTok{mc\_cv}\NormalTok{(train\_data, }\AttributeTok{prop =} \DecValTok{3}\SpecialCharTok{/}\DecValTok{4}\NormalTok{, }\AttributeTok{times =} \DecValTok{10}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{python-58}{%
+\subsubsection{Python}\label{python-58}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{from}\NormalTok{ sklearn.model\_selection }\ImportTok{import}\NormalTok{ ShuffleSplit}
+
+\NormalTok{cv }\OperatorTok{=}\NormalTok{ ShuffleSplit(n\_splits}\OperatorTok{=}\DecValTok{10}\NormalTok{, train\_size}\OperatorTok{=}\DecValTok{3}\OperatorTok{/}\DecValTok{4}\NormalTok{, random\_state}\OperatorTok{=}\DecValTok{42}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{stratified-monte-carlo}{%
+\subsubsection{Stratified Monte Carlo}\label{stratified-monte-carlo}}
+
+\hypertarget{r-59}{%
+\subsubsection{R}\label{r-59}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{set.seed}\NormalTok{(}\DecValTok{42}\NormalTok{)}
+\NormalTok{cv }\OtherTok{\textless{}{-}} \FunctionTok{mc\_cv}\NormalTok{(train\_data, }\AttributeTok{prop =} \DecValTok{3}\SpecialCharTok{/}\DecValTok{4}\NormalTok{, }\AttributeTok{times =} \DecValTok{10}\NormalTok{, }\AttributeTok{strata =}\NormalTok{ heart\_disease)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{python-59}{%
+\subsubsection{Python}\label{python-59}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{from}\NormalTok{ sklearn.model\_selection }\ImportTok{import}\NormalTok{ StratifiedShuffleSplit}
+
+\NormalTok{cv }\OperatorTok{=}\NormalTok{ StratifiedShuffleSplit(n\_splits}\OperatorTok{=}\DecValTok{10}\NormalTok{, train\_size}\OperatorTok{=}\DecValTok{3}\OperatorTok{/}\DecValTok{4}\NormalTok{, random\_state}\OperatorTok{=}\DecValTok{42}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{time-series-split}{%
+\subsection{Time Series split}\label{time-series-split}}
+
+\hypertarget{r-60}{%
+\subsubsection{R}\label{r-60}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{cv }\OtherTok{\textless{}{-}} \FunctionTok{rolling\_origin}\NormalTok{(train\_data, }
+                     \AttributeTok{initial =}\NormalTok{ (}\FunctionTok{nrow}\NormalTok{(train\_data) }\SpecialCharTok{\%\%} \DecValTok{11}\NormalTok{) }\SpecialCharTok{+}\NormalTok{ (}\FunctionTok{nrow}\NormalTok{(train\_data) }\SpecialCharTok{\%/\%} \DecValTok{11}\NormalTok{), }
+                     \AttributeTok{assess =} \FunctionTok{nrow}\NormalTok{(train\_data) }\SpecialCharTok{\%/\%} \DecValTok{11}\NormalTok{, }
+                     \AttributeTok{lag =} \DecValTok{0}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{python-60}{%
+\subsubsection{Python}\label{python-60}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{from}\NormalTok{ sklearn.model\_selection }\ImportTok{import}\NormalTok{ TimeSeriesSplit}
+
+\NormalTok{cv }\OperatorTok{=}\NormalTok{ TimeSeriesSplit(n\_splits}\OperatorTok{=}\DecValTok{10}\NormalTok{, gap}\OperatorTok{=}\DecValTok{0}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{preprocessing}{%
+\chapter{Preprocessing}\label{preprocessing}}
+
+Pre-processing or feature engineering is a crucial step to take in every
+machine learning project. Some models require dummy variables instead of
+categorical ones, or normalized numerical variables, or also NA values
+to be imputed.
+
+In \texttt{tidymodels}, every data pre-processing operation can be
+specified trough a \texttt{step\_} function of the \texttt{recipes}
+package. You start by defining a \texttt{recipe} object in which you
+specify the predictors and response variable as well as the data. Then,
+you add incrementally the \texttt{step\_} functions, which transform
+accordingly your data.
+
+In \texttt{Scikit-Learn}, every pre-processor is a class object \ldots{}
+
+\hypertarget{feature-engineering}{%
+\section{Feature engineering}\label{feature-engineering}}
+
+\hypertarget{r-61}{%
+\subsubsection{R}\label{r-61}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{preprocessor }\OtherTok{\textless{}{-}} \FunctionTok{recipe}\NormalTok{(heart\_disease }\SpecialCharTok{\textasciitilde{}}\NormalTok{ ., }\AttributeTok{data =}\NormalTok{ train\_data) }\SpecialCharTok{|\textgreater{}} 
+    \FunctionTok{step\_normalize}\NormalTok{(}\FunctionTok{all\_numeric\_predictors}\NormalTok{()) }\SpecialCharTok{|\textgreater{}} 
+    \FunctionTok{step\_dummy}\NormalTok{(}\FunctionTok{all\_nominal\_predictors}\NormalTok{(), }\AttributeTok{one\_hot =} \ConstantTok{FALSE}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{preprocessor }\SpecialCharTok{|\textgreater{}} 
+    \FunctionTok{prep}\NormalTok{() }\SpecialCharTok{|\textgreater{}} 
+    \FunctionTok{bake}\NormalTok{(}\AttributeTok{new\_data =} \ConstantTok{NULL}\NormalTok{) }\SpecialCharTok{|\textgreater{}} 
+    \FunctionTok{head}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+# A tibble: 6 x 38
+      bmi physical_health mental_health sleep_time heart_disease smoking_Yes
+    <dbl>           <dbl>         <dbl>      <dbl> <fct>               <dbl>
+1 -1.84           -0.0470         3.28     -1.46   No                      1
+2 -1.26           -0.424         -0.490    -0.0681 No                      0
+3 -0.275           2.09           3.28      0.626  No                      1
+4 -0.648          -0.424         -0.490    -0.762  No                      0
+5  0.0846          0.330         -0.490     3.40   Yes                     1
+6 -1.05            1.46          -0.490    -2.15   No                      0
+# ... with 32 more variables: alcohol_drinking_Yes <dbl>, stroke_Yes <dbl>,
+#   diff_walking_Yes <dbl>, sex_Male <dbl>, age_category_X25.29 <dbl>,
+#   age_category_X30.34 <dbl>, age_category_X35.39 <dbl>,
+#   age_category_X40.44 <dbl>, age_category_X45.49 <dbl>,
+#   age_category_X50.54 <dbl>, age_category_X55.59 <dbl>,
+#   age_category_X60.64 <dbl>, age_category_X65.69 <dbl>,
+#   age_category_X70.74 <dbl>, age_category_X75.79 <dbl>, ...
+\end{verbatim}
+
+\hypertarget{python-61}{%
+\subsubsection{Python}\label{python-61}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{from}\NormalTok{ sklearn.preprocessing }\ImportTok{import}\NormalTok{ OneHotEncoder, StandardScaler}
+\ImportTok{from}\NormalTok{ sklearn.compose }\ImportTok{import}\NormalTok{ make\_column\_selector, ColumnTransformer}
+
+\NormalTok{select\_cat\_cols }\OperatorTok{=}\NormalTok{ make\_column\_selector(dtype\_include}\OperatorTok{=}\BuiltInTok{object}\NormalTok{)}
+\NormalTok{select\_num\_cols }\OperatorTok{=}\NormalTok{ make\_column\_selector(dtype\_exclude}\OperatorTok{=}\BuiltInTok{object}\NormalTok{)}
+
+\NormalTok{preprocessor }\OperatorTok{=}\NormalTok{ ColumnTransformer([}
+\NormalTok{    (}\StringTok{\textquotesingle{}cat\textquotesingle{}}\NormalTok{, OneHotEncoder(drop}\OperatorTok{=}\StringTok{"first"}\NormalTok{, sparse}\OperatorTok{=}\VariableTok{False}\NormalTok{), select\_cat\_cols(train\_data)),}
+\NormalTok{    (}\StringTok{\textquotesingle{}num\textquotesingle{}}\NormalTok{, StandardScaler(), select\_num\_cols(train\_data))}
+\NormalTok{])}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{pd.DataFrame(}
+\NormalTok{    preprocessor.fit\_transform(train\_data),}
+\NormalTok{    columns}\OperatorTok{=}\NormalTok{preprocessor.get\_feature\_names\_out(preprocessor.feature\_names\_in\_)}
+\NormalTok{).head()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+   cat__smoking_Yes  ...  num__sleep_time
+0               1.0  ...        -0.065988
+1               1.0  ...        -0.763366
+2               0.0  ...         0.631390
+3               0.0  ...         0.631390
+4               1.0  ...        -0.065988
+
+[5 rows x 37 columns]
+\end{verbatim}
+
+\hypertarget{preprocessors}{%
+\section{Preprocessors}\label{preprocessors}}
+
+You can find all the available recipes
+\href{https://www.tidymodels.org/find/recipes/}{here}. For Scikit-Learn,
+you can see the official
+\href{https://scikit-learn.org/stable/modules/classes.html}{API pages}.
+
+\hypertarget{normalization}{%
+\subsection{Normalization}\label{normalization}}
+
+\hypertarget{z-score}{%
+\subsubsection{z-score}\label{z-score}}
+
+\hypertarget{r-62}{%
+\paragraph{R}\label{r-62}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{step\_normalize}\NormalTok{()}
+\FunctionTok{step\_center}\NormalTok{()}
+\FunctionTok{step\_scale}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{python-62}{%
+\paragraph{Python}\label{python-62}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{from}\NormalTok{ sklearn.preprocessing }\ImportTok{import}\NormalTok{ StandardScaler}
+
+\NormalTok{StandardScaler()}
+\NormalTok{StandardScaler(with\_std}\OperatorTok{=}\VariableTok{False}\NormalTok{)}
+\NormalTok{StandardScaler(with\_mean}\OperatorTok{=}\VariableTok{False}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{min-max}{%
+\subsubsection{min-max}\label{min-max}}
+
+\hypertarget{r-63}{%
+\paragraph{R}\label{r-63}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{step\_range}\NormalTok{()}
+\FunctionTok{step\_range}\NormalTok{(}\AttributeTok{min =} \SpecialCharTok{{-}}\DecValTok{1}\NormalTok{, }\AttributeTok{max =} \DecValTok{1}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{python-63}{%
+\paragraph{Python}\label{python-63}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{from}\NormalTok{ sklearn.preprocessing }\ImportTok{import}\NormalTok{ MinMaxScaler}
+
+\NormalTok{MinMaxScalerScaler()}
+\NormalTok{MinMaxScalerScaler(feature\_range}\OperatorTok{=}\NormalTok{(}\OperatorTok{{-}}\DecValTok{1}\NormalTok{, }\DecValTok{1}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{gaussian-like}{%
+\subsubsection{Gaussian-like}\label{gaussian-like}}
+
+\hypertarget{r-64}{%
+\paragraph{R}\label{r-64}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{step\_YeoJohnson}\NormalTok{()}
+\FunctionTok{step\_BoxCox}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{python-64}{%
+\paragraph{Python}\label{python-64}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{from}\NormalTok{ sklearn.preprocessing }\ImportTok{import}\NormalTok{ PowerTransformer}
+
+\NormalTok{PowerTransformer(method}\OperatorTok{=}\StringTok{"yeo{-}johnson"}\NormalTok{)}
+\NormalTok{PowerTransformer(method}\OperatorTok{=}\StringTok{"box{-}cox"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{binning}{%
+\subsection{Binning}\label{binning}}
+
+\hypertarget{r-65}{%
+\subsubsection{R}\label{r-65}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{step\_discretize}\NormalTok{(}\AttributeTok{num\_breaks =} \DecValTok{4}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{python-65}{%
+\subsubsection{Python}\label{python-65}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{from}\NormalTok{ sklearn.preprocessing }\ImportTok{import}\NormalTok{ KBinsDiscretizer}
+
+\NormalTok{KBinsDiscretizer(n\_bins}\OperatorTok{=}\DecValTok{5}\NormalTok{, encode}\OperatorTok{=}\StringTok{"ordinal"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{dummy-variables}{%
+\subsection{Dummy variables}\label{dummy-variables}}
+
+\hypertarget{r-66}{%
+\subsubsection{R}\label{r-66}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{step\_dummy}\NormalTok{(}\AttributeTok{one\_hot =} \ConstantTok{TRUE}\NormalTok{)}
+\FunctionTok{step\_dummy}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{python-66}{%
+\subsubsection{Python}\label{python-66}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{from}\NormalTok{ sklearn.preprocessing }\ImportTok{import}\NormalTok{ OneHotEncoder}
+
+\NormalTok{OneHotEncoder()}
+\NormalTok{OneHotEncoder(drop}\OperatorTok{=}\StringTok{"first"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{imputation}{%
+\subsection{Imputation}\label{imputation}}
+
+\hypertarget{r-67}{%
+\subsubsection{R}\label{r-67}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{step\_impute\_mean}\NormalTok{()}
+\FunctionTok{step\_impute\_median}\NormalTok{()}
+\FunctionTok{step\_impute\_mode}\NormalTok{()}
+
+\FunctionTok{step\_impute\_knn}\NormalTok{(}\AttributeTok{neighbors =} \DecValTok{5}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{python-67}{%
+\subsubsection{Python}\label{python-67}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{from}\NormalTok{ sklearn.impute }\ImportTok{import}\NormalTok{ SimpleImputer, KNNImputer}
+
+\NormalTok{SimpleImputer(strategy}\OperatorTok{=}\StringTok{"mean"}\NormalTok{)}
+\NormalTok{SimpleImputer(strategy}\OperatorTok{=}\StringTok{"median"}\NormalTok{)}
+\NormalTok{SimpleImputer(strategy}\OperatorTok{=}\StringTok{"most\_frequent"}\NormalTok{)}
+
+\NormalTok{KNNImputer(n\_neighbors}\OperatorTok{=}\DecValTok{5}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{augmentation}{%
+\subsection{Augmentation}\label{augmentation}}
+
+\hypertarget{r-68}{%
+\subsubsection{R}\label{r-68}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{step\_poly}\NormalTok{(}\AttributeTok{degree=}\DecValTok{2}\NormalTok{)}
+\FunctionTok{step\_bs}\NormalTok{(}\AttributeTok{deg\_free =} \DecValTok{8}\NormalTok{, }\AttributeTok{degree =} \DecValTok{3}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{python-68}{%
+\subsubsection{Python}\label{python-68}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{from}\NormalTok{ sklearn.preprocessing }\ImportTok{import}\NormalTok{ PolynomialFeatures, SplineTransformer}
+
+\NormalTok{PolynomialFeatures(degree}\OperatorTok{=}\DecValTok{2}\NormalTok{)}
+\NormalTok{SplineTransformer(n\_knots}\OperatorTok{=}\DecValTok{5}\NormalTok{, degree}\OperatorTok{=}\DecValTok{3}\NormalTok{, knots}\OperatorTok{=}\StringTok{"quantile"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{apply-functions}{%
+\subsection{Apply functions}\label{apply-functions}}
+
+\hypertarget{r-69}{%
+\subsubsection{R}\label{r-69}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{step\_log}\NormalTok{()}
+\FunctionTok{step\_log}\NormalTok{(}\AttributeTok{base =} \DecValTok{10}\NormalTok{)}
+
+\FunctionTok{step\_hyperbolic}\NormalTok{(}\AttributeTok{func =} \StringTok{"sin"}\NormalTok{)}
+\FunctionTok{step\_hyperbolic}\NormalTok{(}\AttributeTok{func =} \StringTok{"cos"}\NormalTok{)}
+\FunctionTok{step\_hyperbolic}\NormalTok{(}\AttributeTok{func =} \StringTok{"tan"}\NormalTok{)}
+
+\FunctionTok{step\_sqrt}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{python-69}{%
+\subsubsection{Python}\label{python-69}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{import}\NormalTok{ numpy }\ImportTok{as}\NormalTok{ np}
+\ImportTok{from}\NormalTok{ sklearn.preprocessing }\ImportTok{import}\NormalTok{ FunctionTransformer}
+
+\NormalTok{FunctionTransformer(func}\OperatorTok{=}\NormalTok{np.log)}
+\NormalTok{FunctionTransformer(func}\OperatorTok{=}\NormalTok{np.log10)}
+
+\NormalTok{FunctionTransformer(func}\OperatorTok{=}\NormalTok{np.sin)}
+\NormalTok{FunctionTransformer(func}\OperatorTok{=}\NormalTok{np.cos)}
+\NormalTok{FunctionTransformer(func}\OperatorTok{=}\NormalTok{np.tan)}
+
+\NormalTok{FunctionTransformer(func}\OperatorTok{=}\NormalTok{np.sqrt)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{zero-variance}{%
+\subsection{Zero-variance}\label{zero-variance}}
+
+\hypertarget{r-70}{%
+\subsubsection{R}\label{r-70}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{step\_zv}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{python-70}{%
+\subsubsection{Python}\label{python-70}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{from}\NormalTok{ sklearn.feature\_selection }\ImportTok{import}\NormalTok{ VarianceThreshold}
+
+\NormalTok{VarianceThreshold(threshold}\OperatorTok{=}\DecValTok{0}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{fitting-a-model}{%
+\chapter{Fitting a Model}\label{fitting-a-model}}
+
+\hypertarget{fitting-a-model-1}{%
+\section{Fitting a model}\label{fitting-a-model-1}}
+
+\hypertarget{type-of-supervised-models}{%
+\section{Type of (supervised) models}\label{type-of-supervised-models}}
+
+\hypertarget{baseline}{%
+\subsection{Baseline}\label{baseline}}
+
+\hypertarget{r-71}{%
+\subsubsection{R}\label{r-71}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{null\_model}\NormalTok{() }\SpecialCharTok{|\textgreater{}} \FunctionTok{set\_mode}\NormalTok{(}\StringTok{"classification"}\NormalTok{)}
+\FunctionTok{null\_model}\NormalTok{() }\SpecialCharTok{|\textgreater{}} \FunctionTok{set\_mode}\NormalTok{(}\StringTok{"regression"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{python-71}{%
+\subsubsection{Python}\label{python-71}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{from}\NormalTok{ sklearn.dummy }\ImportTok{import}\NormalTok{ DummyClassifier, DummyRegressor}
+
+\NormalTok{DummyClassifier(strategy}\OperatorTok{=}\StringTok{"most\_common"}\NormalTok{)}
+\NormalTok{DummyRegressor(strategy}\OperatorTok{=}\StringTok{"mean"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{linear-regression}{%
+\subsection{Linear Regression}\label{linear-regression}}
+
+\hypertarget{r-72}{%
+\subsubsection{R}\label{r-72}}
+
+\hypertarget{regression}{%
+\paragraph{Regression}\label{regression}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{linear\_reg}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{classification}{%
+\paragraph{Classification}\label{classification}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{logistic\_reg}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{python-72}{%
+\subsubsection{Python}\label{python-72}}
+
+\hypertarget{regression-1}{%
+\paragraph{Regression}\label{regression-1}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{from}\NormalTok{ sklearn.linear\_model }\ImportTok{import}\NormalTok{ LinearRegression}
+
+\NormalTok{LinearRegression()}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{classification-1}{%
+\paragraph{Classification}\label{classification-1}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{from}\NormalTok{ sklearn.linear\_model }\ImportTok{import}\NormalTok{ LogisticRegression}
+
+\NormalTok{LogisticRegression(penalty}\OperatorTok{=}\StringTok{"none"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{regularized-regression}{%
+\subsection{Regularized Regression}\label{regularized-regression}}
+
+\hypertarget{r-73}{%
+\subsubsection{R}\label{r-73}}
+
+\hypertarget{regression-2}{%
+\paragraph{Regression}\label{regression-2}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{linear\_reg}\NormalTok{(}\AttributeTok{penalty =} \FloatTok{0.1}\NormalTok{, }\AttributeTok{mixture =} \DecValTok{0}\NormalTok{) }\SpecialCharTok{|\textgreater{}} \FunctionTok{set\_mode}\NormalTok{(}\StringTok{"regression"}\NormalTok{)}
+\FunctionTok{linear\_reg}\NormalTok{(}\AttributeTok{penalty =} \FloatTok{0.1}\NormalTok{, }\AttributeTok{mixture =} \DecValTok{1}\NormalTok{) }\SpecialCharTok{|\textgreater{}} \FunctionTok{set\_mode}\NormalTok{(}\StringTok{"regression"}\NormalTok{)}
+\FunctionTok{linear\_reg}\NormalTok{(}\AttributeTok{penalty =} \FloatTok{0.1}\NormalTok{, }\AttributeTok{mixture =} \FloatTok{0.5}\NormalTok{) }\SpecialCharTok{|\textgreater{}} \FunctionTok{set\_mode}\NormalTok{(}\StringTok{"regression"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{classification-2}{%
+\paragraph{Classification}\label{classification-2}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{linear\_reg}\NormalTok{(}\AttributeTok{penalty =} \FloatTok{0.1}\NormalTok{, }\AttributeTok{mixture =} \DecValTok{0}\NormalTok{) }\SpecialCharTok{|\textgreater{}} \FunctionTok{set\_mode}\NormalTok{(}\StringTok{"classification"}\NormalTok{)}
+\FunctionTok{linear\_reg}\NormalTok{(}\AttributeTok{penalty =} \FloatTok{0.1}\NormalTok{, }\AttributeTok{mixture =} \DecValTok{1}\NormalTok{) }\SpecialCharTok{|\textgreater{}} \FunctionTok{set\_mode}\NormalTok{(}\StringTok{"classification"}\NormalTok{)}
+\FunctionTok{linear\_reg}\NormalTok{(}\AttributeTok{penalty =} \FloatTok{0.1}\NormalTok{, }\AttributeTok{mixture =} \FloatTok{0.5}\NormalTok{) }\SpecialCharTok{|\textgreater{}} \FunctionTok{set\_mode}\NormalTok{(}\StringTok{"classification"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{python-73}{%
+\subsubsection{Python}\label{python-73}}
+
+Parameters \texttt{alpha} (regularization strength) and \texttt{C} are
+linked by the following relationship: \(\alpha = \frac{1}{2C}\).
+
+\hypertarget{regression-3}{%
+\paragraph{Regression}\label{regression-3}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{from}\NormalTok{ sklearn.linear\_model }\ImportTok{import}\NormalTok{ Ridge, Lasso, ElasticNet}
+
+\NormalTok{Ridge(alpha}\OperatorTok{=}\FloatTok{0.1}\NormalTok{) }\CommentTok{\# ElasticNet(alpha=0.1, l1\_ratio=0)}
+\NormalTok{Lasso(alpha}\OperatorTok{=}\FloatTok{0.1}\NormalTok{) }\CommentTok{\# ElasticNet(alpha=0.1, l1\_ratio=1)}
+\NormalTok{ElasticNet(alpha}\OperatorTok{=}\FloatTok{0.1}\NormalTok{, l1\_ratio}\OperatorTok{=}\FloatTok{0.5}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{classification-3}{%
+\paragraph{Classification}\label{classification-3}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{from}\NormalTok{ sklearn.linear\_model }\ImportTok{import}\NormalTok{ RidgeClassifier, LogisticRegression}
+
+\NormalTok{RidgeClassifier(alpha}\OperatorTok{=}\FloatTok{0.1}\NormalTok{) }\CommentTok{\# LogisticRegression(penalty="l2", C=5)}
+\NormalTok{LogisticRegression(penalty}\OperatorTok{=}\StringTok{"l1"}\NormalTok{, C}\OperatorTok{=}\DecValTok{5}\NormalTok{)}
+\NormalTok{LogisticRegression(penalty}\OperatorTok{=}\StringTok{"elasticnet"}\NormalTok{, C}\OperatorTok{=}\DecValTok{5}\NormalTok{, l1\_ratio}\OperatorTok{=}\FloatTok{0.5}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{k-nearest-neighbors}{%
+\subsection{K-Nearest Neighbors}\label{k-nearest-neighbors}}
+
+\hypertarget{r-74}{%
+\subsubsection{R}\label{r-74}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{nearest\_neighbor}\NormalTok{(}\AttributeTok{neighbors =} \DecValTok{5}\NormalTok{, }\AttributeTok{dist\_power =} \DecValTok{2}\NormalTok{) }\SpecialCharTok{|\textgreater{}} \FunctionTok{set\_mode}\NormalTok{(}\StringTok{"regression"}\NormalTok{)}
+\FunctionTok{nearest\_neighbor}\NormalTok{(}\AttributeTok{neighbors =} \DecValTok{5}\NormalTok{, }\AttributeTok{dist\_power =} \DecValTok{2}\NormalTok{) }\SpecialCharTok{|\textgreater{}} \FunctionTok{set\_mode}\NormalTok{(}\StringTok{"classification"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{python-74}{%
+\subsubsection{Python}\label{python-74}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{from}\NormalTok{ sklearn.neighbors }\ImportTok{import}\NormalTok{ KNeighborsRegressor, KNeighborsClassifier}
+
+\NormalTok{KNeighborsRegressor(n\_neighbors}\OperatorTok{=}\DecValTok{5}\NormalTok{, p}\OperatorTok{=}\DecValTok{2}\NormalTok{)}
+\NormalTok{KNeighborsClassifier(n\_neighbors}\OperatorTok{=}\DecValTok{5}\NormalTok{, p}\OperatorTok{=}\DecValTok{2}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{support-vector-machine}{%
+\subsection{Support Vector Machine}\label{support-vector-machine}}
+
+\hypertarget{r-75}{%
+\subsubsection{R}\label{r-75}}
+
+\hypertarget{regression-4}{%
+\paragraph{Regression}\label{regression-4}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{svm\_linear}\NormalTok{(}\AttributeTok{cost =} \DecValTok{5}\NormalTok{, }\AttributeTok{margin =} \FloatTok{0.01}\NormalTok{) }\SpecialCharTok{|\textgreater{}} \FunctionTok{set\_mode}\NormalTok{(}\StringTok{"regression"}\NormalTok{)}
+\FunctionTok{svm\_poly}\NormalTok{(}\AttributeTok{cost =} \DecValTok{5}\NormalTok{, }\AttributeTok{degree =} \DecValTok{3}\NormalTok{, }\AttributeTok{margin =} \FloatTok{0.01}\NormalTok{) }\SpecialCharTok{|\textgreater{}} \FunctionTok{set\_mode}\NormalTok{(}\StringTok{"regression"}\NormalTok{)}
+\FunctionTok{svm\_rbf}\NormalTok{(}\AttributeTok{cost =} \DecValTok{5}\NormalTok{, }\AttributeTok{rbf\_sigma =} \DecValTok{20}\NormalTok{, }\AttributeTok{margin =} \FloatTok{0.01}\NormalTok{) }\SpecialCharTok{|\textgreater{}} \FunctionTok{set\_mode}\NormalTok{(}\StringTok{"regression"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{classification-4}{%
+\paragraph{Classification}\label{classification-4}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{svm\_linear}\NormalTok{(}\AttributeTok{cost =} \DecValTok{5}\NormalTok{) }\SpecialCharTok{|\textgreater{}} \FunctionTok{set\_mode}\NormalTok{(}\StringTok{"classification"}\NormalTok{)}
+\FunctionTok{svm\_poly}\NormalTok{(}\AttributeTok{cost =} \DecValTok{5}\NormalTok{, }\AttributeTok{degree =} \DecValTok{3}\NormalTok{) }\SpecialCharTok{|\textgreater{}} \FunctionTok{set\_mode}\NormalTok{(}\StringTok{"classification"}\NormalTok{)}
+\FunctionTok{svm\_rbf}\NormalTok{(}\AttributeTok{cost =} \DecValTok{5}\NormalTok{, }\AttributeTok{rbf\_sigma =} \DecValTok{20}\NormalTok{) }\SpecialCharTok{|\textgreater{}} \FunctionTok{set\_mode}\NormalTok{(}\StringTok{"classification"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{python-75}{%
+\subsubsection{Python}\label{python-75}}
+
+\hypertarget{regression-5}{%
+\paragraph{Regression}\label{regression-5}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{from}\NormalTok{ sklearn.svm }\ImportTok{import}\NormalTok{ LinearSVR, SVR}
+
+\NormalTok{LinearSVR(C}\OperatorTok{=}\DecValTok{5}\NormalTok{, epsilon}\OperatorTok{=}\FloatTok{0.01}\NormalTok{)}
+\NormalTok{SVR(kernel}\OperatorTok{=}\StringTok{"poly"}\NormalTok{, C}\OperatorTok{=}\DecValTok{5}\NormalTok{, degree}\OperatorTok{=}\DecValTok{3}\NormalTok{, epsilon}\OperatorTok{=}\FloatTok{0.01}\NormalTok{)}
+\NormalTok{SVR(kernel}\OperatorTok{=}\StringTok{"rbf"}\NormalTok{, C}\OperatorTok{=}\DecValTok{5}\NormalTok{, gamma}\OperatorTok{=}\FloatTok{0.2}\NormalTok{, epsilon}\OperatorTok{=}\FloatTok{0.01}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{classification-5}{%
+\paragraph{Classification}\label{classification-5}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{from}\NormalTok{ sklearn.svm }\ImportTok{import}\NormalTok{ LinearSVC, SVC}
+
+\NormalTok{LinearSVC(C}\OperatorTok{=}\DecValTok{5}\NormalTok{)}
+\NormalTok{SVC(kernel}\OperatorTok{=}\StringTok{"poly"}\NormalTok{, C}\OperatorTok{=}\DecValTok{5}\NormalTok{, degree}\OperatorTok{=}\DecValTok{3}\NormalTok{)}
+\NormalTok{SVC(kernel}\OperatorTok{=}\StringTok{"rbf"}\NormalTok{, C}\OperatorTok{=}\DecValTok{5}\NormalTok{, gamma}\OperatorTok{=}\FloatTok{0.2}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{classification-and-regression-trees}{%
+\subsection{Classification and Regression
+Trees}\label{classification-and-regression-trees}}
+
+\hypertarget{r-76}{%
+\subsubsection{R}\label{r-76}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{decision\_tree}\NormalTok{() }\SpecialCharTok{|\textgreater{}} \FunctionTok{set\_mode}\NormalTok{(}\StringTok{"regression"}\NormalTok{)}
+\FunctionTok{decision\_tree}\NormalTok{() }\SpecialCharTok{|\textgreater{}} \FunctionTok{set\_mode}\NormalTok{(}\StringTok{"classification"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{python-76}{%
+\subsubsection{Python}\label{python-76}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{from}\NormalTok{ sklearn.tree }\ImportTok{import}\NormalTok{ DecisionTreeRegressor, DecisionTreeClassifier}
+
+\NormalTok{DecisionTreeRegressor()}
+\NormalTok{DecisionTreeClassifier()}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{random-forest}{%
+\subsection{Random Forest}\label{random-forest}}
+
+\hypertarget{r-77}{%
+\subsubsection{R}\label{r-77}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{rand\_forest}\NormalTok{() }\SpecialCharTok{|\textgreater{}} \FunctionTok{set\_mode}\NormalTok{(}\StringTok{"regression"}\NormalTok{)}
+\FunctionTok{rand\_forest}\NormalTok{() }\SpecialCharTok{|\textgreater{}} \FunctionTok{set\_mode}\NormalTok{(}\StringTok{"classification"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{python-77}{%
+\subsubsection{Python}\label{python-77}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{from}\NormalTok{ sklearn.ensemble }\ImportTok{import}\NormalTok{ RandomForestRegressor, RandomForestClassifier}
+
+\NormalTok{RandomForestRegressor()}
+\NormalTok{RandomForestClassifier()}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{bagging-trees}{%
+\subsection{Bagging Trees}\label{bagging-trees}}
+
+\hypertarget{r-78}{%
+\subsubsection{R}\label{r-78}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{bag\_tree}\NormalTok{() }\SpecialCharTok{|\textgreater{}} \FunctionTok{set\_mode}\NormalTok{(}\StringTok{"regression"}\NormalTok{)}
+\FunctionTok{bag\_tree}\NormalTok{() }\SpecialCharTok{|\textgreater{}} \FunctionTok{set\_mode}\NormalTok{(}\StringTok{"classification"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{python-78}{%
+\subsubsection{Python}\label{python-78}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{from}\NormalTok{ sklearn.ensemble }\ImportTok{import}\NormalTok{ BaggingRegressor, BaggingClassifier}
+\ImportTok{from}\NormalTok{ sklearn.tree }\ImportTok{import}\NormalTok{ DecisionTreeRegressor, DecisionTreeClassifier}
+
+\NormalTok{BaggingRegressor(base\_estimator}\OperatorTok{=}\NormalTok{DecisionTreeRegressor())}
+\NormalTok{BaggingClassifier(base\_estimator}\OperatorTok{=}\NormalTok{DecisionTreeClassifier())}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{gradient-boosting-machine}{%
+\subsection{Gradient Boosting Machine}\label{gradient-boosting-machine}}
+
+\hypertarget{r-79}{%
+\subsubsection{R}\label{r-79}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{boost\_tree}\NormalTok{() }\SpecialCharTok{|\textgreater{}} \FunctionTok{set\_mode}\NormalTok{(}\StringTok{"regression"}\NormalTok{)}
+\FunctionTok{boost\_tree}\NormalTok{() }\SpecialCharTok{|\textgreater{}} \FunctionTok{set\_mode}\NormalTok{(}\StringTok{"classification"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{python-79}{%
+\subsubsection{Python}\label{python-79}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{from}\NormalTok{ sklearn.ensemble }\ImportTok{import}\NormalTok{ GradientBoostingRegressor, GradientBoostingClassifier}
+
+\NormalTok{GradientBoostingRegressor()}
+\NormalTok{GradientBoostingClassifier()}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{references}{%
+\chapter*{References}\label{references}}
+\addcontentsline{toc}{chapter}{References}
+
+\hypertarget{refs}{}
+\begin{CSLReferences}{0}{0}
+\end{CSLReferences}
+
+\end{document}

@@ -1,0 +1,230 @@
+---
+title: "Splitting Data"
+execute: 
+  eval: false
+---
+
+:::{.panel-tabset}
+## R
+
+```{r}
+#| message: false
+
+library(tidymodels)
+
+df <- readr::read_csv("data/heart_2020_cleaned.csv", show_col_types = FALSE) |> 
+    janitor::clean_names()
+df <- df[1:1000, ]
+```
+
+## Python
+
+```{python}
+#| message: false
+
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+from janitor import clean_names
+
+df = pd.read_csv("data/heart_2020_cleaned.csv").clean_names(case_type='snake')
+df = df.iloc[0:1000,]
+```
+:::
+
+
+## Train-test split
+
+To prevent data leakage, one always have to **train** their model(s) (i.e. fit coefficients, find structure and association) on the training set and **test** it on the testing set (i.e. evaluate performance on never-seen data, generalization).
+Hence, the first step in the data modeling process is to split your data into two separate sets.
+
+:::{.panel-tabset}
+### R
+
+```{r}
+set.seed(42)
+splits <- initial_split(df, prop = 0.8, strata = heart_disease)
+train_data <- training(splits)
+test_data <- testing(splits)
+```
+
+### Python
+
+```{python}
+from sklearn.model_selection import train_test_split
+
+train_data, test_data, train_target, test_target = train_test_split(
+    df.drop(columns="heart_disease"), df["heart_disease"],
+    train_size=0.8,
+    random_state=42
+)
+```
+:::
+
+:::{.callout-warning}
+## Pseudo-random number generators
+
+Probability is concerned with studying uncertainty, randomness. Computers are not able to give you random answers, but they can simulate randomness with (pseudo) **random number generators**. In the following chapters, we will set the seeds of random number generators in order to reproduce the results (although some machine learning procedures involve randomness, you will be able to obtain the same results printed on this book).
+
+We will use the same number ([42, or The Answer to the Ultimate Question of Life, The Universe, and Everything](https://en.wikipedia.org/wiki/The_Hitchhiker%27s_Guide_to_the_Galaxy#42,_or_The_Answer_to_the_Ultimate_Question_of_Life,_The_Universe,_and_Everything)) both in R and Python scripts, but remember that this choice does not lead to the same random process (even if the generation process is the same).
+:::
+
+## Cross-validation
+
+### K-fold
+
+:::{.panel-tabset}
+#### R
+
+```{r}
+set.seed(42)
+cv <- vfold_cv(train_data, v = 10)
+```
+
+#### Python
+
+```{python}
+from sklearn.model_selection import KFold
+
+cv = KFold(n_splits=10, shuffle=True, random_state=42)
+```
+:::
+
+#### Stratified K-fold
+
+:::{.panel-tabset}
+#### R
+
+```{r}
+set.seed(42)
+cv <- vfold_cv(train_data, v = 10, strata = heart_disease)
+```
+
+#### Python
+
+```{python}
+from sklearn.model_selection import StratifiedKFold
+
+cv = StratifiedKFold(n_splits=10, shuffle=True, random_state=42)
+```
+:::
+
+#### Repeated Stratified K-fold
+
+:::{.panel-tabset}
+#### R
+
+```{r}
+set.seed(42)
+cv <- vfold_cv(train_data, v = 10, strata = heart_disease, repeats = 10)
+```
+
+#### Python
+
+```{python}
+from sklearn.model_selection import RepeatedStratifiedKFold
+
+cv = RepeatedStratifiedKFold(n_splits=10, n_repeats=10, random_state=42)
+```
+:::
+
+#### Grouped K-fold
+
+:::{.panel-tabset}
+#### R
+
+```{r}
+cv <- group_vfold_cv(train_data, group = , v = 10)
+```
+
+#### Python
+
+```{python}
+from sklearn.model_selection import GroupKFold
+
+cv = GroupKFold(n_splits=10)
+# group is specified later
+```
+:::
+
+
+### Leave-one-out
+
+:::{.panel-tabset}
+#### R
+
+```{r}
+cv <- loo_cv(train_data)
+```
+
+#### Python
+
+```{python}
+from sklearn.model_selection import LeaveOneOut
+
+cv = LeaveOneOut()
+```
+:::
+
+
+### Monte Carlo
+
+:::{.panel-tabset}
+#### R
+
+```{r}
+set.seed(42)
+cv <- mc_cv(train_data, prop = 3/4, times = 10)
+```
+
+#### Python
+
+```{python}
+from sklearn.model_selection import ShuffleSplit
+
+cv = ShuffleSplit(n_splits=10, train_size=3/4, random_state=42)
+```
+:::
+
+#### Stratified Monte Carlo
+
+:::{.panel-tabset}
+#### R
+
+```{r}
+set.seed(42)
+cv <- mc_cv(train_data, prop = 3/4, times = 10, strata = heart_disease)
+```
+
+#### Python
+
+```{python}
+from sklearn.model_selection import StratifiedShuffleSplit
+
+cv = StratifiedShuffleSplit(n_splits=10, train_size=3/4, random_state=42)
+```
+:::
+
+
+### Time Series split
+
+:::{.panel-tabset}
+#### R
+
+```{r}
+cv <- rolling_origin(train_data, 
+                     initial = (nrow(train_data) %% 11) + (nrow(train_data) %/% 11), 
+                     assess = nrow(train_data) %/% 11, 
+                     lag = 0)
+```
+
+#### Python
+
+```{python}
+from sklearn.model_selection import TimeSeriesSplit
+
+cv = TimeSeriesSplit(n_splits=10, gap=0)
+```
+:::
+
+

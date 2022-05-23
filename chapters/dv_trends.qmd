@@ -1,0 +1,158 @@
+---
+title: "Trends"
+---
+
+We will keep using the heart disease dataset (see @sec-import_local). However, we will consider a small subset of these data in order to lower computing resources.
+
+```{r}
+#| echo: false
+#| message: false
+
+source("../scripts/prepare.R")
+```
+
+```{python}
+#| echo: false
+#| message: false
+
+exec(open("../scripts/prepare.py").read())
+```
+
+:::{.panel-tabset}
+### R
+
+```{r}
+#| code-fold: true
+
+df <- df |> group_by(heart_disease) |> slice_head(n = 50)
+```
+
+### Python
+
+```{python}
+#| code-fold: true
+
+df = df.groupby("heart_disease").head(50)
+```
+:::
+
+## Scatter Plots
+
+### A simple scatter plot
+
+::: panel-tabset
+#### R
+
+```{r}
+library(ggplot2)
+
+df |> 
+    ggplot(aes(bmi, sleep_time)) +
+    geom_point()
+```
+
+#### Python
+
+```{python}
+import matplotlib.pyplot as plt
+import seaborn as sns
+import seaborn.objects as so
+
+sns.set_theme()
+
+(
+    so.Plot(df, "bmi", "sleep_time")
+    .add(so.Scatter())
+    .show()
+)
+```
+:::
+
+### Color by variable
+
+::: panel-tabset
+#### R
+
+```{r}
+df |> 
+    ggplot(aes(bmi, sleep_time, color = heart_disease)) +
+    geom_point(alpha = 0.6) +
+    scale_color_brewer(palette = "Set1")
+```
+
+#### Python
+
+```{python}
+(
+    so.Plot(df, "bmi", "sleep_time", color="heart_disease")
+    .add(so.Scatter(alpha=0.6))
+    .scale(color="Set1")
+    .show()
+)
+```
+
+or also:
+
+```{python}
+#| eval: false
+
+sns.relplot(
+    x="bmi", y="sleep_time", hue="heart_disease",
+    alpha=0.6,
+    palette="Set1",
+    data=df
+);
+plt.show()
+```
+:::
+
+
+## Line Plots
+
+::: panel-tabset
+#### R
+
+```{r}
+df |> 
+    ggplot(aes(bmi, sleep_time, color = heart_disease, linetype = smoking)) +
+    geom_line(alpha = 0.6) +
+    scale_color_viridis_d(option = "plasma")
+```
+
+#### Python
+
+```{python}
+sns.lineplot(
+    x="bmi", y="sleep_time", hue="heart_disease", style="smoking",
+    alpha=0.6, 
+    palette="plasma",
+    data=df
+)
+```
+:::
+
+## Combine different layers
+
+::: panel-tabset
+#### R
+
+```{r}
+df |> 
+    ggplot(aes(bmi, sleep_time, color = heart_disease)) +
+    geom_line(aes(linetype = smoking), alpha = 0.6) +
+    geom_point(aes(shape = smoking), alpha = 0.6) +
+    scale_color_viridis_d(option = "plasma")
+```
+
+#### Python
+
+```{python}
+sns.relplot(
+    x="bmi", y="sleep_time", hue="heart_disease", style="smoking",
+    kind="line", markers=True, alpha=0.6, 
+    palette="plasma",
+    data=df
+);
+plt.show()
+```
+:::

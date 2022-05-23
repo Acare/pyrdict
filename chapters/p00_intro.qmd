@@ -1,0 +1,70 @@
+---
+title: "Introduction"
+execute: 
+  eval: false
+---
+
+Before taking your bilingual journey through data science, I want to highlight some useful resources which can improve your overall learning experience.
+
+```{bash}
+#| echo: false
+
+In the first part we will...
+In the second part we will...
+
+There are a lot of useful packages out there. But I made a choice in which to consider. I find the tidyverse to be very well structured, with an easy-to-use and coherent API. For Python my choices are based on what I've found most commonly on the internet.
+```
+
+## Choose an IDE
+
+Making data science in the command line is ok, but you can save time and improve a lot your workflow by using an integrated development environment (IDE). You will have the ability to create scripts, running code interactively, making plots, debugging code and more within a single application.
+
+In my opinion, the [RStudio IDE](https://www.rstudio.com/products/rstudio/) is the best solution out there for R at present.
+
+For Python, good choices are [Spyder](https://www.spyder-ide.org/), [PyCharm](https://www.jetbrains.com/pycharm/) and [Jupyter](https://jupyter.org/).
+
+
+## Learn by others and improve yourself
+
+### Kaggle
+
+[Kaggle](https://www.kaggle.com/) is an online platform hosting datasets and competitions aimed at solving real-life problems. This is one of the best places to getting your hands dirty in data science!
+
+Throughout the book, we will use many (?) Kaggle datasets. You can install the CLI of [Kaggle API](https://www.kaggle.com/docs/api) and run the following command on bash to download a dataset:
+
+```{bash}
+kaggle datasets download kamilpytlak/personal-key-indicators-of-heart-disease ./data --unzip
+```
+
+### TidyTuesday
+
+As described in the main page, [TidyTuesday](https://github.com/rfordatascience/tidytuesday) is a weekly social data project aimed at applying your R skills, getting feedback, exploring other's work and connecting with the greater R community.
+Every week (yes, on Tuesday), a new dataset is posted on the GitHub page and people are encouraged to produce useful insights from it (usually) through figures. Once you're done with your visualization, you can post it on Twitter by using the hashtags **#TidyTuesday** and **#RStats**. It is also recommended to share your code and adding alt text to your visualizations.
+
+### Big Books
+
+There will be lots of links to external resources throughout the book. Anyway, I suggest you to take a look at these two meta-books which can help you to point to the right direction in your learning path:
+
+- [the Big Book of R](https://www.bigbookofr.com/);
+- [the Big Book of Python](https://www.bigbookofpython.com/).
+
+## Integrate R and Python
+
+If you want to integrate Python code in your R projects, I suggest you to take a look at the R package [`reticulate`](https://rstudio.github.io/reticulate/). 
+
+For example, it is possible to import Python libraries and use their functions to create R objects. In the following code chunk, you can see how we import Numpy and Pandas (using R syntax), create two Numpy arrays (R vectors) and use them to make a Pandas DataFrame (R data.frame):
+
+```{r}
+#| eval: true
+
+library(reticulate)
+
+np <- import("numpy")
+pd <- import("pandas")
+
+a1 <- np$array(c(1, 2, 3, 4))
+a2 <- np$array(5:8)
+pd$DataFrame(list(a1 = a1, a2 = a2), index = letters[1:4])
+```
+
+You can also use Python interactively through the R console (`reticulate::repl_python()` function) or sourcing Python scripts (`reticulate::source_python()`) and more.

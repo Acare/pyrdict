@@ -1,0 +1,277 @@
+---
+title: "Fitting a Model"
+execute: 
+  eval: false
+---
+
+```{r}
+#| echo: false
+#| message: false
+
+source("../scripts/prepare.R")
+```
+
+```{python}
+#| echo: false
+#| message: false
+
+exec(open("../scripts/prepare.py").read())
+```
+
+## Fitting a model
+
+
+
+## Type of (supervised) models
+
+
+### Baseline
+
+::: {.panel-tabset}
+#### R
+
+```{r}
+null_model() |> set_mode("classification")
+null_model() |> set_mode("regression")
+```
+
+#### Python
+
+```{python}
+from sklearn.dummy import DummyClassifier, DummyRegressor
+
+DummyClassifier(strategy="most_common")
+DummyRegressor(strategy="mean")
+```
+:::
+
+
+### Linear Regression {.tabset}
+
+::: panel-tabset
+#### R
+
+##### Regression
+
+```{r}
+linear_reg()
+```
+
+##### Classification
+
+```{r}
+logistic_reg()
+```
+
+#### Python
+
+##### Regression
+
+```{python}
+from sklearn.linear_model import LinearRegression
+
+LinearRegression()
+```
+
+##### Classification
+
+```{python}
+from sklearn.linear_model import LogisticRegression
+
+LogisticRegression(penalty="none")
+```
+:::
+
+
+### Regularized Regression
+
+::: panel-tabset
+#### R
+
+##### Regression
+
+```{r}
+linear_reg(penalty = 0.1, mixture = 0) |> set_mode("regression")
+linear_reg(penalty = 0.1, mixture = 1) |> set_mode("regression")
+linear_reg(penalty = 0.1, mixture = 0.5) |> set_mode("regression")
+```
+
+##### Classification
+
+```{r}
+linear_reg(penalty = 0.1, mixture = 0) |> set_mode("classification")
+linear_reg(penalty = 0.1, mixture = 1) |> set_mode("classification")
+linear_reg(penalty = 0.1, mixture = 0.5) |> set_mode("classification")
+```
+
+#### Python
+
+Parameters `alpha` (regularization strength) and `C` are linked by the following relationship: $\alpha = \frac{1}{2C}$.
+
+##### Regression
+
+```{python}
+from sklearn.linear_model import Ridge, Lasso, ElasticNet
+
+Ridge(alpha=0.1) # ElasticNet(alpha=0.1, l1_ratio=0)
+Lasso(alpha=0.1) # ElasticNet(alpha=0.1, l1_ratio=1)
+ElasticNet(alpha=0.1, l1_ratio=0.5)
+```
+
+##### Classification
+
+```{python}
+from sklearn.linear_model import RidgeClassifier, LogisticRegression
+
+RidgeClassifier(alpha=0.1) # LogisticRegression(penalty="l2", C=5)
+LogisticRegression(penalty="l1", C=5)
+LogisticRegression(penalty="elasticnet", C=5, l1_ratio=0.5)
+```
+:::
+
+### K-Nearest Neighbors
+
+::: panel-tabset
+#### R
+
+```{r}
+nearest_neighbor(neighbors = 5, dist_power = 2) |> set_mode("regression")
+nearest_neighbor(neighbors = 5, dist_power = 2) |> set_mode("classification")
+```
+
+#### Python
+
+```{python}
+from sklearn.neighbors import KNeighborsRegressor, KNeighborsClassifier
+
+KNeighborsRegressor(n_neighbors=5, p=2)
+KNeighborsClassifier(n_neighbors=5, p=2)
+```
+:::
+
+
+### Support Vector Machine
+
+::: panel-tabset
+#### R
+
+##### Regression
+
+```{r}
+svm_linear(cost = 5, margin = 0.01) |> set_mode("regression")
+svm_poly(cost = 5, degree = 3, margin = 0.01) |> set_mode("regression")
+svm_rbf(cost = 5, rbf_sigma = 20, margin = 0.01) |> set_mode("regression")
+```
+
+##### Classification
+
+```{r}
+svm_linear(cost = 5) |> set_mode("classification")
+svm_poly(cost = 5, degree = 3) |> set_mode("classification")
+svm_rbf(cost = 5, rbf_sigma = 20) |> set_mode("classification")
+```
+
+#### Python
+
+##### Regression
+
+```{python}
+from sklearn.svm import LinearSVR, SVR
+
+LinearSVR(C=5, epsilon=0.01)
+SVR(kernel="poly", C=5, degree=3, epsilon=0.01)
+SVR(kernel="rbf", C=5, gamma=0.2, epsilon=0.01)
+```
+
+##### Classification
+
+```{python}
+from sklearn.svm import LinearSVC, SVC
+
+LinearSVC(C=5)
+SVC(kernel="poly", C=5, degree=3)
+SVC(kernel="rbf", C=5, gamma=0.2)
+```
+:::
+
+
+### Classification and Regression Trees
+
+::: panel-tabset
+#### R
+
+```{r}
+decision_tree() |> set_mode("regression")
+decision_tree() |> set_mode("classification")
+```
+
+#### Python
+
+```{python}
+from sklearn.tree import DecisionTreeRegressor, DecisionTreeClassifier
+
+DecisionTreeRegressor()
+DecisionTreeClassifier()
+```
+:::
+
+### Random Forest
+
+::: panel-tabset
+#### R
+
+```{r}
+rand_forest() |> set_mode("regression")
+rand_forest() |> set_mode("classification")
+```
+
+#### Python
+
+```{python}
+from sklearn.ensemble import RandomForestRegressor, RandomForestClassifier
+
+RandomForestRegressor()
+RandomForestClassifier()
+```
+:::
+
+### Bagging Trees
+
+::: panel-tabset
+#### R
+
+```{r}
+bag_tree() |> set_mode("regression")
+bag_tree() |> set_mode("classification")
+```
+
+#### Python
+
+```{python}
+from sklearn.ensemble import BaggingRegressor, BaggingClassifier
+from sklearn.tree import DecisionTreeRegressor, DecisionTreeClassifier
+
+BaggingRegressor(base_estimator=DecisionTreeRegressor())
+BaggingClassifier(base_estimator=DecisionTreeClassifier())
+```
+:::
+
+### Gradient Boosting Machine
+
+::: panel-tabset
+#### R
+
+```{r}
+boost_tree() |> set_mode("regression")
+boost_tree() |> set_mode("classification")
+```
+
+#### Python
+
+```{python}
+from sklearn.ensemble import GradientBoostingRegressor, GradientBoostingClassifier
+
+GradientBoostingRegressor()
+GradientBoostingClassifier()
+```
+:::

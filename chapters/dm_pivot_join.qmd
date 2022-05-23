@@ -1,0 +1,139 @@
+---
+title: "Pivoting and Joining"
+---
+
+After importing the data as in @sec-import_local, we must load the necessary packages:
+
+```{r}
+#| echo: false
+#| message: false
+
+source("../scripts/prepare.R")
+```
+
+```{python}
+#| echo: false
+#| message: false
+
+exec(open("../scripts/prepare.py").read())
+```
+
+## Pivot
+
+First, we select the first ten rows of our dataframe and the columns `heart_disease`, `stroke`, `smoking` and `bmi`. 
+
+::: {.panel-tabset}
+### R
+
+```{r}
+df3 <- df[1:10, ] |> 
+    select(heart_disease, stroke, smoking, bmi) |> 
+    mutate(patient_id = stringr::str_c("P", 1:10), .before = 1)
+df3
+```
+
+### Python
+
+```{python}
+df3 = df.loc[0:9, ["heart_disease", "stroke", "smoking", "bmi"]]
+df3.insert(0, "patient_id", ["P" + str(i) for i in range(1, 11)])
+df3
+```
+:::
+
+### Long format
+
+::: {.panel-tabset}
+#### R
+
+```{r}
+df4 <- df3 |> 
+    pivot_longer(-patient_id, names_to = "variable", values_to = "value",
+                 values_transform = as.character)
+df4
+```
+
+#### Python
+
+```{python}
+df4 = df3.melt(id_vars="patient_id", var_name="variable", value_name="value")
+df4
+```
+:::
+
+### Wide format
+
+::: {.panel-tabset}
+#### R
+
+```{r}
+df4 |> pivot_wider(patient_id, names_from = variable, values_from = value)
+```
+
+#### Python
+
+```{python}
+df4.pivot(index="patient_id", columns="variable", values="value")
+```
+:::
+
+
+## Merge
+
+::: {.panel-tabset}
+### R
+
+```{r}
+set.seed(123)
+df2 <- tibble(
+    gen_health = c("Poor", "Fair", "Good", "Very good", "Excellent"),
+    random_biomarker = rnorm(5)
+)
+df2
+```
+
+### Python
+
+```{python}
+import numpy as np
+
+rng = np.random.RandomState(123)
+df2 = pd.DataFrame({
+    "gen_health": ["Poor", "Fair", "Good", "Very good", "Excellent"],
+    "random_biomarker": rng.randn(5)
+})
+df2
+```
+:::
+
+### Left-join
+
+::: {.panel-tabset}
+#### R
+
+```{r}
+df |> left_join(df2, by = "gen_health")
+```
+
+#### Python
+
+```{python}
+df.join(df2.set_index("gen_health"), on='gen_health', how="left")
+```
+:::
+
+### Right-join
+
+::: panel-tabset
+#### R
+
+```{r}
+df |> right_join(df2, by = "gen_health")
+```
+
+#### Python
+
+```{python}
+df.join(df2.set_index("gen_health"), on='gen_health', how="right")
+```
+:::

@@ -1,0 +1,98 @@
+---
+title: "Natural Language Processing"
+execute: 
+  eval: false
+---
+
+:::{.panel-tabset}
+### R
+
+```{r}
+# library(dplyr)
+library(readr)
+# library(tidyr)
+library(tidytext)
+
+rotam <- read_lines("https://www.gutenberg.org/cache/epub/151/pg151.txt")
+```
+
+### Python
+
+```{python}
+import pandas as pd
+import nltk
+from urllib import request
+
+url_rotam = request.urlopen("https://www.gutenberg.org/cache/epub/151/pg151.txt")
+rotam = url_rotam.read().decode("utf8")
+```
+:::
+
+
+## Unnest tokens
+
+```{r}
+rotam_df <- tibble::tibble(rotam) |> 
+    mutate(flag_start = cumsum(str_detect(rotam, "START")),
+           flag_end = cumsum(str_detect(rotam, "End")),
+           chapter = cumsum(str_detect(rotam, "PART THE"))) |> 
+    filter(flag_start == 1, flag_end == 0, chapter >= 1) |> 
+    mutate(
+        stanza = cumsum(rotam == "" & (lead(rotam) != "" | !str_detect(rotam, "PART THE")))
+    ) |> 
+    filter(!str_detect(rotam, "PART THE"), rotam != "") |> 
+    select(-starts_with("flag")) |> 
+    mutate(verse = row_number(), rotam = str_squish(rotam) |> str_trim())
+
+rotam_words <- rotam_df |> unnest_tokens(word, rotam)
+
+rotam_words |> 
+    anti_join(stop_words, by = "word") |> 
+    count(word, chapter, sort = TRUE) |> 
+    # left_join(rotam_words[c("chapter", "word")], by = "word") |> 
+    # distinct() |> 
+    inner_join(get_sentiments("bing"), by = "word") |> 
+    mutate(n = ifelse(sentiment == "negative", -n, n)) |> 
+    group_by(chapter) |> 
+    slice_head(n = 10) |> 
+    ungroup() |> 
+    ggplot(aes(n, reorder(word, n), fill = sentiment)) +
+    geom_col() +
+    geom_text(aes(label = word), position = position_stack(vjust = 0.5), 
+              color = "grey", size = 2) +
+    facet_grid(rows = vars(chapter), scales = "free_y") +
+    scale_fill_viridis_d() +
+    scale_x_continuous(breaks = seq(from = -10, to = 10, by = 1), 
+                       labels = rlang::as_function(~ abs(.x))) +
+    theme_bw() +
+    labs(x = "# of words", y = NULL) +
+    theme(panel.grid.major.y = element_blank(),
+          axis.text.y = element_blank(), axis.ticks.y = element_blank())
+```
+
+
+:::{.panel-tabset}
+### R
+
+```{r}
+tibble::tibble(rotam) |> 
+    dplyr::filter() |> 
+    unnest_tokens(word, rotam)
+```
+
+### Python
+
+```{python}
+# nltk.download("punkt")
+rotam_words = nltk.word_tokenize(rotam)
+```
+:::
+
+
+## Tf-idf
+
+
+
+## Document-term matrix
+
+
